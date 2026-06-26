@@ -126,7 +126,78 @@
   }
 }
 
+@keyframes pixar-pop {
+  0% {
+    transform: scale(0.3) translateY(60px) rotate(-6deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(1.08) translateY(-10px) rotate(2deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(0.96) translateY(4px) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes sparkle-pop {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+
 @layer components {
+  .animate-pixar-pop {
+    animation: pixar-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .animate-rainbow-spin {
+    animation: rainbow-spin 8s linear infinite;
+  }
+  .animate-float-bob {
+    animation: float-bob 3s ease-in-out infinite;
+  }
+  .animate-sparkle {
+    animation: sparkle-pop 1.8s ease-in-out infinite;
+  }
+
   .icon-animated {
     animation:
       icon-wave 3s ease-in-out infinite,
