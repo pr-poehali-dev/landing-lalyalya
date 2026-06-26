@@ -120,6 +120,13 @@ const FAQ = [
   },
 ];
 
+const NAV_LINKS = [
+  { label: 'Преимущества', href: '#why' },
+  { label: 'Квартиры', href: '#catalog' },
+  { label: 'Отзывы', href: '#reviews' },
+  { label: 'Вопросы', href: '#faq' },
+];
+
 const GUESTS_OPTIONS = ['1', '2', '3–4', '5+'];
 const PURPOSE_OPTIONS = [
   'Туризм',
@@ -140,6 +147,7 @@ const Index = () => {
   const [loading, setLoading] = useState(false);
   const [callbackPhone, setCallbackPhone] = useState('');
   const [callbackLoading, setCallbackLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCallback = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -225,6 +233,64 @@ const Index = () => {
 
   return (
     <div className="font-body">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0D1B2A]/80 backdrop-blur-md">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 md:px-10">
+          <a href="#" className="font-display text-lg font-extrabold text-white">
+            Квартиры у моря
+          </a>
+
+          <nav className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-gray-200 transition hover:text-[#C9A84C]"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="#booking"
+              className="rounded-full bg-[#C9A84C] px-5 py-2 font-display text-sm font-semibold text-[#0D1B2A] transition hover:bg-[#d8b95e]"
+            >
+              Забронировать
+            </a>
+          </nav>
+
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition hover:bg-white/10 md:hidden"
+            aria-label="Меню"
+          >
+            <Icon name={menuOpen ? 'X' : 'Menu'} size={26} />
+          </button>
+        </div>
+
+        {menuOpen && (
+          <nav className="animate-fade-in border-t border-white/10 bg-[#0D1B2A] px-6 py-4 md:hidden">
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-gray-200 transition hover:bg-white/10 hover:text-[#C9A84C]"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#booking"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 rounded-xl bg-[#C9A84C] px-3 py-3 text-center font-display text-base font-semibold text-[#0D1B2A] transition hover:bg-[#d8b95e]"
+              >
+                Забронировать
+              </a>
+            </div>
+          </nav>
+        )}
+      </header>
+
       <section className="relative flex min-h-screen items-center overflow-hidden bg-[#0D1B2A]">
         <img
           src={HERO_IMAGE}
@@ -267,7 +333,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#F8F9FA] py-20 md:py-28">
+      <section id="why" className="bg-[#F8F9FA] py-20 md:py-28">
         <div className="mx-auto w-full max-w-6xl px-6 md:px-10">
           <div className="max-w-3xl">
             <h2 className="font-display text-3xl font-extrabold leading-tight text-[#0D1B2A] md:text-5xl">
@@ -298,7 +364,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#0D1B2A] py-20 md:py-28">
+      <section id="catalog" className="bg-[#0D1B2A] py-20 md:py-28">
         <div className="mx-auto w-full max-w-6xl px-6 md:px-10">
           <div className="max-w-3xl">
             <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-5xl">
@@ -364,7 +430,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#F8F9FA] py-20 md:py-28">
+      <section id="reviews" className="bg-[#F8F9FA] py-20 md:py-28">
         <div className="mx-auto w-full max-w-6xl px-6 md:px-10">
           <div className="max-w-3xl">
             <h2 className="font-display text-3xl font-extrabold leading-tight text-[#0D1B2A] md:text-5xl">
@@ -394,7 +460,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#0D1B2A] py-20 md:py-28">
+      <section id="booking" className="bg-[#0D1B2A] py-20 md:py-28">
         <div className="mx-auto w-full max-w-2xl px-6 md:px-10">
           <div className="text-center">
             <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
@@ -523,7 +589,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#F8F9FA] py-20 md:py-28">
+      <section id="faq" className="bg-[#F8F9FA] py-20 md:py-28">
         <div className="mx-auto w-full max-w-3xl px-6 md:px-10">
           <h2 className="font-display text-3xl font-extrabold leading-tight text-[#0D1B2A] md:text-4xl">
             Ещё сомневаетесь? Вот ответы на частые вопросы
