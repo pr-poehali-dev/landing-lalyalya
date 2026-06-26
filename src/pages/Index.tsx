@@ -1,5 +1,40 @@
+import Icon from '@/components/ui/icon';
+
 const HERO_IMAGE =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/75ddd54e-31c1-4eef-b079-f3ee728a5ec9.jpg';
+
+const FEATURES = [
+  {
+    icon: 'KeyRound',
+    title: 'Заселение 24/7 без ключей',
+    text: 'Умный замок открывается кодом на телефоне. Прилетаете в 3 ночи? Всё будет готово.',
+  },
+  {
+    icon: 'FileText',
+    title: 'Документы для командировки',
+    text: 'Договор, акт, чек — всё с печатью. Принимается в любой бухгалтерии.',
+  },
+  {
+    icon: 'Bath',
+    title: 'Как дома, только лучше',
+    text: 'Полная кухня, стиральная машина, кофемашина, Smart TV, уборка включена.',
+  },
+  {
+    icon: 'Waves',
+    title: 'Вид на море или в центре',
+    text: 'Квартиры у Амурского залива, в центре и у вокзала — выберите локацию.',
+  },
+  {
+    icon: 'Wallet',
+    title: 'На 30–40% дешевле отеля',
+    text: 'Те же удобства, своя кухня, никакой комиссии агрегаторов.',
+  },
+  {
+    icon: 'MessageCircle',
+    title: 'Поддержка за 5 минут',
+    text: 'Пишите в WhatsApp, Telegram или звоните — ответим быстрее ресепшена.',
+  },
+];
 
 const Index = () => {
   return (
@@ -42,6 +77,37 @@ const Index = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#F8F9FA] py-20 md:py-28">
+        <div className="mx-auto w-full max-w-6xl px-6 md:px-10">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-3xl font-extrabold leading-tight text-[#0D1B2A] md:text-5xl">
+              Почему 847 гостей выбрали нас вместо отеля
+            </h2>
+            <p className="mt-5 text-lg text-gray-600 md:text-xl">
+              Отели берут деньги за завтрак, который вам не нужен. Агрегаторы
+              добавляют 15–20% комиссии. Мы — нет.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map((feature) => (
+              <div
+                key={feature.title}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl border-2 border-[#C9A84C] text-[#C9A84C]">
+                  <Icon name={feature.icon} size={28} />
+                </div>
+                <h3 className="mt-6 font-display text-xl font-bold text-[#0D1B2A]">
+                  {feature.title}
+                </h3>
+                <p className="mt-3 text-gray-600">{feature.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
