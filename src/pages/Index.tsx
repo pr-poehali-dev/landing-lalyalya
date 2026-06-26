@@ -1,4 +1,8 @@
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
+import { useToast } from '@/hooks/use-toast';
+
+const BOOKING_URL = 'https://functions.poehali.dev/11057bad-445f-408a-9321-cb13b8603f12';
 
 const HERO_IMAGE =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/75ddd54e-31c1-4eef-b079-f3ee728a5ec9.jpg';
@@ -87,7 +91,69 @@ const REVIEWS = [
   },
 ];
 
+const GUESTS_OPTIONS = ['1', '2', '3–4', '5+'];
+const PURPOSE_OPTIONS = [
+  'Туризм',
+  'Командировка — нужны документы',
+  'Другое',
+];
+
 const Index = () => {
+  const { toast } = useToast();
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    checkIn: '',
+    checkOut: '',
+    guests: '2',
+    purpose: 'Туризм',
+  });
+  const [loading, setLoading] = useState(false);
+
+  const update = (field: string, value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) {
+      toast({
+        title: 'Заполните имя и контакт',
+        description: 'Укажите, как к вам обращаться и куда перезвонить.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch(BOOKING_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('fail');
+      toast({
+        title: 'Заявка отправлена!',
+        description: 'Перезвоним за 5 минут и подберём лучший вариант.',
+      });
+      setForm({
+        name: '',
+        phone: '',
+        checkIn: '',
+        checkOut: '',
+        guests: '2',
+        purpose: 'Туризм',
+      });
+    } catch {
+      toast({
+        title: 'Не удалось отправить',
+        description: 'Попробуйте ещё раз или напишите нам в Telegram.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="font-body">
       <section className="relative flex min-h-screen items-center overflow-hidden bg-[#0D1B2A]">
@@ -255,6 +321,135 @@ const Index = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#0D1B2A] py-20 md:py-28">
+        <div className="mx-auto w-full max-w-2xl px-6 md:px-10">
+          <div className="text-center">
+            <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+              Забронировать квартиру — это 2 минуты
+            </h2>
+            <p className="mt-4 text-lg text-gray-300">
+              Оставьте заявку — перезвоним за 5 минут и подберём лучший вариант
+            </p>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 rounded-3xl bg-white p-7 shadow-2xl md:p-9"
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="block">
+                <span className="text-sm font-medium text-gray-700">Ваше имя</span>
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => update('name', e.target.value)}
+                  placeholder="Как к вам обращаться"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-[#0D1B2A] outline-none transition focus:border-[#C9A84C]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-gray-700">
+                  Телефон или Telegram
+                </span>
+                <input
+                  type="text"
+                  value={form.phone}
+                  onChange={(e) => update('phone', e.target.value)}
+                  placeholder="+7 999 123-45-67"
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-[#0D1B2A] outline-none transition focus:border-[#C9A84C]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-gray-700">Дата заезда</span>
+                <input
+                  type="date"
+                  value={form.checkIn}
+                  onChange={(e) => update('checkIn', e.target.value)}
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-[#0D1B2A] outline-none transition focus:border-[#C9A84C]"
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-gray-700">Дата выезда</span>
+                <input
+                  type="date"
+                  value={form.checkOut}
+                  onChange={(e) => update('checkOut', e.target.value)}
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-4 py-3 text-[#0D1B2A] outline-none transition focus:border-[#C9A84C]"
+                />
+              </label>
+            </div>
+
+            <label className="mt-5 block">
+              <span className="text-sm font-medium text-gray-700">
+                Количество гостей
+              </span>
+              <select
+                value={form.guests}
+                onChange={(e) => update('guests', e.target.value)}
+                className="mt-1.5 w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[#0D1B2A] outline-none transition focus:border-[#C9A84C]"
+              >
+                {GUESTS_OPTIONS.map((g) => (
+                  <option key={g} value={g}>
+                    {g}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <div className="mt-5">
+              <span className="text-sm font-medium text-gray-700">Цель поездки</span>
+              <div className="mt-2 flex flex-col gap-2">
+                {PURPOSE_OPTIONS.map((p) => (
+                  <label
+                    key={p}
+                    className="flex cursor-pointer items-center gap-3 rounded-xl border border-gray-200 px-4 py-3 transition hover:border-[#C9A84C]"
+                  >
+                    <input
+                      type="radio"
+                      name="purpose"
+                      value={p}
+                      checked={form.purpose === p}
+                      onChange={(e) => update('purpose', e.target.value)}
+                      className="h-4 w-4 accent-[#C9A84C]"
+                    />
+                    <span className="text-[#0D1B2A]">{p}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-7 w-full rounded-xl bg-[#C9A84C] py-4 font-display text-base font-semibold text-[#0D1B2A] transition hover:bg-[#d8b95e] disabled:opacity-60"
+            >
+              {loading ? 'Отправляем…' : '→ Отправить заявку и получить подтверждение'}
+            </button>
+
+            <p className="mt-4 text-center text-sm text-gray-400">
+              🔒 Не передаём данные третьим лицам
+            </p>
+          </form>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 text-gray-200 sm:flex-row sm:gap-8">
+            <a
+              href="https://t.me/username"
+              className="flex items-center gap-2 transition hover:text-[#C9A84C]"
+            >
+              <Icon name="Send" size={20} className="text-[#C9A84C]" />
+              Telegram @username
+            </a>
+            <a
+              href="tel:+74232000000"
+              className="flex items-center gap-2 transition hover:text-[#C9A84C]"
+            >
+              <Icon name="Phone" size={20} className="text-[#C9A84C]" />
+              +7 (423) 200-00-00
+            </a>
           </div>
         </div>
       </section>
