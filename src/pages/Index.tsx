@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 const BOOKING_URL = 'https://functions.poehali.dev/11057bad-445f-408a-9321-cb13b8603f12';
 
@@ -91,6 +97,29 @@ const REVIEWS = [
   },
 ];
 
+const FAQ = [
+  {
+    q: 'Как происходит заселение?',
+    a: 'Мы пришлём код от умного замка за 1 час до заезда. Войдёте сами в любое время.',
+  },
+  {
+    q: 'Можно получить документы для командировки?',
+    a: 'Да, всегда. Договор, акт, чек — сообщите при бронировании.',
+  },
+  {
+    q: 'Что если мне что-то не понравится?',
+    a: 'Напишите в мессенджер в течение 30 минут — решим вопрос или предложим замену.',
+  },
+  {
+    q: 'Можно заехать рано утром или поздно ночью?',
+    a: 'Да, бесконтактное заселение работает 24/7.',
+  },
+  {
+    q: 'Как вы отличаетесь от Avito и Sutochno?',
+    a: 'Без комиссии агрегаторов, единая поддержка, гарантированное качество.',
+  },
+];
+
 const GUESTS_OPTIONS = ['1', '2', '3–4', '5+'];
 const PURPOSE_OPTIONS = [
   'Туризм',
@@ -109,6 +138,46 @@ const Index = () => {
     purpose: 'Туризм',
   });
   const [loading, setLoading] = useState(false);
+  const [callbackPhone, setCallbackPhone] = useState('');
+  const [callbackLoading, setCallbackLoading] = useState(false);
+
+  const handleCallback = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!callbackPhone.trim()) {
+      toast({
+        title: 'Укажите телефон',
+        description: 'Оставьте номер — и мы перезвоним.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setCallbackLoading(true);
+    try {
+      const res = await fetch(BOOKING_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Заявка на звонок',
+          phone: callbackPhone,
+          purpose: 'Перезвоните мне',
+        }),
+      });
+      if (!res.ok) throw new Error('fail');
+      toast({
+        title: 'Заявка принята!',
+        description: 'Перезвоним вам в ближайшее время.',
+      });
+      setCallbackPhone('');
+    } catch {
+      toast({
+        title: 'Не удалось отправить',
+        description: 'Попробуйте ещё раз или напишите нам в Telegram.',
+        variant: 'destructive',
+      });
+    } finally {
+      setCallbackLoading(false);
+    }
+  };
 
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -453,6 +522,117 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-[#F8F9FA] py-20 md:py-28">
+        <div className="mx-auto w-full max-w-3xl px-6 md:px-10">
+          <h2 className="font-display text-3xl font-extrabold leading-tight text-[#0D1B2A] md:text-4xl">
+            Ещё сомневаетесь? Вот ответы на частые вопросы
+          </h2>
+
+          <Accordion type="single" collapsible className="mt-10">
+            {FAQ.map((item, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="mb-3 rounded-2xl border border-gray-200 bg-white px-5"
+              >
+                <AccordionTrigger className="text-left font-display text-lg font-semibold text-[#0D1B2A] hover:no-underline">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-gray-600">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      <section className="bg-[#0D1B2A] py-20 md:py-24">
+        <div className="mx-auto w-full max-w-3xl px-6 text-center md:px-10">
+          <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+            Приезжайте во Владивосток — мы уже готовим ключ
+          </h2>
+          <form
+            onSubmit={handleCallback}
+            className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row"
+          >
+            <input
+              type="tel"
+              value={callbackPhone}
+              onChange={(e) => setCallbackPhone(e.target.value)}
+              placeholder="+7 999 123-45-67"
+              className="flex-1 rounded-xl border border-white/20 bg-white/10 px-5 py-4 text-white placeholder-gray-400 outline-none transition focus:border-[#C9A84C]"
+            />
+            <button
+              type="submit"
+              disabled={callbackLoading}
+              className="rounded-xl bg-[#C9A84C] px-8 py-4 font-display text-base font-semibold text-[#0D1B2A] transition hover:bg-[#d8b95e] disabled:opacity-60"
+            >
+              {callbackLoading ? 'Отправляем…' : 'Перезвоните мне →'}
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer className="bg-[#0D1B2A] border-t border-white/10 py-14">
+        <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 md:grid-cols-3 md:px-10">
+          <div>
+            <div className="font-display text-xl font-extrabold text-white">
+              Квартиры у моря
+            </div>
+            <p className="mt-3 text-sm text-gray-400">
+              Апартаменты с дизайнерским ремонтом и видом на Амурский залив
+              во Владивостоке.
+            </p>
+          </div>
+
+          <div className="text-sm text-gray-300">
+            <div className="mb-3 font-semibold text-white">Контакты</div>
+            <p className="flex items-center gap-2">
+              <Icon name="MapPin" size={16} className="text-[#C9A84C]" />
+              г. Владивосток, ул. Светланская, 45
+            </p>
+            <p className="mt-2 flex items-center gap-2">
+              <Icon name="Phone" size={16} className="text-[#C9A84C]" />
+              <a href="tel:+74232000000" className="hover:text-[#C9A84C]">
+                +7 (423) 200-00-00
+              </a>
+            </p>
+            <p className="mt-2 flex items-center gap-2">
+              <Icon name="Send" size={16} className="text-[#C9A84C]" />
+              <a href="https://t.me/username" className="hover:text-[#C9A84C]">
+                Telegram @username
+              </a>
+            </p>
+            <p className="mt-2 flex items-center gap-2">
+              <Icon name="Mail" size={16} className="text-[#C9A84C]" />
+              <a href="mailto:hello@example.ru" className="hover:text-[#C9A84C]">
+                hello@example.ru
+              </a>
+            </p>
+          </div>
+
+          <div className="text-sm text-gray-300">
+            <div className="mb-3 font-semibold text-white">Режим работы</div>
+            <p className="flex items-center gap-2">
+              <Icon name="Clock" size={16} className="text-[#C9A84C]" />
+              Поддержка 24/7, заселение круглосуточно
+            </p>
+            <div className="mt-5 flex flex-col gap-2">
+              <a href="#" className="hover:text-[#C9A84C]">
+                Политика конфиденциальности
+              </a>
+              <a href="#" className="hover:text-[#C9A84C]">
+                Публичная оферта
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="mx-auto mt-10 max-w-6xl px-6 text-sm text-gray-500 md:px-10">
+          © {new Date().getFullYear()} Квартиры у моря. Все права защищены.
+        </div>
+      </footer>
     </div>
   );
 };
