@@ -352,7 +352,7 @@ const Index = () => {
                 className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex h-14 w-14 items-center justify-center rounded-xl border-2 border-[#C9A84C] text-[#C9A84C]">
-                  <Icon name={feature.icon} size={28} />
+                  <Icon name={feature.icon} size={28} className="icon-animated" />
                 </div>
                 <h3 className="mt-6 font-display text-xl font-bold text-[#0D1B2A]">
                   {feature.title}
@@ -396,11 +396,11 @@ const Index = () => {
 
                   <div className="mt-4 flex flex-wrap gap-5 text-sm text-gray-300">
                     <span className="flex items-center gap-2">
-                      <Icon name="BedDouble" size={18} className="text-[#C9A84C]" />
+                      <Icon name="BedDouble" size={18} className="text-[#C9A84C] icon-animated" />
                       {apt.beds}
                     </span>
                     <span className="flex items-center gap-2">
-                      <Icon name="Maximize" size={18} className="text-[#C9A84C]" />
+                      <Icon name="Maximize" size={18} className="text-[#C9A84C] icon-animated" />
                       {apt.area}
                     </span>
                   </div>
@@ -446,7 +446,13 @@ const Index = () => {
               >
                 <div className="flex gap-1 text-[#C9A84C]">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Icon key={i} name="Star" size={18} className="fill-[#C9A84C]" />
+                    <Icon
+                      key={i}
+                      name="Star"
+                      size={18}
+                      className="fill-[#C9A84C] icon-animated"
+                      style={{ animationDelay: `${i * 0.15}s` }}
+                    />
                   ))}
                 </div>
                 <p className="mt-5 flex-1 text-gray-700">«{review.text}»</p>
@@ -575,14 +581,14 @@ const Index = () => {
               href="https://t.me/username"
               className="flex items-center gap-2 transition hover:text-[#C9A84C]"
             >
-              <Icon name="Send" size={20} className="text-[#C9A84C]" />
+              <Icon name="Send" size={20} className="text-[#C9A84C] icon-animated" />
               Telegram @username
             </a>
             <a
               href="tel:+74232000000"
               className="flex items-center gap-2 transition hover:text-[#C9A84C]"
             >
-              <Icon name="Phone" size={20} className="text-[#C9A84C]" />
+              <Icon name="Phone" size={20} className="text-[#C9A84C] icon-animated" />
               +7 (423) 200-00-00
             </a>
           </div>
@@ -656,23 +662,23 @@ const Index = () => {
           <div className="text-sm text-gray-300">
             <div className="mb-3 font-semibold text-white">Контакты</div>
             <p className="flex items-center gap-2">
-              <Icon name="MapPin" size={16} className="text-[#C9A84C]" />
+              <Icon name="MapPin" size={16} className="text-[#C9A84C] icon-animated" />
               г. Владивосток, ул. Светланская, 45
             </p>
             <p className="mt-2 flex items-center gap-2">
-              <Icon name="Phone" size={16} className="text-[#C9A84C]" />
+              <Icon name="Phone" size={16} className="text-[#C9A84C] icon-animated" />
               <a href="tel:+74232000000" className="hover:text-[#C9A84C]">
                 +7 (423) 200-00-00
               </a>
             </p>
             <p className="mt-2 flex items-center gap-2">
-              <Icon name="Send" size={16} className="text-[#C9A84C]" />
+              <Icon name="Send" size={16} className="text-[#C9A84C] icon-animated" />
               <a href="https://t.me/username" className="hover:text-[#C9A84C]">
                 Telegram @username
               </a>
             </p>
             <p className="mt-2 flex items-center gap-2">
-              <Icon name="Mail" size={16} className="text-[#C9A84C]" />
+              <Icon name="Mail" size={16} className="text-[#C9A84C] icon-animated" />
               <a href="mailto:hello@example.ru" className="hover:text-[#C9A84C]">
                 hello@example.ru
               </a>
@@ -682,7 +688,7 @@ const Index = () => {
           <div className="text-sm text-gray-300">
             <div className="mb-3 font-semibold text-white">Режим работы</div>
             <p className="flex items-center gap-2">
-              <Icon name="Clock" size={16} className="text-[#C9A84C]" />
+              <Icon name="Clock" size={16} className="text-[#C9A84C] icon-animated" />
               Поддержка 24/7, заселение круглосуточно
             </p>
             <div className="mt-5 flex flex-col gap-2">

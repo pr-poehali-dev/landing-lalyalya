@@ -99,3 +99,45 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes icon-wave {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(3px) rotate(6deg);
+  }
+}
+
+@keyframes icon-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px rgba(201, 168, 76, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.85));
+  }
+}
+
+@layer components {
+  .icon-animated {
+    animation:
+      icon-wave 3s ease-in-out infinite,
+      icon-glow 2.5s ease-in-out infinite;
+    transition:
+      transform 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .icon-animated:hover {
+    transform: scale(1.2) rotate(-8deg);
+    filter: drop-shadow(0 0 12px rgba(201, 168, 76, 1));
+  }
+}
