@@ -63,9 +63,8 @@ def handler(event: dict, context) -> dict:
         if role in ('user', 'assistant') and content:
             messages.append({'role': role, 'content': content})
 
-    api_key = os.environ.get('YANDEX_API_KEY')
-    folder_id = os.environ.get('YANDEX_FOLDER_ID')
-    if not api_key or not folder_id:
+    api_key = os.environ.get('PERPLEXITY_API_KEY')
+    if not api_key:
         return {
             'statusCode': 200,
             'headers': {**cors_headers, 'Content-Type': 'application/json'},
@@ -75,28 +74,19 @@ def handler(event: dict, context) -> dict:
             ),
         }
 
-    yandex_messages = []
-    for m in messages:
-        role = 'system' if m['role'] == 'system' else (m['role'] if m['role'] in ('user', 'assistant') else 'user')
-        yandex_messages.append({'role': role, 'text': m['content']})
-
     payload = json.dumps({
-        'modelUri': f'gpt://{folder_id}/yandexgpt/latest',
-        'completionOptions': {
-            'stream': False,
-            'temperature': 0.5,
-            'maxTokens': 500,
-        },
-        'messages': yandex_messages,
+        'model': 'sonar',
+        'messages': messages,
+        'temperature': 0.5,
+        'max_tokens': 500,
     }).encode('utf-8')
 
     req = urllib.request.Request(
-        'https://llm.api.cloud.yandex.net/foundationModels/v1/completion',
+        'https://api.perplexity.ai/chat/completions',
         data=payload,
         headers={
-            'Authorization': f'Api-Key {api_key}',
+            'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json',
-            'x-folder-id': folder_id,
         },
         method='POST',
     )
@@ -104,14 +94,14 @@ def handler(event: dict, context) -> dict:
     try:
         with urllib.request.urlopen(req, timeout=25) as resp:
             data = json.loads(resp.read().decode('utf-8'))
-        reply = data['result']['alternatives'][0]['message']['text'].strip()
-        print(f'YandexGPT OK, reply length: {len(reply)}')
+        reply = data['choices'][0]['message']['content'].strip()
+        print(f'Perplexity OK, reply length: {len(reply)}')
     except urllib.error.HTTPError as e:
         err_body = e.read().decode('utf-8', errors='ignore')
-        print(f'YandexGPT HTTPError {e.code}: {err_body}')
+        print(f'Perplexity HTTPError {e.code}: {err_body}')
         reply = 'Извините, не удалось обработать запрос. Напишите нам в Telegram @username или позвоните +7 (423) 200-00-00.'
     except Exception as e:
-        print(f'YandexGPT request failed: {type(e).__name__}: {e}')
+        print(f'Perplexity request failed: {type(e).__name__}: {e}')
         reply = 'Извините, произошла ошибка. Позвоните нам: +7 (423) 200-00-00.'
 
     return {
