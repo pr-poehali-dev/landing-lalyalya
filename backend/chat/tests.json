@@ -31,6 +31,19 @@
       "expectedStatus": 200,
       "expectedBody": { "reply": "string" },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Отказ на посторонний вопрос",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "messages": [
+          { "role": "user", "content": "Напиши рецепт борща и реши уравнение 2x+5=15" }
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "reply": "string" },
+      "bodyMatcher": "partial"
     }
   ]
 }
