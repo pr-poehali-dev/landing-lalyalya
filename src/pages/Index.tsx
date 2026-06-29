@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import OfferModal from '@/components/OfferModal';
+import ChatWidget from '@/components/ChatWidget';
 
 const BOOKING_URL = 'https://functions.poehali.dev/11057bad-445f-408a-9321-cb13b8603f12';
 
@@ -235,6 +236,7 @@ const Index = () => {
   return (
     <div className="font-body">
       <OfferModal />
+      <ChatWidget />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0D1B2A]/80 backdrop-blur-md">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 md:px-10">
           <a href="#" className="font-display text-lg font-extrabold text-white">
