@@ -64,6 +64,7 @@ def handler(event: dict, context) -> dict:
             messages.append({'role': role, 'content': content})
 
     api_key = os.environ.get('OPENAI_API_KEY')
+    print(f'OPENAI_API_KEY present: {bool(api_key)}, length: {len(api_key) if api_key else 0}')
     if not api_key:
         return {
             'statusCode': 200,
@@ -95,9 +96,12 @@ def handler(event: dict, context) -> dict:
         with urllib.request.urlopen(req, timeout=25) as resp:
             data = json.loads(resp.read().decode('utf-8'))
         reply = data['choices'][0]['message']['content'].strip()
-    except urllib.error.HTTPError:
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode('utf-8', errors='ignore')
+        print(f'OpenAI HTTPError {e.code}: {err_body}')
         reply = 'Извините, не удалось обработать запрос. Напишите нам в Telegram @username или позвоните +7 (423) 200-00-00.'
-    except Exception:
+    except Exception as e:
+        print(f'OpenAI request failed: {type(e).__name__}: {e}')
         reply = 'Извините, произошла ошибка. Позвоните нам: +7 (423) 200-00-00.'
 
     return {
