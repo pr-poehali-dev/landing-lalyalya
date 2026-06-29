@@ -7,12 +7,25 @@
       "expectedStatus": 200
     },
     {
-      "name": "Ответ на вопрос клиента",
+      "name": "Ответ на вопрос клиента про заселение",
       "method": "POST",
       "path": "/",
       "body": {
         "messages": [
           { "role": "user", "content": "Как происходит заселение?" }
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "reply": "string" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ответ на вопрос про цены",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "messages": [
+          { "role": "user", "content": "Сколько стоит студия у моря?" }
         ]
       },
       "expectedStatus": 200,

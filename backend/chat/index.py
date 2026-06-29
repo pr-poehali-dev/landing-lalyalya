@@ -105,6 +105,7 @@ def handler(event: dict, context) -> dict:
         with urllib.request.urlopen(req, timeout=25) as resp:
             data = json.loads(resp.read().decode('utf-8'))
         reply = data['result']['alternatives'][0]['message']['text'].strip()
+        print(f'YandexGPT OK, reply length: {len(reply)}')
     except urllib.error.HTTPError as e:
         err_body = e.read().decode('utf-8', errors='ignore')
         print(f'YandexGPT HTTPError {e.code}: {err_body}')
