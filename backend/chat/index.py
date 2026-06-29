@@ -63,7 +63,7 @@ def handler(event: dict, context) -> dict:
         if role in ('user', 'assistant') and content:
             messages.append({'role': role, 'content': content})
 
-    api_key = os.environ.get('PERPLEXITY_API_KEY')
+    api_key = os.environ.get('PERPLEXITY') or os.environ.get('PERPLEXITY_API_KEY')
     if not api_key:
         return {
             'statusCode': 200,
