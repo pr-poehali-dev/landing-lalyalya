@@ -13,7 +13,7 @@ const Founder = () => {
               src={IMAGES.founder}
               alt="Стёпа Молодец — создатель маршрута ВДТ"
               loading="lazy"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[60%_30%]"
             />
             <div className="absolute bottom-5 left-5 bg-background/90 backdrop-blur-md px-5 py-3 rounded-lg border border-border/50">
               <div className="font-display text-lg font-bold text-foreground">
