@@ -19,10 +19,12 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				display: ['Unbounded', 'sans-serif'],
-				body: ['Golos Text', 'sans-serif'],
+				display: ['Cormorant Garamond', 'serif'],
+				body: ['Inter', 'sans-serif'],
 			},
 			colors: {
+				taiga: 'hsl(var(--taiga))',
+				terracotta: 'hsl(var(--terracotta))',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
