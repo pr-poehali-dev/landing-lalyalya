@@ -26,7 +26,7 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
 
-      <div className="relative z-[2] w-full max-w-[1200px] mx-auto px-4 md:px-8 pb-16 md:pb-24">
+      <div className="relative z-[2] w-full max-w-[1200px] mx-auto px-4 md:px-8 pt-28 md:pt-32 pb-16 md:pb-24">
         <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-primary mb-6 before:block before:w-6 before:h-px before:bg-primary">
           Первый мультиспортивный маршрут Дальнего Востока
         </p>

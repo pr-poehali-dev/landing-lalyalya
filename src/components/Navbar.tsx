@@ -25,12 +25,16 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-background/70 backdrop-blur-xl border-b border-border'
-          : 'bg-transparent border-b border-transparent'
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border'
+          : 'bg-gradient-to-b from-black/50 to-transparent border-b border-transparent'
       }`}
     >
       <nav className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#top" aria-label="Великий Дальневосточный Трейл">
+        <a
+          href="#top"
+          aria-label="Великий Дальневосточный Трейл"
+          className={scrolled ? 'text-foreground' : 'text-white'}
+        >
           <Logo />
         </a>
 
@@ -39,7 +43,9 @@ const Navbar = () => {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm text-foreground/75 hover:text-primary transition-colors"
+                className={`text-sm transition-colors hover:text-primary ${
+                  scrolled ? 'text-foreground/75' : 'text-white/85'
+                }`}
               >
                 {item.label}
               </a>
@@ -51,7 +57,9 @@ const Navbar = () => {
           <button
             onClick={toggleTheme}
             aria-label="Переключить тему"
-            className="w-10 h-10 flex items-center justify-center rounded-full text-foreground/80 hover:text-primary hover:bg-foreground/5 transition-colors"
+            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors hover:text-primary hover:bg-foreground/5 ${
+              scrolled ? 'text-foreground/80' : 'text-white/85'
+            }`}
           >
             <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={20} />
           </button>
