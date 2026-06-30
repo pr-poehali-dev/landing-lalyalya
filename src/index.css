@@ -7,35 +7,43 @@
 @layer base {
   :root {
     --background: 40 33% 94%;
-    --foreground: 30 12% 10%;
+    --foreground: 40 11% 9%;
 
-    --card: 40 30% 97%;
-    --card-foreground: 30 12% 10%;
+    --surface: 40 33% 96%;
+    --surface-2: 40 38% 98%;
+    --surface-offset: 38 22% 90%;
+    --surface-dynamic: 40 16% 86%;
 
-    --popover: 40 30% 97%;
-    --popover-foreground: 30 12% 10%;
+    --card: 40 33% 96%;
+    --card-foreground: 40 11% 9%;
 
-    --primary: 41 60% 50%;
-    --primary-foreground: 30 12% 8%;
+    --popover: 40 33% 96%;
+    --popover-foreground: 40 11% 9%;
 
-    --secondary: 40 20% 88%;
-    --secondary-foreground: 30 12% 12%;
+    --primary: 43 89% 38%;
+    --primary-foreground: 40 33% 97%;
+    --primary-hover: 38 80% 30%;
+    --primary-highlight: 44 60% 91%;
 
-    --muted: 40 18% 86%;
-    --muted-foreground: 30 8% 40%;
+    --secondary: 38 22% 90%;
+    --secondary-foreground: 40 11% 12%;
 
-    --accent: 41 60% 55%;
-    --accent-foreground: 30 12% 8%;
+    --muted: 40 16% 86%;
+    --muted-foreground: 40 6% 40%;
+
+    --accent: 43 89% 38%;
+    --accent-foreground: 40 33% 97%;
 
     --destructive: 0 70% 45%;
     --destructive-foreground: 40 33% 94%;
 
-    --border: 35 15% 80%;
-    --input: 35 15% 80%;
-    --ring: 41 60% 50%;
+    --border: 40 14% 77%;
+    --input: 40 14% 77%;
+    --ring: 43 89% 38%;
 
-    --taiga: 95 22% 32%;
-    --terracotta: 20 50% 45%;
+    --divider: 42 16% 81%;
+    --taiga: 142 42% 30%;
+    --terracotta: 25 67% 31%;
 
     --radius: 0.5rem;
 
@@ -57,36 +65,44 @@
   }
 
   .dark {
-    --background: 36 14% 5%;
-    --foreground: 40 25% 92%;
+    --background: 40 16% 5%;
+    --foreground: 45 26% 88%;
 
-    --card: 30 12% 8%;
-    --card-foreground: 40 25% 92%;
+    --surface: 42 13% 7%;
+    --surface-2: 45 12% 9%;
+    --surface-offset: 48 11% 11%;
+    --surface-dynamic: 48 12% 14%;
 
-    --popover: 30 12% 8%;
-    --popover-foreground: 40 25% 92%;
+    --card: 42 13% 7%;
+    --card-foreground: 45 26% 88%;
 
-    --primary: 41 60% 55%;
-    --primary-foreground: 30 14% 6%;
+    --popover: 42 13% 7%;
+    --popover-foreground: 45 26% 88%;
 
-    --secondary: 30 10% 14%;
-    --secondary-foreground: 40 25% 92%;
+    --primary: 42 62% 55%;
+    --primary-foreground: 40 16% 5%;
+    --primary-hover: 42 65% 65%;
+    --primary-highlight: 42 30% 14%;
 
-    --muted: 30 8% 16%;
-    --muted-foreground: 40 10% 62%;
+    --secondary: 48 12% 14%;
+    --secondary-foreground: 45 26% 88%;
 
-    --accent: 41 60% 55%;
-    --accent-foreground: 30 14% 6%;
+    --muted: 48 11% 11%;
+    --muted-foreground: 45 7% 56%;
+
+    --accent: 42 62% 55%;
+    --accent-foreground: 40 16% 5%;
 
     --destructive: 0 62.8% 40%;
-    --destructive-foreground: 40 25% 92%;
+    --destructive-foreground: 45 26% 88%;
 
-    --border: 30 10% 18%;
-    --input: 30 10% 18%;
-    --ring: 41 60% 55%;
+    --border: 45 12% 18%;
+    --input: 45 12% 18%;
+    --ring: 42 62% 55%;
 
-    --taiga: 95 20% 42%;
-    --terracotta: 20 55% 52%;
+    --divider: 48 9% 15%;
+    --taiga: 142 25% 39%;
+    --terracotta: 27 53% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -198,6 +214,26 @@
   }
   100% {
     transform: translateX(220%) skewX(-20deg);
+  }
+}
+
+@layer components {
+  .reveal {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    animation: reveal-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 75%;
+  }
+  @keyframes reveal-fade {
+    to {
+      opacity: 1;
+    }
   }
 }
 

@@ -25,6 +25,13 @@ export default {
 			colors: {
 				taiga: 'hsl(var(--taiga))',
 				terracotta: 'hsl(var(--terracotta))',
+				divider: 'hsl(var(--divider))',
+				surface: {
+					DEFAULT: 'hsl(var(--surface))',
+					2: 'hsl(var(--surface-2))',
+					offset: 'hsl(var(--surface-offset))',
+					dynamic: 'hsl(var(--surface-dynamic))',
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -32,7 +39,9 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					hover: 'hsl(var(--primary-hover))',
+					highlight: 'hsl(var(--primary-highlight))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',

@@ -5,9 +5,9 @@ import { useTheme } from '@/hooks/use-theme';
 
 const NAV_ITEMS = [
   { label: 'Маршрут', href: '#route' },
-  { label: 'Способы передвижения', href: '#transport' },
-  { label: 'Стоянки', href: '#camps' },
-  { label: 'Об идейном вдохновителе', href: '#author' },
+  { label: 'Способы', href: '#transport' },
+  { label: 'Стоянки', href: '#hubs' },
+  { label: 'Об идейном вдохновителе', href: '#founder' },
 ];
 
 const Navbar = () => {
