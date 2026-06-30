@@ -14,6 +14,14 @@ const Finish = () => {
         aria-label="Камчатка ночью — вулканическое зарево"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-1/2 ember-glow"
+        style={{
+          background:
+            'radial-gradient(80% 60% at 50% 100%, hsl(var(--terracotta) / 0.5) 0%, hsl(var(--primary) / 0.15) 35%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
 
       <div className="relative z-[2] text-center max-w-[960px] mx-auto w-full px-4 md:px-8 pt-8 pb-20">
         <p className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.12em] text-primary mb-4 before:block before:w-[18px] before:h-px before:bg-primary">

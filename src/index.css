@@ -133,6 +133,60 @@
   }
 }
 
+@keyframes mist-drift {
+  0% {
+    transform: translateX(-3%);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(3%);
+    opacity: 0.5;
+  }
+}
+
+@keyframes ember-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.mist-layer {
+  background: radial-gradient(
+    120% 80% at 50% 100%,
+    hsl(var(--primary) / 0.08) 0%,
+    transparent 60%
+  );
+  animation: mist-drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.ember-glow {
+  animation: ember-glow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 24s ease-in-out infinite alternate;
+}
+
 @keyframes icon-wave {
   0%,
   100% {

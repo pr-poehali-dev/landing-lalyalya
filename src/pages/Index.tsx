@@ -9,7 +9,26 @@ import Founder from '@/components/sections/Founder';
 import Finish from '@/components/sections/Finish';
 import Footer from '@/components/sections/Footer';
 
-const Divider = () => <hr className="h-px bg-divider border-0 m-0" />;
+const Divider = () => (
+  <div
+    className="relative flex items-center justify-center bg-background"
+    aria-hidden="true"
+  >
+    <span className="h-px w-full bg-divider" />
+    <span className="absolute flex items-center justify-center w-9 h-9 rounded-full bg-background border border-divider text-primary/70">
+      <svg width="20" height="14" viewBox="0 0 34 24" fill="none">
+        <path
+          d="M1 22L9 9L14 15L21 3L33 22"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="21" cy="3" r="2.6" className="fill-primary" />
+      </svg>
+    </span>
+  </div>
+);
 
 const Index = () => {
   return (
