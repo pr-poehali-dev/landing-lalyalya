@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-calc {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  letter-spacing: 0.01em;
+}
+
+.font-segment {
+  font-family: 'DSEG7 Classic', 'Share Tech Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
 @layer base {
   :root {
     --background: 40 33% 94%;

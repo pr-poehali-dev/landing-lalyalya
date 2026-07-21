@@ -28,15 +28,15 @@ const Hero = () => {
       <div className="absolute inset-x-0 bottom-0 h-2/3 mist-layer" aria-hidden="true" />
 
       <div className="relative z-[2] w-full max-w-[1200px] mx-auto px-4 md:px-8 pt-28 md:pt-32 pb-16 md:pb-24">
-        <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-primary mb-6 before:block before:w-6 before:h-px before:bg-primary">
+        <p className="font-calc inline-flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-primary mb-6 before:block before:w-6 before:h-px before:bg-primary">
           Первый мультиспортивный маршрут Дальнего Востока
         </p>
 
-        <h1 className="font-display font-bold leading-[0.95] tracking-tight text-foreground mb-6 max-w-[14ch] text-[clamp(3rem,0.5rem+7vw,8rem)]">
-          Великий <em className="italic text-primary">Дальневосточный</em> Трейл
+        <h1 className="font-calc font-bold leading-[1.05] tracking-tight text-foreground mb-6 max-w-[16ch] text-[clamp(2.5rem,0.5rem+6vw,6.5rem)] uppercase">
+          Великий <em className="not-italic text-primary">Дальневосточный</em> Трейл
         </h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground font-light max-w-[55ch] mb-10 leading-relaxed">
+        <p className="font-calc text-lg md:text-xl text-muted-foreground max-w-[55ch] mb-10 leading-relaxed">
           6 000 км от Тихого океана до вулканов Камчатки. Пешком, на велосипеде и
           каяке — через тайгу, Колыму и Охотское побережье.
         </p>
@@ -44,10 +44,10 @@ const Hero = () => {
         <div className="flex flex-wrap gap-8 mb-10">
           {STATS.map((s) => (
             <div key={s.label}>
-              <span className="block font-display text-3xl md:text-4xl font-bold text-primary leading-none">
+              <span className="block font-segment text-3xl md:text-4xl text-primary leading-none">
                 {s.num}
               </span>
-              <span className="block text-xs text-muted-foreground uppercase tracking-[0.08em] mt-1">
+              <span className="font-calc block text-xs text-muted-foreground uppercase tracking-[0.08em] mt-2">
                 {s.label}
               </span>
             </div>
