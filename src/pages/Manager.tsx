@@ -122,6 +122,12 @@ const Manager = () => {
           >
             <Icon name="RefreshCw" size={15} /> Обновить
           </button>
+          <a
+            href="/"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm text-foreground hover:bg-surface-dynamic"
+          >
+            <Icon name="Home" size={15} /> На сайт
+          </a>
           <button
             onClick={() => {
               localStorage.removeItem('mgr_pass');
