@@ -1,7 +1,9 @@
 import json
 import os
+import re
 import urllib.request
 import urllib.error
+import psycopg2
 
 SYSTEM_PROMPT = '''Ты — дружелюбный онлайн-консультант проекта «Великий Дальневосточный Трейл» — первого мультиспортивного маршрута Дальнего Востока России.
 
@@ -24,32 +26,102 @@ SYSTEM_PROMPT = '''Ты — дружелюбный онлайн-консульт
 5. Если человек просто задаёт вопросы и не выражает готовности — НЕ добавляй маркер [[LEAD]] и не навязывай форму.
 6. Отвечай на русском языке. Не выдумывай точные цены — при вопросе о точной стоимости предложи связаться с менеджером.'''
 
+CORS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+}
+
+
+def _resp(status, payload):
+    return {
+        'statusCode': status,
+        'headers': {**CORS, 'Content-Type': 'application/json'},
+        'body': json.dumps(payload, ensure_ascii=False, default=str),
+    }
+
+
+def _fetch_messages(cur, chat_id):
+    cur.execute(
+        "SELECT sender, content, created_at FROM chat_messages WHERE chat_id = %s ORDER BY id",
+        (chat_id,),
+    )
+    return [{'sender': r[0], 'content': r[1], 'created_at': r[2]} for r in cur.fetchall()]
+
 
 def handler(event: dict, context) -> dict:
-    '''Онлайн ИИ-консультант по вопросам трейла на базе Perplexity.'''
+    '''Онлайн-чат: приём сообщений клиента, ответ ИИ (если включён) и выдача истории для поллинга.'''
     method = event.get('httpMethod', 'GET')
-    cors = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Max-Age': '86400',
-    }
     if method == 'OPTIONS':
-        return {'statusCode': 200, 'headers': cors, 'body': ''}
+        return {'statusCode': 200, 'headers': CORS, 'body': ''}
 
-    if method != 'POST':
-        return {'statusCode': 405, 'headers': {**cors, 'Content-Type': 'application/json'},
-                'body': json.dumps({'error': 'Method not allowed'})}
+    conn = psycopg2.connect(os.environ['DATABASE_URL'])
+    conn.autocommit = True
+    try:
+        params = event.get('queryStringParameters') or {}
 
-    body = json.loads(event.get('body') or '{}')
-    history = body.get('messages', [])
+        # Поллинг: клиент запрашивает свежие сообщения
+        if method == 'GET':
+            chat_id = str(params.get('chatId', ''))[:40]
+            if not chat_id:
+                return _resp(400, {'error': 'chat_id_required'})
+            with conn.cursor() as cur:
+                cur.execute("SELECT ai_enabled FROM chats WHERE id = %s", (chat_id,))
+                row = cur.fetchone()
+                ai_enabled = bool(row[0]) if row else True
+                msgs = _fetch_messages(cur, chat_id)
+            return _resp(200, {'messages': msgs, 'aiEnabled': ai_enabled})
 
+        if method != 'POST':
+            return _resp(405, {'error': 'method_not_allowed'})
+
+        body = json.loads(event.get('body') or '{}')
+        chat_id = str(body.get('chatId', ''))[:40]
+        text = str(body.get('text', '')).strip()[:2000]
+        if not chat_id or not text:
+            return _resp(400, {'error': 'chat_id_and_text_required'})
+
+        with conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO chats (id) VALUES (%s) ON CONFLICT (id) DO UPDATE SET last_message_at = NOW() "
+                "RETURNING ai_enabled",
+                (chat_id,),
+            )
+            ai_enabled = bool(cur.fetchone()[0])
+            cur.execute(
+                "INSERT INTO chat_messages (chat_id, sender, content) VALUES (%s, 'user', %s)",
+                (chat_id, text),
+            )
+
+            if not ai_enabled:
+                # Отвечает живой менеджер — ИИ молчит
+                msgs = _fetch_messages(cur, chat_id)
+                return _resp(200, {'messages': msgs, 'aiEnabled': False, 'offerLead': False})
+
+            history = _fetch_messages(cur, chat_id)
+
+        reply, offer_lead = _ask_ai(history)
+
+        with conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO chat_messages (chat_id, sender, content) VALUES (%s, 'ai', %s)",
+                (chat_id, reply),
+            )
+            cur.execute("UPDATE chats SET last_message_at = NOW() WHERE id = %s", (chat_id,))
+            msgs = _fetch_messages(cur, chat_id)
+
+        return _resp(200, {'messages': msgs, 'aiEnabled': True, 'offerLead': offer_lead})
+    finally:
+        conn.close()
+
+
+def _ask_ai(history):
     messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
     for m in history[-12:]:
-        role = 'assistant' if m.get('role') == 'assistant' else 'user'
-        messages.append({'role': role, 'content': str(m.get('content', ''))[:2000]})
+        role = 'assistant' if m['sender'] in ('ai', 'manager') else 'user'
+        messages.append({'role': role, 'content': str(m['content'])[:2000]})
 
-    api_key = os.environ['PERPLEXITY']
     payload = json.dumps({
         'model': 'sonar',
         'messages': messages,
@@ -61,52 +133,33 @@ def handler(event: dict, context) -> dict:
         'https://api.perplexity.ai/chat/completions',
         data=payload,
         headers={
-            'Authorization': f'Bearer {api_key}',
+            'Authorization': f"Bearer {os.environ['PERPLEXITY']}",
             'Content-Type': 'application/json',
         },
         method='POST',
     )
-
     try:
         with urllib.request.urlopen(req, timeout=25) as resp:
             data = json.loads(resp.read().decode('utf-8'))
         reply = data['choices'][0]['message']['content']
-    except urllib.error.HTTPError as e:
-        return {'statusCode': 502, 'headers': {**cors, 'Content-Type': 'application/json'},
-                'body': json.dumps({'error': 'ai_error', 'detail': e.read().decode('utf-8')[:300]})}
-    except Exception as e:
-        return {'statusCode': 502, 'headers': {**cors, 'Content-Type': 'application/json'},
-                'body': json.dumps({'error': 'ai_error', 'detail': str(e)[:300]})}
+    except Exception:
+        return 'Извините, не получилось ответить. Попробуйте ещё раз или свяжитесь с менеджером.', False
 
     offer_lead = '[[LEAD]]' in reply
-    reply = reply.replace('[[LEAD]]', '')
-    reply = _clean_markdown(reply)
-
-    return {
-        'statusCode': 200,
-        'headers': {**cors, 'Content-Type': 'application/json'},
-        'body': json.dumps({'reply': reply, 'offerLead': offer_lead}, ensure_ascii=False),
-    }
+    reply = _clean_markdown(reply.replace('[[LEAD]]', ''))
+    return reply, offer_lead
 
 
 def _clean_markdown(text: str) -> str:
-    '''Убирает Markdown-разметку, чтобы ответ выглядел как живое сообщение.'''
-    import re
-    # Ссылки [текст](url) -> текст
     text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
-    # Жирный/курсив **x**, *x*, __x__, _x_
     text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
     text = re.sub(r'\*([^*]+)\*', r'\1', text)
     text = re.sub(r'__([^_]+)__', r'\1', text)
-    # Заголовки и маркеры списков в начале строк
     lines = []
     for line in text.split('\n'):
         line = re.sub(r'^\s*#{1,6}\s*', '', line)
         line = re.sub(r'^\s*[-*•]\s+', '— ', line)
         lines.append(line)
-    text = '\n'.join(lines)
-    # Остаточные одиночные звёздочки и решётки
-    text = text.replace('**', '').replace('*', '')
-    # Сноски-цитаты вида [1], [2]
+    text = '\n'.join(lines).replace('**', '').replace('*', '')
     text = re.sub(r'\[\d+\]', '', text)
     return text.strip()

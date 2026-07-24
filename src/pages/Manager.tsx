@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import func2url from '../../backend/func2url.json';
+import ChatConsole from '@/components/ChatConsole';
 
 interface Lead {
   id: number;
@@ -26,6 +27,7 @@ const Manager = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [openId, setOpenId] = useState<number | null>(null);
+  const [tab, setTab] = useState<'leads' | 'chats'>('leads');
 
   const load = async (pass: string) => {
     setLoading(true);
@@ -108,20 +110,34 @@ const Manager = () => {
   return (
     <div className="min-h-screen bg-surface">
       <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background px-4 py-4 md:px-8">
-        <div className="flex items-center gap-3">
-          <Icon name="Inbox" size={22} className="text-primary" />
-          <h1 className="font-display text-lg font-bold text-foreground">Заявки</h1>
-          <span className="rounded-full bg-primary/15 px-2.5 py-0.5 text-xs font-medium text-primary">
-            {leads.length}
-          </span>
+        <div className="flex items-center gap-1 rounded-xl bg-surface p-1">
+          <button
+            onClick={() => setTab('leads')}
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition ${
+              tab === 'leads' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'
+            }`}
+          >
+            <Icon name="Inbox" size={16} /> Заявки
+            <span className="rounded-full bg-primary/15 px-1.5 text-xs text-primary">{leads.length}</span>
+          </button>
+          <button
+            onClick={() => setTab('chats')}
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition ${
+              tab === 'chats' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'
+            }`}
+          >
+            <Icon name="MessagesSquare" size={16} /> Чаты
+          </button>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => load(password)}
-            className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm text-foreground hover:bg-surface-dynamic"
-          >
-            <Icon name="RefreshCw" size={15} /> Обновить
-          </button>
+          {tab === 'leads' && (
+            <button
+              onClick={() => load(password)}
+              className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm text-foreground hover:bg-surface-dynamic"
+            >
+              <Icon name="RefreshCw" size={15} /> Обновить
+            </button>
+          )}
           <a
             href="/"
             className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm text-foreground hover:bg-surface-dynamic"
@@ -141,7 +157,9 @@ const Manager = () => {
         </div>
       </header>
 
-      <div className="mx-auto max-w-4xl space-y-3 p-4 md:p-8">
+      {tab === 'chats' && <ChatConsole password={password} />}
+
+      <div className={tab === 'leads' ? 'mx-auto max-w-4xl space-y-3 p-4 md:p-8' : 'hidden'}>
         {leads.length === 0 && (
           <p className="py-16 text-center text-muted-foreground">Заявок пока нет</p>
         )}

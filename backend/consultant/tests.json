@@ -7,13 +7,28 @@
       "expectedStatus": 200
     },
     {
-      "name": "Ask consultant",
+      "name": "Send message and get AI reply",
       "method": "POST",
       "path": "/",
-      "body": { "messages": [{ "role": "user", "content": "Сколько километров маршрут?" }] },
+      "body": { "chatId": "test-chat-001", "text": "Сколько километров маршрут?" },
       "expectedStatus": 200,
-      "expectedBody": { "reply": "string" },
+      "expectedBody": { "aiEnabled": true },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Poll chat history",
+      "method": "GET",
+      "path": "/?chatId=test-chat-001",
+      "expectedStatus": 200,
+      "expectedBody": { "aiEnabled": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing text fails",
+      "method": "POST",
+      "path": "/",
+      "body": { "chatId": "test-chat-001" },
+      "expectedStatus": 400
     }
   ]
 }

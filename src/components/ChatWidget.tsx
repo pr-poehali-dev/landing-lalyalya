@@ -3,38 +3,72 @@ import Icon from '@/components/ui/icon';
 import func2url from '../../backend/func2url.json';
 
 interface Message {
-  role: 'user' | 'assistant';
+  sender: 'user' | 'ai' | 'manager';
   content: string;
 }
 
 const GREETING: Message = {
-  role: 'assistant',
+  sender: 'ai',
   content:
     'Привет! Я консультант Великого Дальневосточного Трейла. Спрашивайте про маршрут, сроки, снаряжение и участие — помогу разобраться.',
 };
 
 const QUICK = ['Какой маршрут?', 'Сколько длится?', 'Как принять участие?'];
 
+const getChatId = () => {
+  let id = localStorage.getItem('vdt_chat_id');
+  if (!id) {
+    id = 'c_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('vdt_chat_id', id);
+  }
+  return id;
+};
+
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
+  const [aiEnabled, setAiEnabled] = useState(true);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [showLead, setShowLead] = useState(false);
   const [lead, setLead] = useState({ name: '', phone: '', contact: '', message: '' });
   const [sent, setSent] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const chatId = useRef(getChatId());
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, loading, open, showLead, sent]);
 
+  const applyServer = (data: { messages?: Message[]; aiEnabled?: boolean; offerLead?: boolean }) => {
+    if (Array.isArray(data.messages)) {
+      setMessages(data.messages.length ? data.messages : [GREETING]);
+    }
+    if (typeof data.aiEnabled === 'boolean') setAiEnabled(data.aiEnabled);
+    if (data.offerLead) setShowLead(true);
+  };
+
+  // Поллинг: подхватываем ответы менеджера в реальном времени
+  useEffect(() => {
+    if (!open) return;
+    const poll = async () => {
+      try {
+        const res = await fetch(`${func2url.consultant}?chatId=${chatId.current}`);
+        if (res.ok) applyServer(await res.json());
+      } catch {
+        /* ignore */
+      }
+    };
+    poll();
+    const t = setInterval(poll, 4000);
+    return () => clearInterval(t);
+  }, [open]);
+
   const send = async (text: string) => {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
 
-    const next = [...messages, { role: 'user' as const, content: trimmed }];
-    setMessages(next);
+    setMessages((m) => [...m, { sender: 'user', content: trimmed }]);
     setInput('');
     setLoading(true);
 
@@ -42,18 +76,13 @@ const ChatWidget = () => {
       const res = await fetch(func2url.consultant, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ chatId: chatId.current, text: trimmed }),
       });
-      const data = await res.json();
-      setMessages((m) => [
-        ...m,
-        { role: 'assistant', content: data.reply || 'Не получилось ответить, попробуйте ещё раз.' },
-      ]);
-      if (data.offerLead) setShowLead(true);
+      applyServer(await res.json());
     } catch {
       setMessages((m) => [
         ...m,
-        { role: 'assistant', content: 'Связь прервалась. Попробуйте написать ещё раз.' },
+        { sender: 'ai', content: 'Связь прервалась. Попробуйте написать ещё раз.' },
       ]);
     } finally {
       setLoading(false);
@@ -63,14 +92,20 @@ const ChatWidget = () => {
   const submitLead = async () => {
     if (!lead.name.trim() || !lead.phone.trim()) return;
     const dialog = messages
-      .map((m) => `${m.role === 'user' ? 'Клиент' : 'Бот'}: ${m.content}`)
+      .map((m) => `${m.sender === 'user' ? 'Клиент' : m.sender === 'manager' ? 'Менеджер' : 'Бот'}: ${m.content}`)
       .join('\n');
     const contact = [lead.phone.trim(), lead.contact.trim()].filter(Boolean).join(' · ');
     try {
       const res = await fetch(func2url.leads, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: lead.name, contact, message: lead.message, dialog }),
+        body: JSON.stringify({
+          name: lead.name,
+          contact,
+          message: lead.message,
+          dialog,
+          chatId: chatId.current,
+        }),
       });
       if (res.ok) {
         setSent(true);
@@ -101,27 +136,32 @@ const ChatWidget = () => {
         <div className="fixed bottom-24 right-6 z-[90] flex h-[32rem] max-h-[70vh] w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl">
           <div className="flex items-center gap-3 bg-primary px-5 py-4 text-primary-foreground">
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-foreground/15">
-              <Icon name="Mountain" size={22} />
+              <Icon name={aiEnabled ? 'Mountain' : 'Headset'} size={22} />
             </div>
             <div className="leading-tight">
-              <div className="font-display font-bold">Консультант трейла</div>
+              <div className="font-display font-bold">
+                {aiEnabled ? 'Консультант трейла' : 'Менеджер на связи'}
+              </div>
               <div className="flex items-center gap-1.5 text-xs opacity-80">
                 <span className="h-2 w-2 rounded-full bg-taiga" />
-                Отвечает ИИ • обычно за минуту
+                {aiEnabled ? 'Отвечает ИИ • обычно за минуту' : 'С вами общается специалист'}
               </div>
             </div>
           </div>
 
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-surface p-4">
             {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                    m.role === 'user'
+                    m.sender === 'user'
                       ? 'rounded-br-md bg-primary text-primary-foreground'
                       : 'rounded-bl-md bg-background text-foreground shadow-sm'
                   }`}
                 >
+                  {m.sender === 'manager' && (
+                    <span className="mb-0.5 block text-[11px] font-semibold text-primary">Менеджер</span>
+                  )}
                   {m.content}
                 </div>
               </div>
@@ -203,7 +243,7 @@ const ChatWidget = () => {
             )}
           </div>
 
-          {!showLead && !sent && (
+          {!showLead && !sent && aiEnabled && (
             <button
               onClick={() => setShowLead(true)}
               className="flex items-center justify-center gap-1.5 border-t border-border bg-surface px-3 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/10"
