@@ -8,6 +8,7 @@ import Hubs from '@/components/sections/Hubs';
 import Founder from '@/components/sections/Founder';
 import Finish from '@/components/sections/Finish';
 import Footer from '@/components/sections/Footer';
+import ChatWidget from '@/components/ChatWidget';
 
 const Divider = () => (
   <div
@@ -49,6 +50,7 @@ const Index = () => {
       <Divider />
       <Finish />
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

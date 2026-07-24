@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Create lead",
+      "method": "POST",
+      "path": "/",
+      "body": { "name": "Тест", "contact": "test@mail.ru", "message": "Хочу пройти трейл", "dialog": "" },
+      "expectedStatus": 200,
+      "expectedBody": { "ok": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Create lead without contact fails",
+      "method": "POST",
+      "path": "/",
+      "body": { "name": "Тест" },
+      "expectedStatus": 400
+    },
+    {
+      "name": "List leads unauthorized",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 401
+    }
+  ]
+}
