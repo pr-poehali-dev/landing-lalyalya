@@ -30,6 +30,7 @@ const Manager = () => {
   const [error, setError] = useState('');
   const [openId, setOpenId] = useState<number | null>(null);
   const [tab, setTab] = useState<'leads' | 'chats'>('leads');
+  const [unreadChats, setUnreadChats] = useState(0);
 
   const load = async (pass: string) => {
     setLoading(true);
@@ -129,6 +130,11 @@ const Manager = () => {
             }`}
           >
             <Icon name="MessagesSquare" size={16} /> Чаты
+            {unreadChats > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-xs font-bold text-primary-foreground animate-pulse">
+                {unreadChats}
+              </span>
+            )}
           </button>
         </div>
         <div className="flex items-center gap-3">
@@ -159,7 +165,9 @@ const Manager = () => {
         </div>
       </header>
 
-      {tab === 'chats' && <ChatConsole password={password} />}
+      <div className={tab === 'chats' ? '' : 'hidden'}>
+        <ChatConsole password={password} onUnreadChange={setUnreadChats} />
+      </div>
 
       <div className={tab === 'leads' ? 'mx-auto max-w-4xl space-y-3 p-4 md:p-8' : 'hidden'}>
         {leads.length === 0 && (

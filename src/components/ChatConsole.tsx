@@ -10,7 +10,27 @@ interface ChatItem {
   contact: string | null;
   lastMessage: string | null;
   count: number;
+  lastSender: 'user' | 'ai' | 'manager' | null;
 }
+
+const playPing = () => {
+  try {
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.setValueAtTime(1180, ctx.currentTime + 0.12);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  } catch {
+    /* ignore */
+  }
+};
 
 interface Msg {
   sender: 'user' | 'ai' | 'manager';
@@ -18,20 +38,57 @@ interface Msg {
   created_at: string;
 }
 
-const ChatConsole = ({ password }: { password: string }) => {
+const ChatConsole = ({
+  password,
+  onUnreadChange,
+}: {
+  password: string;
+  onUnreadChange?: (n: number) => void;
+}) => {
   const [chats, setChats] = useState<ChatItem[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [aiEnabled, setAiEnabled] = useState(true);
   const [reply, setReply] = useState('');
+  const [unread, setUnread] = useState<Record<string, boolean>>({});
   const scrollRef = useRef<HTMLDivElement>(null);
+  const counts = useRef<Record<string, number>>({});
+  const initialized = useRef(false);
+  const activeRef = useRef<string | null>(null);
 
   const auth = { 'X-Manager-Password': password };
+
+  useEffect(() => {
+    activeRef.current = activeId;
+  }, [activeId]);
+
+  useEffect(() => {
+    onUnreadChange?.(Object.values(unread).filter(Boolean).length);
+  }, [unread, onUnreadChange]);
 
   const loadChats = async () => {
     try {
       const res = await fetch(`${func2url.leads}?action=chats`, { headers: auth });
-      if (res.ok) setChats((await res.json()).chats || []);
+      if (!res.ok) return;
+      const list: ChatItem[] = (await res.json()).chats || [];
+      let ping = false;
+      const nextUnread: Record<string, boolean> = {};
+      for (const c of list) {
+        const prev = counts.current[c.id];
+        const grew = prev !== undefined && c.count > prev;
+        const fromClient = c.lastSender === 'user';
+        if (initialized.current && grew && fromClient && c.id !== activeRef.current) {
+          nextUnread[c.id] = true;
+          ping = true;
+        }
+        counts.current[c.id] = c.count;
+      }
+      if (Object.keys(nextUnread).length) {
+        setUnread((u) => ({ ...u, ...nextUnread }));
+      }
+      if (ping) playPing();
+      initialized.current = true;
+      setChats(list);
     } catch {
       /* ignore */
     }
@@ -59,6 +116,7 @@ const ChatConsole = ({ password }: { password: string }) => {
 
   useEffect(() => {
     if (!activeId) return;
+    setUnread((u) => ({ ...u, [activeId]: false }));
     loadChat(activeId);
     const t = setInterval(() => loadChat(activeId), 3000);
     return () => clearInterval(t);
@@ -102,20 +160,32 @@ const ChatConsole = ({ password }: { password: string }) => {
             key={c.id}
             onClick={() => setActiveId(c.id)}
             className={`w-full rounded-xl border p-3 text-left transition ${
-              activeId === c.id
-                ? 'border-primary bg-primary/5'
-                : 'border-border bg-background hover:bg-surface-dynamic'
+              unread[c.id]
+                ? 'border-primary bg-primary/10'
+                : activeId === c.id
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border bg-background hover:bg-surface-dynamic'
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="truncate text-sm font-semibold text-foreground">
+              <span className="flex items-center gap-1.5 truncate text-sm font-semibold text-foreground">
+                {unread[c.id] && (
+                  <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-primary" />
+                )}
                 {c.name || `Гость ${c.id.slice(-4)}`}
               </span>
-              {!c.aiEnabled && (
-                <span className="shrink-0 rounded-full bg-terracotta/15 px-2 py-0.5 text-[10px] font-medium text-terracotta">
-                  Оператор
-                </span>
-              )}
+              <span className="flex shrink-0 items-center gap-1.5">
+                {unread[c.id] && (
+                  <span className="rounded-full bg-primary px-1.5 text-[10px] font-bold text-primary-foreground">
+                    NEW
+                  </span>
+                )}
+                {!c.aiEnabled && (
+                  <span className="rounded-full bg-terracotta/15 px-2 py-0.5 text-[10px] font-medium text-terracotta">
+                    Оператор
+                  </span>
+                )}
+              </span>
             </div>
             <p className="mt-0.5 truncate text-xs text-muted-foreground">
               {c.lastMessage || '—'}

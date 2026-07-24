@@ -66,7 +66,8 @@ def handler(event: dict, context) -> dict:
                 cur.execute(
                     "SELECT c.id, c.ai_enabled, c.last_message_at, l.name, l.contact, "
                     "(SELECT content FROM chat_messages m WHERE m.chat_id = c.id ORDER BY m.id DESC LIMIT 1), "
-                    "(SELECT COUNT(*) FROM chat_messages m WHERE m.chat_id = c.id) "
+                    "(SELECT COUNT(*) FROM chat_messages m WHERE m.chat_id = c.id), "
+                    "(SELECT sender FROM chat_messages m WHERE m.chat_id = c.id ORDER BY m.id DESC LIMIT 1) "
                     "FROM chats c LEFT JOIN leads l ON l.id = c.lead_id "
                     "ORDER BY c.last_message_at DESC LIMIT 200"
                 )
@@ -74,6 +75,7 @@ def handler(event: dict, context) -> dict:
             chats = [{
                 'id': r[0], 'aiEnabled': r[1], 'lastAt': r[2],
                 'name': r[3], 'contact': r[4], 'lastMessage': r[5], 'count': r[6],
+                'lastSender': r[7],
             } for r in rows]
             return _resp(200, {'chats': chats})
 
