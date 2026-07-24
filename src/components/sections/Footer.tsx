@@ -1,3 +1,5 @@
+import Icon from '@/components/ui/icon';
+
 const LINKS = [
   { label: 'Маршрут', href: '#route' },
   { label: 'Стоянки', href: '#hubs' },
@@ -28,9 +30,18 @@ const Footer = () => {
             </a>
           ))}
         </nav>
-        <p className="text-xs text-muted-foreground">
-          © 2026 ВДТ. Маршрут открытый.
-        </p>
+        <div className="flex items-center gap-6">
+          <a
+            href="/manager"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Icon name="Lock" size={14} />
+            Кабинет менеджера
+          </a>
+          <p className="text-xs text-muted-foreground">
+            © 2026 ВДТ. Маршрут открытый.
+          </p>
+        </div>
       </div>
     </footer>
   );
