@@ -203,6 +203,16 @@ const ChatWidget = () => {
             )}
           </div>
 
+          {!showLead && !sent && (
+            <button
+              onClick={() => setShowLead(true)}
+              className="flex items-center justify-center gap-1.5 border-t border-border bg-surface px-3 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/10"
+            >
+              <Icon name="Headset" size={16} />
+              Связаться с менеджером
+            </button>
+          )}
+
           <form
             onSubmit={(e) => {
               e.preventDefault();
