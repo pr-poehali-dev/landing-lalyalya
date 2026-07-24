@@ -21,7 +21,7 @@ const ChatWidget = () => {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [showLead, setShowLead] = useState(false);
-  const [lead, setLead] = useState({ name: '', contact: '', message: '' });
+  const [lead, setLead] = useState({ name: '', phone: '', contact: '', message: '' });
   const [sent, setSent] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -61,15 +61,16 @@ const ChatWidget = () => {
   };
 
   const submitLead = async () => {
-    if (!lead.name.trim() || !lead.contact.trim()) return;
+    if (!lead.name.trim() || !lead.phone.trim()) return;
     const dialog = messages
       .map((m) => `${m.role === 'user' ? 'Клиент' : 'Бот'}: ${m.content}`)
       .join('\n');
+    const contact = [lead.phone.trim(), lead.contact.trim()].filter(Boolean).join(' · ');
     try {
       const res = await fetch(func2url.leads, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...lead, dialog }),
+        body: JSON.stringify({ name: lead.name, contact, message: lead.message, dialog }),
       });
       if (res.ok) {
         setSent(true);
@@ -164,9 +165,17 @@ const ChatWidget = () => {
                   className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
                 />
                 <input
+                  type="tel"
+                  value={lead.phone}
+                  onChange={(e) => setLead({ ...lead, phone: e.target.value })}
+                  placeholder="Номер телефона"
+                  className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+                <input
+                  type="email"
                   value={lead.contact}
                   onChange={(e) => setLead({ ...lead, contact: e.target.value })}
-                  placeholder="Телефон или e-mail"
+                  placeholder="E-mail (необязательно)"
                   className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
                 />
                 <textarea
@@ -178,7 +187,7 @@ const ChatWidget = () => {
                 />
                 <button
                   onClick={submitLead}
-                  disabled={!lead.name.trim() || !lead.contact.trim()}
+                  disabled={!lead.name.trim() || !lead.phone.trim()}
                   className="w-full rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 disabled:opacity-50"
                 >
                   Отправить заявку
