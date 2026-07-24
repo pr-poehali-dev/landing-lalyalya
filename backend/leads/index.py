@@ -53,7 +53,32 @@ def handler(event: dict, context) -> dict:
                 )
                 new_id = cur.fetchone()[0]
                 if chat_id:
-                    cur.execute("UPDATE chats SET lead_id = %s WHERE id = %s", (new_id, chat_id))
+                    # Создаём чат, если его ещё нет (клиент нажал форму, не написав в чат)
+                    cur.execute(
+                        "INSERT INTO chats (id, lead_id) VALUES (%s, %s) "
+                        "ON CONFLICT (id) DO UPDATE SET lead_id = %s",
+                        (chat_id, new_id, new_id),
+                    )
+                    # Переносим текст переписки в живой чат, если сообщений ещё нет
+                    cur.execute("SELECT COUNT(*) FROM chat_messages WHERE chat_id = %s", (chat_id,))
+                    if cur.fetchone()[0] == 0 and dialog:
+                        for line in dialog.split('\n'):
+                            line = line.strip()
+                            if not line:
+                                continue
+                            if line.startswith('Клиент:'):
+                                sender, content = 'user', line[len('Клиент:'):].strip()
+                            elif line.startswith('Менеджер:'):
+                                sender, content = 'manager', line[len('Менеджер:'):].strip()
+                            elif line.startswith('Бот:'):
+                                sender, content = 'ai', line[len('Бот:'):].strip()
+                            else:
+                                sender, content = 'ai', line
+                            if content:
+                                cur.execute(
+                                    "INSERT INTO chat_messages (chat_id, sender, content) VALUES (%s, %s, %s)",
+                                    (chat_id, sender, content),
+                                )
             return _resp(200, {'ok': True, 'id': new_id})
 
         # Далее — только для менеджера
