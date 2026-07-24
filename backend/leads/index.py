@@ -118,13 +118,14 @@ def handler(event: dict, context) -> dict:
         if method == 'GET':
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT id, name, contact, message, dialog, status, created_at "
-                    "FROM leads ORDER BY created_at DESC LIMIT 500"
+                    "SELECT l.id, l.name, l.contact, l.message, l.dialog, l.status, l.created_at, "
+                    "(SELECT c.id FROM chats c WHERE c.lead_id = l.id ORDER BY c.last_message_at DESC LIMIT 1) "
+                    "FROM leads l ORDER BY l.created_at DESC LIMIT 500"
                 )
                 rows = cur.fetchall()
             leads = [{
                 'id': r[0], 'name': r[1], 'contact': r[2], 'message': r[3],
-                'dialog': r[4], 'status': r[5], 'created_at': r[6],
+                'dialog': r[4], 'status': r[5], 'created_at': r[6], 'chatId': r[7],
             } for r in rows]
             return _resp(200, {'leads': leads})
 

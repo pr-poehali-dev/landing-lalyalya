@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import func2url from '../../backend/func2url.json';
 import ChatConsole from '@/components/ChatConsole';
+import LeadChat from '@/components/LeadChat';
 
 interface Lead {
   id: number;
@@ -11,6 +12,7 @@ interface Lead {
   dialog: string;
   status: string;
   created_at: string;
+  chatId: string | null;
 }
 
 const STATUS: Record<string, { label: string; cls: string }> = {
@@ -197,18 +199,26 @@ const Manager = () => {
                   {v.label}
                 </button>
               ))}
-              {l.dialog && (
+              {(l.chatId || l.dialog) && (
                 <button
                   onClick={() => setOpenId(openId === l.id ? null : l.id)}
-                  className="ml-auto flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                  className="ml-auto flex items-center gap-1 text-xs font-medium text-primary hover:opacity-80"
                 >
-                  <Icon name="MessageSquare" size={14} />
-                  {openId === l.id ? 'Скрыть диалог' : 'Диалог с ботом'}
+                  <Icon name={l.chatId ? 'Headset' : 'MessageSquare'} size={14} />
+                  {openId === l.id
+                    ? 'Свернуть'
+                    : l.chatId
+                      ? 'Открыть диалог и ответить'
+                      : 'Диалог с ботом'}
                 </button>
               )}
             </div>
 
-            {openId === l.id && l.dialog && (
+            {openId === l.id && l.chatId && (
+              <LeadChat chatId={l.chatId} password={password} />
+            )}
+
+            {openId === l.id && !l.chatId && l.dialog && (
               <pre className="mt-3 max-h-64 overflow-y-auto whitespace-pre-wrap rounded-lg bg-surface p-3 text-xs text-foreground">
                 {l.dialog}
               </pre>
