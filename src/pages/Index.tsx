@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Hero from '@/components/sections/Hero';
 import Values from '@/components/sections/Values';
 import Project from '@/components/sections/Project';
@@ -11,6 +12,8 @@ import Location from '@/components/sections/Location';
 import Voices from '@/components/sections/Voices';
 import Support from '@/components/sections/Support';
 import Faq from '@/components/sections/Faq';
+import Organizers from '@/components/sections/Organizers';
+import FinalCta from '@/components/sections/FinalCta';
 
 const Index = () => {
   return (
@@ -29,7 +32,10 @@ const Index = () => {
         <Voices />
         <Support />
         <Faq />
+        <Organizers />
+        <FinalCta />
       </main>
+      <Footer />
     </div>
   );
 };

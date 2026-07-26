@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import Icon from '@/components/ui/icon';
 
-const FAQ = () => {
+const Faq = () => {
   return (
     <section id="faq" className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 md:px-8">
