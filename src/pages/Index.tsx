@@ -4,6 +4,7 @@ import Values from '@/components/sections/Values';
 import Project from '@/components/sections/Project';
 import Entrepreneurs from '@/components/sections/Entrepreneurs';
 import WhyImportant from '@/components/sections/WhyImportant';
+import Ceremony from '@/components/sections/Ceremony';
 
 const Index = () => {
   return (
@@ -15,6 +16,7 @@ const Index = () => {
         <Project />
         <Entrepreneurs />
         <WhyImportant />
+        <Ceremony />
       </main>
     </div>
   );
