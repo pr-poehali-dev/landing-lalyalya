@@ -6,7 +6,7 @@ const HERO_IMG =
 const Hero = () => {
   return (
     <section id="about" className="relative overflow-hidden bg-background">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 md:px-8 md:py-20 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8 lg:grid-cols-2">
         <div className="min-w-0">
           <p className="mb-5 inline-block rounded-full bg-primary-highlight px-4 py-1.5 text-sm font-semibold text-primary">
             Приморское краевое отделение «ОПОРЫ РОССИИ»
