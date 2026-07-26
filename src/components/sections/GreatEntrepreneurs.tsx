@@ -62,14 +62,25 @@ const GreatEntrepreneurs = () => {
     <section className="bg-background pb-6 pt-2 md:pb-10">
       <div className="mx-auto max-w-4xl px-4 md:px-8">
         <Collapsible open={open} onOpenChange={setOpen}>
-          <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-6 py-5 text-left transition hover:bg-surface-dynamic">
-            <span className="font-display text-xl font-bold text-primary">
-              Великие предприниматели Приморья
-            </span>
+          <CollapsibleTrigger className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary-highlight px-6 py-5 text-left shadow-sm transition hover:border-primary/35 hover:shadow-md">
+            <div className="flex items-center gap-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary/15">
+                <Icon name="Users" size={22} />
+              </span>
+              <div>
+                <span className="block font-display text-xl font-bold text-primary">
+                  Великие предприниматели Приморья
+                </span>
+                <span className="mt-0.5 flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+                  <Icon name={open ? 'ChevronUp' : 'ChevronDown'} size={14} className="shrink-0" />
+                  {open ? 'Свернуть' : 'Нажмите, чтобы узнать больше'}
+                </span>
+              </div>
+            </div>
             <Icon
               name={open ? 'ChevronUp' : 'ChevronDown'}
               size={22}
-              className="shrink-0 text-primary"
+              className="shrink-0 text-primary transition-transform group-hover:translate-y-0.5"
             />
           </CollapsibleTrigger>
           <CollapsibleContent className="mt-4 space-y-6">
