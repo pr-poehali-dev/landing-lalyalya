@@ -6,6 +6,7 @@ import Entrepreneurs from '@/components/sections/Entrepreneurs';
 import WhyImportant from '@/components/sections/WhyImportant';
 import Ceremony from '@/components/sections/Ceremony';
 import Monument from '@/components/sections/Monument';
+import TimeCapsule from '@/components/sections/TimeCapsule';
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
         <WhyImportant />
         <Ceremony />
         <Monument />
+        <TimeCapsule />
       </main>
     </div>
   );
