@@ -64,12 +64,10 @@ const GreatEntrepreneurs = () => {
         <Collapsible open={open} onOpenChange={setOpen}>
           <CollapsibleTrigger className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary-highlight px-6 py-5 text-left shadow-sm transition hover:border-primary/35 hover:shadow-md">
             <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-primary/10 bg-white transition group-hover:border-primary/20">
-                <svg viewBox="0 0 3 2" className="h-full w-full">
-                  <rect width="3" height="2" fill="#fff" />
-                  <rect width="3" height="1.334" y="0.667" fill="#0039A6" />
-                  <rect width="3" height="0.667" y="1.333" fill="#D52B1E" />
-                </svg>
+              <span className="flex h-11 w-11 shrink-0 flex-col overflow-hidden rounded-full border border-primary/10 transition group-hover:border-primary/20">
+                <span className="flex-1 bg-white" />
+                <span className="flex-1 bg-[#0039A6]" />
+                <span className="flex-1 bg-[#D52B1E]" />
               </span>
               <div>
                 <span className="block font-display text-xl font-bold text-primary">
