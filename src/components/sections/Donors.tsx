@@ -55,10 +55,10 @@ const Donors = () => {
         <Dialog open={open} onOpenChange={setOpen}>
           <button
             onClick={() => setOpen(true)}
-            className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary-highlight px-6 py-6 text-left shadow-sm transition hover:border-primary/35 hover:shadow-md"
+            className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-accent/20 bg-card-red px-6 py-6 text-left shadow-sm transition hover:border-accent/35 hover:shadow-md"
           >
             <div className="flex items-center gap-4">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary/15">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition group-hover:bg-accent/15">
                 <Icon name="HeartHandshake" size={26} />
               </span>
               <div>
@@ -74,7 +74,7 @@ const Donors = () => {
             <Icon
               name="ChevronRight"
               size={22}
-              className="hidden shrink-0 text-primary transition-transform group-hover:translate-x-1 sm:block animate-pulse"
+              className="hidden shrink-0 text-accent transition-transform group-hover:translate-x-1 sm:block animate-pulse"
             />
           </button>
 
@@ -87,7 +87,7 @@ const Donors = () => {
                 Благодарим каждого, кто поддержал создание памятника предпринимателям
                 Приморья
               </DialogDescription>
-              <p className="pt-1 text-sm font-semibold text-primary">
+              <p className="pt-1 text-sm font-semibold text-accent">
                 Всего собрано: {formatAmount(total)}
               </p>
             </DialogHeader>
