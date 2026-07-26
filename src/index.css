@@ -131,6 +131,12 @@
     @apply border-border;
   }
 
+  html,
+  body {
+    @apply overflow-x-hidden;
+    max-width: 100vw;
+  }
+
   body {
     @apply bg-background text-foreground font-body;
   }
@@ -141,7 +147,7 @@
   h4,
   h5,
   h6 {
-    @apply font-display;
+    @apply font-display break-words;
   }
 }
 

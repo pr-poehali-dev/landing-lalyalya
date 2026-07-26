@@ -12,14 +12,14 @@ const FinalCta = () => {
           создают опору для будущего региона.
         </p>
 
-        <div className="mb-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8">
-          <div className="flex items-center gap-2 text-lg font-semibold">
-            <Icon name="Calendar" size={20} className="text-accent" />
-            31 августа 2026 года · 13:00
+        <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
+          <div className="inline-flex items-center gap-2 text-left text-lg font-semibold">
+            <Icon name="Calendar" size={20} className="shrink-0 text-accent" />
+            <span>31 августа 2026 года · 13:00</span>
           </div>
-          <div className="flex items-center gap-2 text-lg font-medium text-white/85">
-            <Icon name="MapPin" size={20} className="text-accent" />
-            Сцена на площади Адмирала Фокина · Владивосток
+          <div className="inline-flex items-center gap-2 text-left text-lg font-medium text-white/85">
+            <Icon name="MapPin" size={20} className="shrink-0 text-accent" />
+            <span>Сцена на площади Адмирала Фокина · Владивосток</span>
           </div>
         </div>
 
