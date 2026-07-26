@@ -11,7 +11,7 @@ interface Person {
   tag: string;
   tagColor: 'blue' | 'red' | 'muted';
   text: string;
-  icon: string;
+  photo: string;
 }
 
 const PEOPLE: Person[] = [
@@ -20,28 +20,32 @@ const PEOPLE: Person[] = [
     tag: 'Историческая персона',
     tagColor: 'blue',
     text: 'Часть исторического наследия Приморья; имя Янковских связано, в частности, с первым в регионе конным заводом.',
-    icon: 'Landmark',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/4aa0aaf0-df2f-42f8-a55f-775399d93da9.jpg',
   },
   {
     name: 'Фёдоров',
     tag: 'Уточняется',
     tagColor: 'muted',
     text: 'Историческая персона для включения после уточнения полного имени и утверждённой справки заказчиком.',
-    icon: 'HelpCircle',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/9a188440-4649-43a9-9f32-86886106ba4b.jpg',
   },
   {
     name: 'Дмитрий Алексеев',
     tag: 'Современный предприниматель',
     tagColor: 'red',
     text: 'Предприниматель Владивостока, сооснователь DNS; в 2026 году впервые вошёл в мировой рейтинг миллиардеров Forbes по версии российского СМИ.',
-    icon: 'TrendingUp',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/b2c5d73b-f2c7-46d4-99e1-12c060f88b98.jpg',
   },
   {
     name: 'Другие предприниматели Приморья',
     tag: 'Открыто для дополнения',
     tagColor: 'muted',
     text: 'По мере наполнения проекта и согласования с экспертным сообществом.',
-    icon: 'Users',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/7e924508-b28f-4d90-a1b7-ff03d61c0b96.jpg',
   },
 ];
 
@@ -177,8 +181,12 @@ const Project = () => {
                   key={p.name}
                   className="flex gap-4 rounded-2xl border border-border bg-background p-5 shadow-sm"
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <Icon name={p.icon} size={24} className="text-primary" />
+                  <span className="h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-primary/15 bg-primary/10">
+                    <img
+                      src={p.photo}
+                      alt={p.name}
+                      className="h-full w-full object-cover"
+                    />
                   </span>
                   <div>
                     <div className="mb-1.5 flex flex-wrap items-center gap-2">
