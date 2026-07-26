@@ -139,7 +139,6 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    text-wrap: pretty;
   }
 
   h1,
@@ -147,19 +146,15 @@
   h3,
   h4,
   h5,
-  h6 {
-    @apply font-display;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-
+  h6,
   p,
   li,
   span,
   a,
   blockquote {
-    overflow-wrap: break-word;
-    hyphens: auto;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
   }
 }
 
