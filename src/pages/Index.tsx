@@ -1,5 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/sections/Hero';
+import Values from '@/components/sections/Values';
+import Project from '@/components/sections/Project';
 
 const Index = () => {
   return (
@@ -7,6 +9,8 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <Values />
+        <Project />
       </main>
     </div>
   );
