@@ -9,6 +9,8 @@ import Monument from '@/components/sections/Monument';
 import TimeCapsule from '@/components/sections/TimeCapsule';
 import Location from '@/components/sections/Location';
 import Voices from '@/components/sections/Voices';
+import Support from '@/components/sections/Support';
+import Faq from '@/components/sections/Faq';
 
 const Index = () => {
   return (
@@ -25,6 +27,8 @@ const Index = () => {
         <TimeCapsule />
         <Location />
         <Voices />
+        <Support />
+        <Faq />
       </main>
     </div>
   );
