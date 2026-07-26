@@ -17,10 +17,11 @@ interface SectionProps {
   value: string;
   icon: string;
   title: string;
+  color: 'primary' | 'accent';
   children: React.ReactNode;
 }
 
-const ProjectSection = ({ value, icon, title, children }: SectionProps) => (
+const ProjectSection = ({ value, icon, title, color, children }: SectionProps) => (
   <AccordionItem
     value={value}
     className="overflow-hidden rounded-2xl border border-border bg-surface"
@@ -28,7 +29,13 @@ const ProjectSection = ({ value, icon, title, children }: SectionProps) => (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-surface-dynamic">
         <div className="flex items-center gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition group-hover:bg-accent/15">
+          <span
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
+              color === 'accent'
+                ? 'bg-accent/10 text-accent group-hover:bg-accent/15'
+                : 'bg-primary/10 text-primary group-hover:bg-primary/15'
+            }`}
+          >
             <Icon name={icon} size={22} />
           </span>
           <div>
@@ -74,7 +81,7 @@ const Project = () => {
         </div>
 
         <Accordion type="single" collapsible defaultValue="intro" className="space-y-4">
-          <ProjectSection value="intro" icon="Landmark" title="Памятник предпринимателям Приморья">
+          <ProjectSection value="intro" icon="Landmark" title="Памятник предпринимателям Приморья" color="primary">
             <p>
               Этот памятник посвящён предпринимателям — тем, кто созидает, берёт
               ответственность, объединяет людей и формирует экономику региона не лозунгами,
@@ -87,7 +94,7 @@ const Project = () => {
             </p>
           </ProjectSection>
 
-          <ProjectSection value="creation" icon="Hammer" title="Созидание и ответственность">
+          <ProjectSection value="creation" icon="Hammer" title="Созидание и ответственность" color="accent">
             <p>
               Предпринимательство — это не только про прибыль. Это про смыслы, инициативу
               и готовность создавать то, чего ещё не существует.
@@ -104,6 +111,7 @@ const Project = () => {
             value="territory"
             icon="Compass"
             title="Приморье как территория предпринимателей"
+            color="primary"
           >
             <p>
               Приморье — это территория, которая создавалась людьми действия. На протяжении
@@ -117,7 +125,7 @@ const Project = () => {
             </p>
           </ProjectSection>
 
-          <ProjectSection value="idea" icon="Award" title="Большая идея — признание роли">
+          <ProjectSection value="idea" icon="Award" title="Большая идея — признание роли" color="accent">
             <p>
               Памятник предпринимателям — это не просто объект в городской среде. Это
               высказывание общества: здесь ценят тех, кто создаёт, рискует, строит
