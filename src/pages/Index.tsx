@@ -8,6 +8,7 @@ import Ceremony from '@/components/sections/Ceremony';
 import Monument from '@/components/sections/Monument';
 import TimeCapsule from '@/components/sections/TimeCapsule';
 import Location from '@/components/sections/Location';
+import Voices from '@/components/sections/Voices';
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
         <Monument />
         <TimeCapsule />
         <Location />
+        <Voices />
       </main>
     </div>
   );
