@@ -15,18 +15,8 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <a href="#top" className="flex items-center gap-2 shrink-0">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary">
-            <Icon name="Landmark" size={20} className="text-primary-foreground" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-sm font-extrabold tracking-tight text-primary">
-              ОПОРА РОССИИ
-            </span>
-            <span className="block text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
-              Приморское краевое отделение
-            </span>
-          </span>
+        <a href="#top" className="flex shrink-0 items-center">
+          <img src="/logo-opora.png" alt="ОПОРА РОССИИ" className="h-9 w-auto md:h-11" />
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex">
