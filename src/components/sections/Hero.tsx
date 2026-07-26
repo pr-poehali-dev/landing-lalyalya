@@ -12,7 +12,7 @@ const Hero = () => {
             Приморское краевое отделение «ОПОРЫ РОССИИ»
           </p>
 
-          <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-primary md:text-5xl">
+          <h1 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl md:text-5xl">
             Церемония открытия камня для памятника предпринимателям Приморья
           </h1>
 
