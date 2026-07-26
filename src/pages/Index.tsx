@@ -3,7 +3,6 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/sections/Hero';
 import Values from '@/components/sections/Values';
 import Project from '@/components/sections/Project';
-import Entrepreneurs from '@/components/sections/Entrepreneurs';
 import WhyImportant from '@/components/sections/WhyImportant';
 import Ceremony from '@/components/sections/Ceremony';
 import Monument from '@/components/sections/Monument';
@@ -23,7 +22,6 @@ const Index = () => {
         <Hero />
         <Values />
         <Project />
-        <Entrepreneurs />
         <WhyImportant />
         <Ceremony />
         <Monument />

@@ -46,7 +46,9 @@ const Faq = () => {
             <AccordionContent className="leading-relaxed text-muted-foreground">
               <p className="mb-4">На сцене площади Адмирала Фокина во Владивостоке.</p>
               <a
-                href="#location"
+                href="https://2gis.ru/vladivostok/geo/70030076837838956"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
               >
                 <Icon name="Navigation" size={16} />
@@ -77,7 +79,9 @@ const Faq = () => {
             <AccordionContent className="leading-relaxed text-muted-foreground">
               <p className="mb-4">Зарегистрируйтесь по ссылке:</p>
               <a
-                href="#hero"
+                href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
               >
                 Принять участие

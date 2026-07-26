@@ -43,14 +43,18 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#support"
+              href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
             >
               Принять участие
               <Icon name="ArrowRight" size={18} />
             </a>
             <a
-              href="#location"
+              href="https://2gis.ru/vladivostok/geo/70030076837838956"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-base font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
             >
               <Icon name="Navigation" size={18} />

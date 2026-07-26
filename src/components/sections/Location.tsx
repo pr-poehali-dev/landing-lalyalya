@@ -72,7 +72,7 @@ const Location = () => {
             </div>
 
             <a
-              href="https://2gis.ru/vladivostok/search/Площадь%20Адмирала%20Фокина"
+              href="https://2gis.ru/vladivostok/geo/70030076837838956"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"

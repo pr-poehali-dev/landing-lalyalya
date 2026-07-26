@@ -25,7 +25,9 @@ const FinalCta = () => {
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#top"
+            href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
           >
             Принять участие
