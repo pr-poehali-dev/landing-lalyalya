@@ -11,6 +11,7 @@ import TimeCapsule from '@/components/sections/TimeCapsule';
 import Location from '@/components/sections/Location';
 import Voices from '@/components/sections/Voices';
 import Support from '@/components/sections/Support';
+import Donors from '@/components/sections/Donors';
 import Faq from '@/components/sections/Faq';
 import Organizers from '@/components/sections/Organizers';
 import FinalCta from '@/components/sections/FinalCta';
@@ -31,6 +32,7 @@ const Index = () => {
         <Location />
         <Voices />
         <Support />
+        <Donors />
         <Faq />
         <Organizers />
         <FinalCta />
