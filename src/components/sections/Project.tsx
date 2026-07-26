@@ -28,7 +28,7 @@ const ProjectSection = ({ value, icon, title, children }: SectionProps) => (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-surface-dynamic">
         <div className="flex items-center gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary/15">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition group-hover:bg-accent/15">
             <Icon name={icon} size={22} />
           </span>
           <div>
