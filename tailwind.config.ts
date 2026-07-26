@@ -19,12 +19,14 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				display: ['Cormorant Garamond', 'serif'],
+				display: ['Montserrat', 'sans-serif'],
 				body: ['Inter', 'sans-serif'],
 			},
 			colors: {
-				taiga: 'hsl(var(--taiga))',
-				terracotta: 'hsl(var(--terracotta))',
+				'opora-blue': 'hsl(var(--opora-blue))',
+				'opora-red': 'hsl(var(--opora-red))',
+				'card-blue': 'hsl(var(--card-blue))',
+				'card-red': 'hsl(var(--card-red))',
 				divider: 'hsl(var(--divider))',
 				surface: {
 					DEFAULT: 'hsl(var(--surface))',

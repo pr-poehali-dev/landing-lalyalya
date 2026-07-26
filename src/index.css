@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,46 +16,48 @@
 
 @layer base {
   :root {
-    --background: 40 33% 94%;
-    --foreground: 40 11% 9%;
+    --background: 0 0% 100%;
+    --foreground: 215 40% 16%;
 
-    --surface: 40 33% 96%;
-    --surface-2: 40 38% 98%;
-    --surface-offset: 38 22% 90%;
-    --surface-dynamic: 40 16% 86%;
+    --surface: 210 40% 97%;
+    --surface-2: 0 0% 100%;
+    --surface-offset: 210 38% 94%;
+    --surface-dynamic: 210 36% 92%;
 
-    --card: 40 33% 96%;
-    --card-foreground: 40 11% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 40% 16%;
 
-    --popover: 40 33% 96%;
-    --popover-foreground: 40 11% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 40% 16%;
 
-    --primary: 43 89% 38%;
-    --primary-foreground: 40 33% 97%;
-    --primary-hover: 38 80% 30%;
-    --primary-highlight: 44 60% 91%;
+    --primary: 215 62% 26%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 215 62% 20%;
+    --primary-highlight: 210 60% 95%;
 
-    --secondary: 38 22% 90%;
-    --secondary-foreground: 40 11% 12%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 40% 16%;
 
-    --muted: 40 16% 86%;
-    --muted-foreground: 40 6% 40%;
+    --muted: 210 30% 94%;
+    --muted-foreground: 215 16% 42%;
 
-    --accent: 43 89% 38%;
-    --accent-foreground: 40 33% 97%;
+    --accent: 356 95% 46%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 40 33% 94%;
+    --destructive: 356 95% 46%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 40 14% 77%;
-    --input: 40 14% 77%;
-    --ring: 43 89% 38%;
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 215 62% 26%;
 
-    --divider: 42 16% 81%;
-    --taiga: 142 42% 30%;
-    --terracotta: 25 67% 31%;
+    --divider: 214 25% 90%;
+    --opora-blue: 215 62% 26%;
+    --opora-red: 356 95% 46%;
+    --card-blue: 205 70% 96%;
+    --card-red: 356 80% 97%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
