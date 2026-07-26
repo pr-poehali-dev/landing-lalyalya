@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/sections/Hero';
+import GreatEntrepreneurs from '@/components/sections/GreatEntrepreneurs';
 import Values from '@/components/sections/Values';
 import Project from '@/components/sections/Project';
 import WhyImportant from '@/components/sections/WhyImportant';
@@ -20,6 +21,7 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <GreatEntrepreneurs />
         <Values />
         <Project />
         <WhyImportant />
