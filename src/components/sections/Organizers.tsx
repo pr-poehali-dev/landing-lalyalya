@@ -66,7 +66,7 @@ const Organizers = () => {
           ))}
 
           <a
-            href="mailto:pko@primopora.ru"
+            href="mailto:pko@primopora.ru?subject=Заявка на партнёрство в проекте «Памятник предпринимателям Приморья»&body=Здравствуйте! Хочу стать партнёром проекта.%0D%0A%0D%0AНазвание компании: %0D%0AКонтактное лицо: %0D%0AТелефон: %0D%0AЧем можем помочь проекту: "
             className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border p-5 text-center transition hover:border-accent hover:bg-card-red"
           >
             <Icon name="Plus" size={22} className="text-accent" />
