@@ -27,8 +27,12 @@ const Organizers = () => {
         </p>
 
         <div className="mb-12 flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 shadow-sm md:flex-row md:items-center">
-          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Icon name="Landmark" size={30} />
+          <span className="h-16 w-16 shrink-0 overflow-hidden rounded-full shadow-sm">
+            <img
+              src="/opora-logo.jpg"
+              alt="Логотип «ОПОРЫ РОССИИ»"
+              className="h-full w-full object-cover"
+            />
           </span>
           <div>
             <h3 className="mb-2 font-display text-xl font-bold text-primary">
