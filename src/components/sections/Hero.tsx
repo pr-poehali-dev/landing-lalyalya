@@ -27,7 +27,7 @@ const Hero = () => {
             <div className="absolute -bottom-5 left-4 right-4 rounded-2xl border border-border bg-background/95 px-5 py-4 shadow-lg backdrop-blur">
               <div className="flex items-center gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                  <Icon name="Mic" size={20} className="text-accent" />
+                  <Icon name="MapPin" size={20} className="text-accent" />
                 </span>
                 <span className="text-sm font-semibold text-foreground">
                   Сцена · площадь Адмирала Фокина · Владивосток
