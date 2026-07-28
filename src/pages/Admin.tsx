@@ -192,6 +192,13 @@ const Admin = () => {
           >
             {loading ? 'Проверяем...' : 'Войти'}
           </button>
+          <a
+            href="/"
+            className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-primary"
+          >
+            <Icon name="ArrowLeft" size={16} />
+            Вернуться на сайт
+          </a>
         </form>
       </div>
     );
