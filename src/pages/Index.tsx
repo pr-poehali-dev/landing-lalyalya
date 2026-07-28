@@ -9,7 +9,6 @@ import Ceremony from '@/components/sections/Ceremony';
 import Monument from '@/components/sections/Monument';
 import TimeCapsule from '@/components/sections/TimeCapsule';
 import Location from '@/components/sections/Location';
-import Voices from '@/components/sections/Voices';
 import Support from '@/components/sections/Support';
 import Donors from '@/components/sections/Donors';
 import Faq from '@/components/sections/Faq';
@@ -30,7 +29,6 @@ const Index = () => {
         <Monument />
         <TimeCapsule />
         <Location />
-        <Voices />
         <Support />
         <Donors />
         <Faq />
