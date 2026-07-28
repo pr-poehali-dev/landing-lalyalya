@@ -72,9 +72,10 @@ def handler(event: dict, context) -> dict:
         }
 
     if method == 'GET':
-        password = event.get('headers', {}).get('X-Admin-Password') or \
-            event.get('headers', {}).get('x-admin-password')
-        if password != os.environ.get('MANAGER_PASSWORD'):
+        password = (event.get('headers', {}).get('X-Admin-Password') or
+                    event.get('headers', {}).get('x-admin-password') or '').strip()
+        expected = (os.environ.get('MANAGER_PASSWORD') or '').strip()
+        if not expected or password != expected:
             return {
                 'statusCode': 401,
                 'headers': {**cors_headers, 'Content-Type': 'application/json'},
