@@ -1,4 +1,10 @@
 import Icon from '@/components/ui/icon';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 const MONUMENT_IMG =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/c1954dc5-1472-4181-8e8e-352398884295.png';
@@ -38,52 +44,60 @@ const Monument = () => {
           </div>
 
           <div>
-            <div className="mb-8">
-              <h3 className="mb-3 font-display text-xl font-bold text-primary">
-                165 лет истории предпринимательства
-              </h3>
-              <div className="space-y-3 leading-relaxed text-muted-foreground">
-                <p>
-                  История Приморского края — это история людей действия. Предприниматели,
-                  купцы и промышленники из разных стран развивали торговлю, производство,
-                  порты и международные связи.
-                </p>
-                <p>
-                  Памятник станет знаком признания: этот регион создавался людьми,
-                  которые умели видеть возможности, принимать решения и строить будущее.
-                </p>
-              </div>
-            </div>
+            <Accordion type="single" collapsible className="mb-8 space-y-4">
+              <AccordionItem
+                value="history"
+                className="rounded-2xl border border-border bg-background px-6"
+              >
+                <AccordionTrigger className="font-display text-xl font-bold text-primary hover:no-underline">
+                  165 лет истории предпринимательства
+                </AccordionTrigger>
+                <AccordionContent className="space-y-3 leading-relaxed text-muted-foreground">
+                  <p>
+                    История Приморского края — это история людей действия. Предприниматели,
+                    купцы и промышленники из разных стран развивали торговлю, производство,
+                    порты и международные связи.
+                  </p>
+                  <p>
+                    Памятник станет знаком признания: этот регион создавался людьми,
+                    которые умели видеть возможности, принимать решения и строить будущее.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <div className="mb-8">
-              <h3 className="mb-3 font-display text-xl font-bold text-primary">
-                Конкурс и реализация
-              </h3>
-              <div className="space-y-3 leading-relaxed text-muted-foreground">
-                <p>
-                  Конкурс на эскиз и создание памятника проводится по согласованию
-                  с инициаторами проекта, администрацией города и края. Реализация проекта
-                  осуществляется при поддержке предпринимательского сообщества и партнёров.
-                </p>
-                <div className="flex items-start gap-4 rounded-2xl border border-accent/25 bg-card-red p-5">
-                  <span className="flex h-11 w-11 shrink-0 animate-pulse items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                    <Icon name="Mail" size={22} />
-                  </span>
-                  <div>
-                    <p className="mb-1 font-semibold text-primary">
-                      Ваши предложения по проекту, участию и реализации памятника
-                      направляйте на почту:
-                    </p>
-                    <a
-                      href="mailto:pko@primopora.ru"
-                      className="font-display text-lg font-bold text-accent hover:underline"
-                    >
-                      pko@primopora.ru
-                    </a>
+              <AccordionItem
+                value="contest"
+                className="rounded-2xl border border-border bg-background px-6"
+              >
+                <AccordionTrigger className="font-display text-xl font-bold text-primary hover:no-underline">
+                  Конкурс и реализация
+                </AccordionTrigger>
+                <AccordionContent className="space-y-3 leading-relaxed text-muted-foreground">
+                  <p>
+                    Конкурс на эскиз и создание памятника проводится по согласованию
+                    с инициаторами проекта, администрацией города и края. Реализация проекта
+                    осуществляется при поддержке предпринимательского сообщества и партнёров.
+                  </p>
+                  <div className="flex items-start gap-4 rounded-2xl border border-accent/25 bg-card-red p-5">
+                    <span className="flex h-11 w-11 shrink-0 animate-pulse items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                      <Icon name="Mail" size={22} />
+                    </span>
+                    <div>
+                      <p className="mb-1 font-semibold text-primary">
+                        Ваши предложения по проекту, участию и реализации памятника
+                        направляйте на почту:
+                      </p>
+                      <a
+                        href="mailto:pko@primopora.ru"
+                        className="font-display text-lg font-bold text-accent hover:underline"
+                      >
+                        pko@primopora.ru
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             <blockquote className="flex gap-4 rounded-2xl border-l-4 border-accent bg-card-red p-6">
               <Icon name="Quote" size={26} className="shrink-0 text-accent" />
