@@ -2,11 +2,13 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const LINKS = [
-  { label: 'О событии', href: '#about' },
   { label: 'О проекте', href: '#project' },
+  { label: 'Церемония', href: '#ceremony' },
+  { label: 'Памятный знак', href: '#monument' },
   { label: 'Капсула времени', href: '#capsule' },
-  { label: 'Место проведения', href: '#location' },
+  { label: 'Место', href: '#location' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Организаторы', href: '#organizers' },
 ];
 
 const Navbar = () => {
@@ -19,12 +21,12 @@ const Navbar = () => {
           <img src="/logo-opora.png" alt="ОПОРА РОССИИ" className="h-9 w-auto md:h-11" />
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-foreground/80 transition hover:text-primary"
+              className="whitespace-nowrap text-sm font-medium text-foreground/80 transition hover:text-primary"
             >
               {l.label}
             </a>
@@ -33,7 +35,7 @@ const Navbar = () => {
 
         <a
           href="#support"
-          className="hidden shrink-0 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-sm transition hover:opacity-90 md:inline-block"
+          className="hidden shrink-0 whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-sm transition hover:opacity-90 lg:inline-block"
         >
           Поддержать проект
         </a>
