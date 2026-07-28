@@ -85,10 +85,6 @@ const Support = () => {
               Внести сумму
               <Icon name="ArrowRight" size={18} />
             </a>
-            <p className="mt-4 text-sm italic text-muted-foreground">
-              Ссылка на оплату добавляется после предоставления реквизитов или
-              подключения платёжной страницы.
-            </p>
           </div>
         </div>
 
