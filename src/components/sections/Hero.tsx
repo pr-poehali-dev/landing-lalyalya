@@ -1,4 +1,5 @@
 import Icon from '@/components/ui/icon';
+import ApplicationDialog from '@/components/ApplicationDialog';
 
 const HERO_IMG =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/72ba56e3-9d30-400c-9fe4-dcd72b6d09cc.jpg';
@@ -62,15 +63,12 @@ const Hero = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
-            >
-              Принять участие
-              <Icon name="ArrowRight" size={18} />
-            </a>
+            <ApplicationDialog>
+              <button className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90">
+                Принять участие
+                <Icon name="ArrowRight" size={18} />
+              </button>
+            </ApplicationDialog>
             <a
               href="https://2gis.ru/vladivostok/geo/70030076837838956"
               target="_blank"

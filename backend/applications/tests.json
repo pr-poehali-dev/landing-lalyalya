@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "name": "Create application",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "first_name": "Иван",
+        "last_name": "Петров",
+        "phone": "+79001234567",
+        "email": "ivan@example.com",
+        "consent": true
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"success": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject without consent",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "first_name": "Иван",
+        "last_name": "Петров",
+        "phone": "+79001234567",
+        "email": "ivan@example.com",
+        "consent": false
+      },
+      "expectedStatus": 400
+    },
+    {
+      "name": "Reject admin list without password",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 401
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Icon from '@/components/ui/icon';
+import ApplicationDialog from '@/components/ApplicationDialog';
 
 const Faq = () => {
   return (
@@ -77,16 +78,13 @@ const Faq = () => {
               Как принять участие в церемонии?
             </AccordionTrigger>
             <AccordionContent className="leading-relaxed text-muted-foreground">
-              <p className="mb-4">Зарегистрируйтесь по ссылке:</p>
-              <a
-                href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
-              >
-                Принять участие
-                <Icon name="ArrowRight" size={16} />
-              </a>
+              <p className="mb-4">Заполните короткую форму заявки:</p>
+              <ApplicationDialog>
+                <button className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground transition hover:opacity-90">
+                  Принять участие
+                  <Icon name="ArrowRight" size={16} />
+                </button>
+              </ApplicationDialog>
             </AccordionContent>
           </AccordionItem>
 

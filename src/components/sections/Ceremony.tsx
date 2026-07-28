@@ -1,4 +1,5 @@
 import Icon from '@/components/ui/icon';
+import ApplicationDialog from '@/components/ApplicationDialog';
 
 const DETAILS = [
   { icon: 'Calendar', label: 'Дата и время', value: '31.08.2026 · 13:00' },
@@ -57,15 +58,12 @@ const Ceremony = () => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <a
-            href="https://ticketcode.ru/event/tseremoniya-otkrytiya-kamnya-dlya-pamyatnika-predprinimatelej-dalnego-vostoka-g--2?ref=svetlana-d-8e23"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
-          >
-            Принять участие
-            <Icon name="ArrowRight" size={18} />
-          </a>
+          <ApplicationDialog>
+            <button className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90">
+              Принять участие
+              <Icon name="ArrowRight" size={18} />
+            </button>
+          </ApplicationDialog>
           <a
             href="https://2gis.ru/vladivostok/geo/70030076837838956"
             target="_blank"
