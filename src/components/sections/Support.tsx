@@ -12,20 +12,22 @@ const Support = () => {
           </span>
         </div>
 
-        <h2 className="mb-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-4xl">
-          Станьте частью истории Приморья
-        </h2>
-        <p className="mb-12 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Поддержать проект можно не только финансово. Для создания памятного знака
-          и проведения церемонии нужны партнёры, экспертиза, услуги, материалы и идеи.
-        </p>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h2 className="mb-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-4xl lg:text-5xl">
+              Станьте частью истории Приморья
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              Поддержать проект можно не только финансово. Для создания памятного знака
+              и проведения церемонии нужны партнёры, экспертиза, услуги, материалы и идеи.
+            </p>
+          </div>
 
-        <div className="max-w-xl">
-          <div className="flex flex-col rounded-2xl border border-border bg-card-red p-8 shadow-sm">
+          <div className="flex flex-col rounded-2xl border border-border bg-card-red p-8 shadow-sm md:p-10">
             <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-accent text-accent-foreground">
               <Icon name="HeartHandshake" size={26} />
             </span>
-            <h3 className="mb-3 font-display text-xl font-bold text-primary">
+            <h3 className="mb-3 font-display text-2xl font-bold text-primary">
               Стать партнёром
             </h3>
             <p className="mb-6 flex-1 leading-relaxed text-muted-foreground">
