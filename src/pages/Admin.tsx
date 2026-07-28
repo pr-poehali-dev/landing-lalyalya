@@ -10,6 +10,24 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { toast } from '@/hooks/use-toast';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 const STORAGE_KEY = 'ceremony_admin_password';
@@ -29,6 +47,9 @@ const Admin = () => {
   const [items, setItems] = useState<Application[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [editItem, setEditItem] = useState<Application | null>(null);
+  const [deleteItem, setDeleteItem] = useState<Application | null>(null);
+  const [saving, setSaving] = useState(false);
 
   const fetchData = async (pwd: string) => {
     setLoading(true);
@@ -65,6 +86,60 @@ const Admin = () => {
     setAuthed(false);
     setPassword('');
     setItems([]);
+  };
+
+  const saveEdit = async () => {
+    if (!editItem) return;
+    if (!editItem.first_name.trim() || !editItem.last_name.trim() ||
+        !editItem.phone.trim() || !editItem.email.trim()) {
+      toast({ title: 'Заполните все поля', variant: 'destructive' });
+      return;
+    }
+    setSaving(true);
+    try {
+      const res = await fetch(API_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Password': password },
+        body: JSON.stringify(editItem),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Ошибка');
+      setItems((prev) => prev.map((x) => (x.id === editItem.id ? editItem : x)));
+      setEditItem(null);
+      toast({ title: 'Изменения сохранены' });
+    } catch (err) {
+      toast({
+        title: 'Не удалось сохранить',
+        description: err instanceof Error ? err.message : '',
+        variant: 'destructive',
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteItem) return;
+    setSaving(true);
+    try {
+      const res = await fetch(`${API_URL}?id=${deleteItem.id}`, {
+        method: 'DELETE',
+        headers: { 'X-Admin-Password': password },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Ошибка');
+      setItems((prev) => prev.filter((x) => x.id !== deleteItem.id));
+      setDeleteItem(null);
+      toast({ title: 'Заявка удалена' });
+    } catch (err) {
+      toast({
+        title: 'Не удалось удалить',
+        description: err instanceof Error ? err.message : '',
+        variant: 'destructive',
+      });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const formatDate = (iso: string | null) => {
@@ -167,6 +242,7 @@ const Admin = () => {
                   <TableHead>Телефон</TableHead>
                   <TableHead>Почта</TableHead>
                   <TableHead>Дата заявки</TableHead>
+                  <TableHead className="text-right">Действия</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -188,6 +264,24 @@ const Admin = () => {
                     <TableCell className="whitespace-nowrap text-muted-foreground">
                       {formatDate(a.created_at)}
                     </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        <button
+                          onClick={() => setEditItem({ ...a })}
+                          title="Редактировать"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-accent/10 hover:text-accent"
+                        >
+                          <Icon name="Pencil" size={16} />
+                        </button>
+                        <button
+                          onClick={() => setDeleteItem(a)}
+                          title="Удалить"
+                          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-red-50 hover:text-red-600"
+                        >
+                          <Icon name="Trash2" size={16} />
+                        </button>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -195,6 +289,96 @@ const Admin = () => {
           </div>
         )}
       </div>
+
+      <Dialog open={!!editItem} onOpenChange={(v) => !v && setEditItem(null)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">
+              Редактировать заявку
+            </DialogTitle>
+          </DialogHeader>
+          {editItem && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-first">Имя</Label>
+                <Input
+                  id="edit-first"
+                  value={editItem.first_name}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, first_name: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-last">Фамилия</Label>
+                <Input
+                  id="edit-last"
+                  value={editItem.last_name}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, last_name: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-phone">Телефон</Label>
+                <Input
+                  id="edit-phone"
+                  value={editItem.phone}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, phone: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-email">Почта</Label>
+                <Input
+                  id="edit-email"
+                  value={editItem.email}
+                  onChange={(e) =>
+                    setEditItem({ ...editItem, email: e.target.value })
+                  }
+                />
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <button
+              onClick={() => setEditItem(null)}
+              className="rounded-full border-2 border-border px-6 py-2.5 text-sm font-semibold text-muted-foreground transition hover:bg-surface"
+            >
+              Отмена
+            </button>
+            <button
+              onClick={saveEdit}
+              disabled={saving}
+              className="rounded-full bg-accent px-6 py-2.5 text-sm font-semibold text-accent-foreground transition hover:opacity-90 disabled:opacity-50"
+            >
+              {saving ? 'Сохраняем...' : 'Сохранить'}
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={!!deleteItem} onOpenChange={(v) => !v && setDeleteItem(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Удалить заявку?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {deleteItem &&
+                `Заявка «${deleteItem.first_name} ${deleteItem.last_name}» будет удалена без возможности восстановления.`}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Удалить
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

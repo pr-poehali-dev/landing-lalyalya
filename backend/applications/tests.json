@@ -33,6 +33,19 @@
       "method": "GET",
       "path": "/",
       "expectedStatus": 401
+    },
+    {
+      "name": "Reject edit without password",
+      "method": "PUT",
+      "path": "/",
+      "body": {"id": 1, "first_name": "A", "last_name": "B", "phone": "1", "email": "a@b.ru"},
+      "expectedStatus": 401
+    },
+    {
+      "name": "Reject delete without password",
+      "method": "DELETE",
+      "path": "/?id=1",
+      "expectedStatus": 401
     }
   ]
 }

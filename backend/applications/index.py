@@ -10,7 +10,7 @@ def handler(event: dict, context) -> dict:
 
     cors_headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Password',
         'Access-Control-Max-Age': '86400',
     }
@@ -20,6 +20,19 @@ def handler(event: dict, context) -> dict:
 
     dsn = os.environ['DATABASE_URL']
     schema = os.environ.get('MAIN_DB_SCHEMA', 'public')
+
+    def check_password() -> bool:
+        password = (event.get('headers', {}).get('X-Admin-Password') or
+                    event.get('headers', {}).get('x-admin-password') or '').strip()
+        expected = (os.environ.get('MANAGER_PASSWORD') or '').strip()
+        return bool(expected) and password == expected
+
+    def unauthorized():
+        return {
+            'statusCode': 401,
+            'headers': {**cors_headers, 'Content-Type': 'application/json'},
+            'body': json.dumps({'error': 'Неверный пароль'}),
+        }
 
     if method == 'POST':
         body = json.loads(event.get('body') or '{}')
@@ -72,15 +85,8 @@ def handler(event: dict, context) -> dict:
         }
 
     if method == 'GET':
-        password = (event.get('headers', {}).get('X-Admin-Password') or
-                    event.get('headers', {}).get('x-admin-password') or '').strip()
-        expected = (os.environ.get('MANAGER_PASSWORD') or '').strip()
-        if not expected or password != expected:
-            return {
-                'statusCode': 401,
-                'headers': {**cors_headers, 'Content-Type': 'application/json'},
-                'body': json.dumps({'error': 'Неверный пароль'}),
-            }
+        if not check_password():
+            return unauthorized()
 
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
@@ -108,6 +114,90 @@ def handler(event: dict, context) -> dict:
             'statusCode': 200,
             'headers': {**cors_headers, 'Content-Type': 'application/json'},
             'body': json.dumps({'items': items, 'total': len(items)}),
+        }
+
+    if method == 'PUT':
+        if not check_password():
+            return unauthorized()
+
+        body = json.loads(event.get('body') or '{}')
+        try:
+            app_id = int(body.get('id'))
+        except (TypeError, ValueError):
+            return {
+                'statusCode': 400,
+                'headers': {**cors_headers, 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': 'Некорректный id'}),
+            }
+        first_name = (body.get('first_name') or '').strip()
+        last_name = (body.get('last_name') or '').strip()
+        phone = (body.get('phone') or '').strip()
+        email = (body.get('email') or '').strip()
+
+        if not first_name or not last_name or not phone or not email:
+            return {
+                'statusCode': 400,
+                'headers': {**cors_headers, 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': 'Заполните все поля'}),
+            }
+        if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+            return {
+                'statusCode': 400,
+                'headers': {**cors_headers, 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': 'Некорректная почта'}),
+            }
+
+        fn = first_name.replace("'", "''")
+        ln = last_name.replace("'", "''")
+        ph = phone.replace("'", "''")
+        em = email.replace("'", "''")
+
+        conn = psycopg2.connect(dsn)
+        cur = conn.cursor()
+        cur.execute(
+            f"UPDATE {schema}.ceremony_applications SET "
+            f"first_name = '{fn}', last_name = '{ln}', "
+            f"phone = '{ph}', email = '{em}' WHERE id = {app_id}"
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return {
+            'statusCode': 200,
+            'headers': {**cors_headers, 'Content-Type': 'application/json'},
+            'body': json.dumps({'success': True}),
+        }
+
+    if method == 'DELETE':
+        if not check_password():
+            return unauthorized()
+
+        params = event.get('queryStringParameters') or {}
+        body = json.loads(event.get('body') or '{}')
+        raw_id = params.get('id') or body.get('id')
+        try:
+            app_id = int(raw_id)
+        except (TypeError, ValueError):
+            return {
+                'statusCode': 400,
+                'headers': {**cors_headers, 'Content-Type': 'application/json'},
+                'body': json.dumps({'error': 'Некорректный id'}),
+            }
+
+        conn = psycopg2.connect(dsn)
+        cur = conn.cursor()
+        cur.execute(
+            f"DELETE FROM {schema}.ceremony_applications WHERE id = {app_id}"
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return {
+            'statusCode': 200,
+            'headers': {**cors_headers, 'Content-Type': 'application/json'},
+            'body': json.dumps({'success': True}),
         }
 
     return {
