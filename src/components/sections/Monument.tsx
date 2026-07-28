@@ -66,7 +66,7 @@ const Monument = () => {
                   осуществляется при поддержке предпринимательского сообщества и партнёров.
                 </p>
                 <div className="flex items-start gap-4 rounded-2xl border border-accent/25 bg-card-red p-5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                  <span className="flex h-11 w-11 shrink-0 animate-pulse items-center justify-center rounded-xl bg-accent text-accent-foreground">
                     <Icon name="Mail" size={22} />
                   </span>
                   <div>
