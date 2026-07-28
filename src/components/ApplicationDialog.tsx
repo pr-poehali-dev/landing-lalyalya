@@ -28,6 +28,8 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [showOffer, setShowOffer] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   const reset = () => {
     setFirstName('');
@@ -162,8 +164,29 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
                 />
                 <span className="text-xs leading-relaxed text-muted-foreground">
                   Отправляя заявку, я подтверждаю, что ознакомлен(а) и согласен(а) с
-                  условиями Договора-оферты и Политики конфиденциальности, а также даю
-                  согласие на обработку моих персональных данных
+                  условиями{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowOffer(true);
+                    }}
+                    className="font-semibold text-accent underline hover:opacity-80"
+                  >
+                    Договора-оферты
+                  </button>{' '}
+                  и{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowPrivacy(true);
+                    }}
+                    className="font-semibold text-accent underline hover:opacity-80"
+                  >
+                    Политики конфиденциальности
+                  </button>
+                  , а также даю согласие на обработку моих персональных данных
                 </span>
               </label>
 
@@ -179,6 +202,32 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
           </>
         )}
       </DialogContent>
+
+      <Dialog open={showOffer} onOpenChange={setShowOffer}>
+        <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">
+              Договор-оферта
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>Тут будет нужный текст.</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showPrivacy} onOpenChange={setShowPrivacy}>
+        <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">
+              Политика конфиденциальности
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3 leading-relaxed text-muted-foreground">
+            <p>Тут будет нужный текст.</p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   );
 };
