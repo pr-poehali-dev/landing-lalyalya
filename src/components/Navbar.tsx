@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const LINKS = [
@@ -13,6 +13,27 @@ const LINKS = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+
+  useEffect(() => {
+    const ids = LINKS.map((l) => l.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(`#${visible[0].target.id}`);
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
@@ -26,7 +47,11 @@ const Navbar = () => {
             <a
               key={l.href}
               href={l.href}
-              className="whitespace-nowrap text-sm font-medium text-foreground/80 transition hover:text-primary"
+              className={`relative whitespace-nowrap text-sm font-medium transition after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:rounded-full after:bg-accent after:transition-all ${
+                active === l.href
+                  ? 'text-primary after:w-full'
+                  : 'text-foreground/80 hover:text-primary after:w-0'
+              }`}
             >
               {l.label}
             </a>
@@ -56,7 +81,11 @@ const Navbar = () => {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-surface"
+              className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                active === l.href
+                  ? 'bg-surface text-primary'
+                  : 'text-foreground/80 hover:bg-surface'
+              }`}
             >
               {l.label}
             </a>
