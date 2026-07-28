@@ -21,21 +21,23 @@ const Monument = () => {
           </span>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-          <div>
-            <h2 className="mb-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-4xl">
-              Памятный знак
-            </h2>
-            <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
-              Это не декоративный объект, а символ предпринимательской инициативы,
-              созидания и ответственности за будущее региона.
-            </p>
+        <div className="mb-10 max-w-3xl">
+          <h2 className="mb-4 font-display text-3xl font-extrabold leading-tight tracking-tight text-primary md:text-4xl">
+            Памятный знак
+          </h2>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            Это не декоративный объект, а символ предпринимательской инициативы,
+            созидания и ответственности за будущее региона.
+          </p>
+        </div>
 
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
             <div className="overflow-hidden rounded-3xl shadow-lg">
               <img
                 src={MONUMENT_IMG}
                 alt="Концепт памятного знака"
-                className="h-full w-full object-cover"
+                className="h-full max-h-[520px] w-full object-cover"
               />
             </div>
             <p className="mt-2 text-center text-xs text-muted-foreground">
@@ -44,7 +46,7 @@ const Monument = () => {
           </div>
 
           <div>
-            <Accordion type="single" collapsible className="mb-8 space-y-4">
+            <Accordion type="single" collapsible className="mb-6 space-y-4">
               <AccordionItem
                 value="history"
                 className="rounded-2xl border border-border bg-background px-6"
