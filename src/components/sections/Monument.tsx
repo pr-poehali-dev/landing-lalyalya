@@ -1,7 +1,7 @@
 import Icon from '@/components/ui/icon';
 
 const MONUMENT_IMG =
-  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/50795b2f-3e16-46a7-a5a9-70e0bb46fce4.jpg';
+  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/c1954dc5-1472-4181-8e8e-352398884295.png';
 
 const Monument = () => {
   return (
