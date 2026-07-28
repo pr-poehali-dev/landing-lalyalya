@@ -76,7 +76,8 @@ const Support = () => {
             </h3>
             <p className="mb-6 flex-1 leading-relaxed text-muted-foreground">
               Внесите любую сумму на создание памятного знака и капсулы времени для
-              будущих поколений.
+              будущих поколений, и информация о вашей компании, товаре или услуге
+              появится на этом сайте.
             </p>
             <a
               href="mailto:pko@primopora.ru"
