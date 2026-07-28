@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
+import { GOAL_AMOUNT, TOTAL_RAISED, formatAmount } from '@/data/donors';
 
 const REASONS = [
   {
@@ -33,6 +34,7 @@ const REASONS = [
 
 const Support = () => {
   const [open, setOpen] = useState(false);
+  const percent = Math.min(100, (TOTAL_RAISED / GOAL_AMOUNT) * 100);
 
   return (
     <section id="support" className="bg-surface py-16 md:py-24">
@@ -87,6 +89,43 @@ const Support = () => {
               Ссылка на оплату добавляется после предоставления реквизитов или
               подключения платёжной страницы.
             </p>
+          </div>
+        </div>
+
+        <div className="mt-12 rounded-2xl border border-border bg-background p-6 shadow-sm md:mt-16 md:p-8">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                Собрано на памятник
+              </p>
+              <p className="mt-1 font-display text-3xl font-extrabold text-accent md:text-4xl">
+                {formatAmount(TOTAL_RAISED)}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                Цель
+              </p>
+              <p className="mt-1 font-display text-2xl font-bold text-primary md:text-3xl">
+                {formatAmount(GOAL_AMOUNT)}
+              </p>
+            </div>
+          </div>
+
+          <div className="relative h-4 w-full overflow-hidden rounded-full bg-surface">
+            <div
+              className="absolute inset-y-0 left-0 rounded-full bg-accent transition-all duration-700"
+              style={{ width: `${Math.max(percent, 1.5)}%` }}
+            />
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+            <span className="font-semibold text-accent">
+              {percent.toFixed(1)}% от цели
+            </span>
+            <span className="text-muted-foreground">
+              Осталось собрать: {formatAmount(Math.max(GOAL_AMOUNT - TOTAL_RAISED, 0))}
+            </span>
           </div>
         </div>
 
