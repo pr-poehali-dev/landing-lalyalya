@@ -65,17 +65,23 @@ const Monument = () => {
                   с инициаторами проекта, администрацией города и края. Реализация проекта
                   осуществляется при поддержке предпринимательского сообщества и партнёров.
                 </p>
-                <p>
-                  Ваши предложения по проекту, участию и реализации памятника направляйте
-                  на почту:{' '}
-                  <a
-                    href="mailto:pko@primopora.ru"
-                    className="font-semibold text-accent hover:underline"
-                  >
-                    pko@primopora.ru
-                  </a>
-                  .
-                </p>
+                <div className="flex items-start gap-4 rounded-2xl border border-accent/25 bg-card-red p-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                    <Icon name="Mail" size={22} />
+                  </span>
+                  <div>
+                    <p className="mb-1 font-semibold text-primary">
+                      Ваши предложения по проекту, участию и реализации памятника
+                      направляйте на почту:
+                    </p>
+                    <a
+                      href="mailto:pko@primopora.ru"
+                      className="font-display text-lg font-bold text-accent hover:underline"
+                    >
+                      pko@primopora.ru
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
