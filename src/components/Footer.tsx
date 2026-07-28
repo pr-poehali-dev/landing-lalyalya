@@ -10,13 +10,22 @@ const Footer = () => {
           © 2026 Приморское краевое отделение «ОПОРЫ РОССИИ». Все права защищены.
         </p>
 
-        <a
-          href="mailto:pko@primopora.ru"
-          className="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-        >
-          <Icon name="Mail" size={16} />
-          pko@primopora.ru
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="mailto:pko@primopora.ru"
+            className="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          >
+            <Icon name="Mail" size={16} />
+            pko@primopora.ru
+          </a>
+          <a
+            href="/admin"
+            title="Вход в кабинет заявок"
+            className="text-muted-foreground/50 transition hover:text-primary"
+          >
+            <Icon name="Lock" size={16} />
+          </a>
+        </div>
       </div>
     </footer>
   );
