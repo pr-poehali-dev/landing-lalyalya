@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AboutOrgDialog from '@/components/AboutOrgDialog';
 import Hero from '@/components/sections/Hero';
 import GreatEntrepreneurs from '@/components/sections/GreatEntrepreneurs';
 import Values from '@/components/sections/Values';
@@ -36,6 +37,7 @@ const Index = () => {
         <FinalCta />
       </main>
       <Footer />
+      <AboutOrgDialog />
     </div>
   );
 };
