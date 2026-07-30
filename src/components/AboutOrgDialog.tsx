@@ -20,12 +20,12 @@ const AboutOrgDialog = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <span className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-            <Icon name="Landmark" size={26} />
-          </span>
-          <DialogTitle className="font-display text-2xl font-bold text-primary">
-            «ОПОРА РОССИИ»
-          </DialogTitle>
+          <img
+            src="https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/708717a5-e1d8-48dc-b066-c29ad7d4b1e6.png"
+            alt="ОПОРА РОССИИ — Приморское краевое отделение"
+            className="mb-3 h-14 w-auto object-contain"
+          />
+          <DialogTitle className="sr-only">«ОПОРА РОССИИ»</DialogTitle>
           <DialogDescription className="text-base leading-relaxed">
             Общероссийская общественная организация малого и среднего
             предпринимательства. Объединяет тысячи предпринимателей по всей стране
