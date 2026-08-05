@@ -6,54 +6,37 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 
-interface Person {
-  name: string;
-  tag: string;
-  tagColor: 'blue' | 'red' | 'muted';
-  text: string;
-  photo: string;
-}
-
-const PEOPLE: Person[] = [
-  {
-    name: 'Семья Янковских',
-    tag: 'Историческая персона',
-    tagColor: 'blue',
-    text: 'Часть исторического наследия Приморья; имя Янковских связано, в частности, с первым в регионе конным заводом.',
-    photo:
-      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/4aa0aaf0-df2f-42f8-a55f-775399d93da9.jpg',
-  },
-  {
-    name: 'Фёдоров',
-    tag: 'Уточняется',
-    tagColor: 'muted',
-    text: 'Историческая персона для включения после уточнения полного имени и утверждённой справки заказчиком.',
-    photo:
-      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/9a188440-4649-43a9-9f32-86886106ba4b.jpg',
-  },
-  {
-    name: 'Дмитрий Алексеев',
-    tag: 'Современный предприниматель',
-    tagColor: 'red',
-    text: 'Предприниматель Владивостока, сооснователь DNS; в 2026 году впервые вошёл в мировой рейтинг миллиардеров Forbes по версии российского СМИ.',
-    photo:
-      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/b2c5d73b-f2c7-46d4-99e1-12c060f88b98.jpg',
-  },
-  {
-    name: 'Другие предприниматели Приморья',
-    tag: 'Открыто для дополнения',
-    tagColor: 'muted',
-    text: 'По мере наполнения проекта и согласования с экспертным сообществом.',
-    photo:
-      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/7e924508-b28f-4d90-a1b7-ff03d61c0b96.jpg',
-  },
+const PEOPLE: string[] = [
+  'Яков Лазаревич Семёнов',
+  'Михаил Иванович Янковский',
+  'Михаил Иванович Суворов',
+  'Михаил Григорьевич Шевелёв',
+  'Юлий Иванович Бринер',
+  'Константин Николаевич Шульгин',
+  'Иван Яковлевич Чурин',
+  'Василий Петрович Бабинцев',
+  'Игнатий Иосифович Маковский',
+  'Александр Александрович Иванов',
+  'Александр Алексеевич Масленников',
+  'Август Алексеевич Менард',
+  'Иван Миронович Польский',
+  'Алексей Дмитриевич Старцев',
+  'Дмитрий Алексеевич Старцев',
+  'Александр Алексеевич Старцев',
+  'Карл Георгиевич Гильденштедт',
+  'Мейер Моисеевич Люри',
+  'Так Цзэмин',
+  'Александр С. Лусаковский',
+  'Братья Худяковы (Иустин, Павел, Александр)',
+  'Иван Васильевич Кулаев',
+  'Густав Васильевич Альберс',
+  'Густав Николаевич Кунст',
+  'Семья Куперов (Карл, Александр, Тамара)',
+  'Василий Анисимович Жариков',
+  'Скидельский (Хаим-Лейба Шиманович)',
+  'Иоганн (Иван) Михайлович Лангелитье',
+  'Отто Васильевич Линдгольм',
 ];
-
-const TAG_STYLES: Record<Person['tagColor'], string> = {
-  blue: 'bg-primary-highlight text-primary',
-  red: 'bg-card-red text-accent',
-  muted: 'bg-surface-dynamic text-muted-foreground',
-};
 
 const GreatEntrepreneurs = () => {
   const [open, setOpen] = useState(false);
@@ -93,44 +76,20 @@ const GreatEntrepreneurs = () => {
                 и культуры.
               </p>
               <p>
-                В этом разделе будет формироваться открытый список предпринимателей,
-                оставивших заметный след в истории Приморья: от первых купцов
-                и промышленников до современных создателей компаний и инициатив.
+                Список предпринимателей, оставивших заметный след в истории Приморья:
               </p>
             </div>
 
-            <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-              Среди персон, которые могут быть представлены в разделе:
-            </p>
-
-            <div className="grid gap-5 sm:grid-cols-2">
-              {PEOPLE.map((p) => (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {PEOPLE.map((name, i) => (
                 <div
-                  key={p.name}
-                  className="flex gap-4 rounded-2xl border border-border bg-background p-5 shadow-sm"
+                  key={name}
+                  className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 shadow-sm"
                 >
-                  <span className="h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-primary/15 bg-primary/10">
-                    <img
-                      src={p.photo}
-                      alt={p.name}
-                      className="h-full w-full object-cover"
-                    />
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-highlight text-sm font-bold text-primary">
+                    {i + 1}
                   </span>
-                  <div>
-                    <div className="mb-1.5 flex flex-wrap items-center gap-2">
-                      <h4 className="font-display text-base font-bold text-primary">
-                        {p.name}
-                      </h4>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${TAG_STYLES[p.tagColor]}`}
-                      >
-                        {p.tag}
-                      </span>
-                    </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {p.text}
-                    </p>
-                  </div>
+                  <span className="text-sm font-medium text-foreground">{name}</span>
                 </div>
               ))}
             </div>
