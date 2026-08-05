@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
 import { toast } from '@/hooks/use-toast';
-import { PrivacyPolicyText } from '@/components/ConsentText';
+import { PrivacyPolicyText, OfferText } from '@/components/ConsentText';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 
@@ -211,9 +211,7 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
               Договор-оферта
             </DialogTitle>
           </DialogHeader>
-          <div className="space-y-3 leading-relaxed text-muted-foreground">
-            <p>Тут будет нужный текст.</p>
-          </div>
+          <OfferText />
         </DialogContent>
       </Dialog>
 

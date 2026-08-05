@@ -9,6 +9,9 @@ import {
 } from '@/components/ui/dialog';
 import { GOAL_AMOUNT, TOTAL_RAISED, formatAmount } from '@/data/donors';
 import ConsentText from '@/components/ConsentText';
+import { toast } from '@/hooks/use-toast';
+
+const DONATE_URL = 'https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn';
 
 const REASONS = [
   {
@@ -35,7 +38,19 @@ const REASONS = [
 
 const Support = () => {
   const [open, setOpen] = useState(false);
+  const [consentMain, setConsentMain] = useState(false);
+  const [consentModal, setConsentModal] = useState(false);
   const percent = Math.min(100, (TOTAL_RAISED / GOAL_AMOUNT) * 100);
+
+  const handleDonateClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    consent: boolean,
+  ) => {
+    if (!consent) {
+      e.preventDefault();
+      toast({ title: 'Поставьте галочку согласия', variant: 'destructive' });
+    }
+  };
 
   return (
     <section id="support" className="bg-surface py-16 md:py-24">
@@ -81,15 +96,23 @@ const Support = () => {
               появится на этом сайте.
             </p>
             <a
-              href="https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn"
+              href={DONATE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
+              onClick={(e) => handleDonateClick(e, consentMain)}
+              aria-disabled={!consentMain}
+              className={`inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition ${
+                consentMain ? 'hover:opacity-90' : 'cursor-not-allowed opacity-50'
+              }`}
             >
               Внести сумму
               <Icon name="ArrowRight" size={18} />
             </a>
-            <ConsentText className="mt-4 text-xs leading-relaxed text-muted-foreground" />
+            <ConsentText
+              className="mt-4 flex cursor-pointer items-start gap-3"
+              checked={consentMain}
+              onCheckedChange={setConsentMain}
+            />
           </div>
         </div>
 
@@ -166,15 +189,23 @@ const Support = () => {
                 Даже небольшой вклад имеет значение
               </p>
               <a
-                href="https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn"
+                href={DONATE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
+                onClick={(e) => handleDonateClick(e, consentModal)}
+                aria-disabled={!consentModal}
+                className={`inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition ${
+                  consentModal ? 'hover:opacity-90' : 'cursor-not-allowed opacity-50'
+                }`}
               >
                 Внести сумму
                 <Icon name="ArrowRight" size={18} />
               </a>
-              <ConsentText className="mt-4 text-xs leading-relaxed text-muted-foreground" />
+              <ConsentText
+                className="mt-4 flex cursor-pointer items-start justify-center gap-3 text-left"
+                checked={consentModal}
+                onCheckedChange={setConsentModal}
+              />
             </div>
           </DialogContent>
         </Dialog>
