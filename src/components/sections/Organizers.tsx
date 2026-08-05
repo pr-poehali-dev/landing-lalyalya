@@ -1,7 +1,7 @@
 import Icon from '@/components/ui/icon';
 
 const PARTNERS = [
-  'Приморское краевое отделение «ОПОРЫ РОССИИ»',
+  'Приморское краевое отделение «ОПОРА РОССИИ»',
   'Деловое сообщество Приморского края',
   'Партнёры проекта',
 ];
@@ -36,7 +36,7 @@ const Organizers = () => {
           </span>
           <div>
             <h3 className="mb-2 font-display text-xl font-bold text-primary">
-              Приморское краевое отделение «ОПОРЫ РОССИИ»
+              Приморское краевое отделение «ОПОРА РОССИИ»
             </h3>
             <p className="leading-relaxed text-muted-foreground">
               «ОПОРА РОССИИ» — общественная организация малого и среднего

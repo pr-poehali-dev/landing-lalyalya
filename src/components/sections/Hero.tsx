@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8 lg:grid-cols-2">
         <div className="min-w-0">
           <p className="mb-5 inline-block rounded-full bg-primary-highlight px-4 py-1.5 text-sm font-semibold text-primary">
-            Приморское краевое отделение «ОПОРЫ РОССИИ»
+            Приморское краевое отделение «ОПОРА РОССИИ»
           </p>
 
           <h1 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl md:text-5xl">

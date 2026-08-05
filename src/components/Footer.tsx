@@ -7,7 +7,7 @@ const Footer = () => {
         <img src="/logo-opora.png" alt="ОПОРА РОССИИ" className="h-9 w-auto" />
 
         <p className="text-sm text-muted-foreground">
-          © 2026 Приморское краевое отделение «ОПОРЫ РОССИИ». Все права защищены.
+          © 2026 Приморское краевое отделение «ОПОРА РОССИИ». Все права защищены.
         </p>
 
         <div className="flex items-center gap-4">
