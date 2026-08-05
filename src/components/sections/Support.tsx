@@ -80,7 +80,9 @@ const Support = () => {
               появится на этом сайте.
             </p>
             <a
-              href="mailto:pko@primopora.ru"
+              href="https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
             >
               Внести сумму
@@ -162,7 +164,9 @@ const Support = () => {
                 Даже небольшой вклад имеет значение
               </p>
               <a
-                href="mailto:pko@primopora.ru"
+                href="https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90"
               >
                 Внести сумму
