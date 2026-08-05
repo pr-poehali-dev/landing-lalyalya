@@ -8,6 +8,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { GOAL_AMOUNT, TOTAL_RAISED, formatAmount } from '@/data/donors';
+import ConsentText from '@/components/ConsentText';
 
 const REASONS = [
   {
@@ -88,6 +89,7 @@ const Support = () => {
               Внести сумму
               <Icon name="ArrowRight" size={18} />
             </a>
+            <ConsentText className="mt-4 text-xs leading-relaxed text-muted-foreground" />
           </div>
         </div>
 
@@ -172,6 +174,7 @@ const Support = () => {
                 Внести сумму
                 <Icon name="ArrowRight" size={18} />
               </a>
+              <ConsentText className="mt-4 text-xs leading-relaxed text-muted-foreground" />
             </div>
           </DialogContent>
         </Dialog>
