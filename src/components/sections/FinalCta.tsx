@@ -6,21 +6,46 @@ const FinalCta = () => {
     <section className="relative overflow-hidden bg-primary py-20 text-primary-foreground md:py-28">
       <div className="mx-auto max-w-3xl px-4 text-center md:px-8">
         <h2 className="mb-6 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
-          Память о созидателях должна иметь форму
+          Память о созидателях
+          <br />
+          должна иметь{' '}
+          <span className="relative whitespace-nowrap text-accent">
+            форму
+            <svg
+              className="absolute -bottom-1 left-0 w-full text-accent/60"
+              viewBox="0 0 120 12"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 9c20-6 96-6 116 0"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+            </svg>
+          </span>
         </h2>
         <p className="mb-10 text-lg leading-relaxed text-white/85 md:text-xl">
           Памятник предпринимателям Приморья — это знак уважения к людям, которые
           создают опору для будущего региона.
         </p>
 
-        <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8">
-          <div className="inline-flex items-center gap-2 text-left text-lg font-semibold">
-            <Icon name="Calendar" size={20} className="shrink-0 text-accent" />
-            <span>31 августа 2026 года · 13:00</span>
+        <div className="mb-10 flex flex-col items-stretch gap-3 rounded-2xl border border-white/15 bg-white/5 p-2 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-center sm:gap-0 sm:divide-x sm:divide-white/15">
+          <div className="flex items-center justify-center gap-3 rounded-xl px-6 py-4 text-left sm:justify-start">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/15">
+              <Icon name="Calendar" size={20} className="shrink-0 text-accent" />
+            </span>
+            <span className="text-lg font-semibold">31 августа 2026 года · 13:00</span>
           </div>
-          <div className="inline-flex items-center gap-2 text-left text-lg font-medium text-white/85">
-            <Icon name="MapPin" size={20} className="shrink-0 text-accent" />
-            <span>Сцена на площади Адмирала Фокина · Владивосток</span>
+          <div className="flex items-center justify-center gap-3 rounded-xl px-6 py-4 text-left sm:justify-start">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/15">
+              <Icon name="MapPin" size={20} className="shrink-0 text-accent" />
+            </span>
+            <span className="text-lg font-medium text-white/90">
+              Сцена на площади Адмирала Фокина · Владивосток
+            </span>
           </div>
         </div>
 
