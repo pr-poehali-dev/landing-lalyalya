@@ -11,7 +11,7 @@ interface ConsentTextProps {
   onCheckedChange?: (checked: boolean) => void;
 }
 
-const ConsentText = ({ className, checked, onCheckedChange }: ConsentTextProps) => {
+const ConsentText = ({ className, onCheckedChange }: ConsentTextProps) => {
   const [showOffer, setShowOffer] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [offerChecked, setOfferChecked] = useState(false);

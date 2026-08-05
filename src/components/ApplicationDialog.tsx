@@ -12,7 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import Icon from '@/components/ui/icon';
 import { toast } from '@/hooks/use-toast';
-import { PrivacyPolicyText, OfferText } from '@/components/ConsentText';
+import { ApplicationOfferText } from '@/components/consent/ApplicationOfferText';
+import { ApplicationPrivacyText } from '@/components/consent/ApplicationPrivacyText';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 
@@ -26,25 +27,29 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [consent, setConsent] = useState(false);
+  const [offerChecked, setOfferChecked] = useState(false);
+  const [privacyChecked, setPrivacyChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [showOffer, setShowOffer] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+
+  const consent = offerChecked && privacyChecked;
 
   const reset = () => {
     setFirstName('');
     setLastName('');
     setPhone('');
     setEmail('');
-    setConsent(false);
+    setOfferChecked(false);
+    setPrivacyChecked(false);
     setDone(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consent) {
-      toast({ title: 'Поставьте галочку согласия', variant: 'destructive' });
+      toast({ title: 'Поставьте галочки согласия', variant: 'destructive' });
       return;
     }
     setLoading(true);
@@ -157,39 +162,50 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
                 />
               </div>
 
-              <label className="flex cursor-pointer items-start gap-3">
-                <Checkbox
-                  checked={consent}
-                  onCheckedChange={(v) => setConsent(v === true)}
-                  className="mt-1 shrink-0"
-                />
-                <span className="text-xs leading-relaxed text-muted-foreground">
-                  Отправляя заявку, я подтверждаю, что ознакомлен(а) и согласен(а) с
-                  условиями{' '}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowOffer(true);
-                    }}
-                    className="font-semibold text-accent underline hover:opacity-80"
-                  >
-                    Договора-оферты
-                  </button>{' '}
-                  и{' '}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowPrivacy(true);
-                    }}
-                    className="font-semibold text-accent underline hover:opacity-80"
-                  >
-                    Политики конфиденциальности
-                  </button>
-                  , а также даю согласие на обработку моих персональных данных
-                </span>
-              </label>
+              <div className="space-y-2">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <Checkbox
+                    checked={offerChecked}
+                    onCheckedChange={(v) => setOfferChecked(v === true)}
+                    className="mt-1 shrink-0"
+                  />
+                  <span className="text-xs leading-relaxed text-muted-foreground">
+                    Я ознакомлен(а) и согласен(а) с условиями{' '}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowOffer(true);
+                      }}
+                      className="font-semibold text-accent underline hover:opacity-80"
+                    >
+                      Договора-оферты
+                    </button>
+                    .
+                  </span>
+                </label>
+                <label className="flex cursor-pointer items-start gap-3">
+                  <Checkbox
+                    checked={privacyChecked}
+                    onCheckedChange={(v) => setPrivacyChecked(v === true)}
+                    className="mt-1 shrink-0"
+                  />
+                  <span className="text-xs leading-relaxed text-muted-foreground">
+                    Я ознакомлен(а) с{' '}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowPrivacy(true);
+                      }}
+                      className="font-semibold text-accent underline hover:opacity-80"
+                    >
+                      Политикой конфиденциальности
+                    </button>{' '}
+                    и даю согласие на обработку моих персональных данных.
+                  </span>
+                </label>
+              </div>
 
               <button
                 type="submit"
@@ -211,7 +227,7 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
               Договор-оферта
             </DialogTitle>
           </DialogHeader>
-          <OfferText />
+          <ApplicationOfferText />
         </DialogContent>
       </Dialog>
 
@@ -222,7 +238,7 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
               Политика конфиденциальности
             </DialogTitle>
           </DialogHeader>
-          <PrivacyPolicyText />
+          <ApplicationPrivacyText />
         </DialogContent>
       </Dialog>
     </Dialog>
