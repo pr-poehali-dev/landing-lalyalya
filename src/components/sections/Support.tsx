@@ -109,7 +109,7 @@ const Support = () => {
               <Icon name="ArrowRight" size={18} />
             </a>
             <ConsentText
-              className="mt-4 flex cursor-pointer items-start gap-3"
+              className="mt-4 space-y-2"
               checked={consentMain}
               onCheckedChange={setConsentMain}
             />
@@ -202,7 +202,7 @@ const Support = () => {
                 <Icon name="ArrowRight" size={18} />
               </a>
               <ConsentText
-                className="mt-4 flex cursor-pointer items-start justify-center gap-3 text-left"
+                className="mt-4 space-y-2 text-left"
                 checked={consentModal}
                 onCheckedChange={setConsentModal}
               />
