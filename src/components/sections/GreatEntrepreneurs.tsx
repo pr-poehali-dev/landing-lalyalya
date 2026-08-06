@@ -136,6 +136,11 @@ const GreatEntrepreneurs = () => {
                   <span className="flex-1 text-sm font-medium text-foreground">
                     {person.name}
                   </span>
+                  <Icon
+                    name="MousePointerClick"
+                    size={16}
+                    className="shrink-0 animate-pulse text-muted-foreground/60"
+                  />
                 </button>
               ))}
             </div>
