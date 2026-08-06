@@ -1,7 +1,7 @@
 import Icon from '@/components/ui/icon';
 
 const LOCATION_IMG =
-  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/files/34d30903-9e52-4b92-86c3-248533323f2f.jpg';
+  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/eafcd2bc-6509-4d37-9a72-d1a9f9d336b0.jpg';
 
 const Location = () => {
   return (
