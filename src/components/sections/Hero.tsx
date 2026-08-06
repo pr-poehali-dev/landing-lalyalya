@@ -82,11 +82,11 @@ const Hero = () => {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="overflow-hidden rounded-3xl shadow-xl">
+          <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl bg-surface shadow-xl xl:aspect-[16/11]">
             <img
               src={HERO_IMG}
               alt="Площадь Адмирала Фокина, Владивосток"
-              className="aspect-[4/3] w-full object-cover xl:aspect-[16/11]"
+              className="h-full w-full object-contain"
             />
           </div>
           <div className="absolute -bottom-5 left-4 right-4 rounded-2xl border border-border bg-background/95 px-5 py-4 shadow-lg backdrop-blur md:left-8 md:right-8">
