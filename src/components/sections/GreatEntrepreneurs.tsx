@@ -5,41 +5,54 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
-const PEOPLE: string[] = [
-  'Яков Лазаревич Семёнов',
-  'Михаил Иванович Янковский',
-  'Михаил Иванович Суворов',
-  'Михаил Григорьевич Шевелёв',
-  'Юлий Иванович Бринер',
-  'Константин Николаевич Шульгин',
-  'Иван Яковлевич Чурин',
-  'Василий Петрович Бабинцев',
-  'Игнатий Иосифович Маковский',
-  'Александр Александрович Иванов',
-  'Александр Алексеевич Масленников',
-  'Август Алексеевич Менард',
-  'Иван Миронович Польский',
-  'Алексей Дмитриевич Старцев',
-  'Дмитрий Алексеевич Старцев',
-  'Александр Алексеевич Старцев',
-  'Карл Георгиевич Гильденштедт',
-  'Мейер Моисеевич Люри',
-  'Так Цзэмин',
-  'Александр С. Лусаковский',
-  'Братья Худяковы (Иустин, Павел, Александр)',
-  'Иван Васильевич Кулаев',
-  'Густав Васильевич Альберс',
-  'Густав Николаевич Кунст',
-  'Семья Куперов (Карл, Александр, Тамара)',
-  'Василий Анисимович Жариков',
-  'Скидельский (Хаим-Лейба Шиманович)',
-  'Иоганн (Иван) Михайлович Лангелитье',
-  'Отто Васильевич Линдгольм',
+interface Person {
+  name: string;
+  bio: string;
+}
+
+const PEOPLE: Person[] = [
+  { name: 'Яков Лазаревич Семёнов', bio: '' },
+  { name: 'Михаил Иванович Янковский', bio: '' },
+  { name: 'Михаил Иванович Суворов', bio: '' },
+  { name: 'Михаил Григорьевич Шевелёв', bio: '' },
+  { name: 'Юлий Иванович Бринер', bio: '' },
+  { name: 'Константин Николаевич Шульгин', bio: '' },
+  { name: 'Иван Яковлевич Чурин', bio: '' },
+  { name: 'Василий Петрович Бабинцев', bio: '' },
+  { name: 'Игнатий Иосифович Маковский', bio: '' },
+  { name: 'Александр Александрович Иванов', bio: '' },
+  { name: 'Александр Алексеевич Масленников', bio: '' },
+  { name: 'Август Алексеевич Менард', bio: '' },
+  { name: 'Иван Миронович Польский', bio: '' },
+  { name: 'Алексей Дмитриевич Старцев', bio: '' },
+  { name: 'Дмитрий Алексеевич Старцев', bio: '' },
+  { name: 'Александр Алексеевич Старцев', bio: '' },
+  { name: 'Карл Георгиевич Гильденштедт', bio: '' },
+  { name: 'Мейер Моисеевич Люри', bio: '' },
+  { name: 'Так Цзэмин', bio: '' },
+  { name: 'Александр С. Лусаковский', bio: '' },
+  { name: 'Братья Худяковы (Иустин, Павел, Александр)', bio: '' },
+  { name: 'Иван Васильевич Кулаев', bio: '' },
+  { name: 'Густав Васильевич Альберс', bio: '' },
+  { name: 'Густав Николаевич Кунст', bio: '' },
+  { name: 'Семья Куперов (Карл, Александр, Тамара)', bio: '' },
+  { name: 'Василий Анисимович Жариков', bio: '' },
+  { name: 'Скидельский (Хаим-Лейба Шиманович)', bio: '' },
+  { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
+  { name: 'Отто Васильевич Линдгольм', bio: '' },
 ];
 
 const GreatEntrepreneurs = () => {
   const [open, setOpen] = useState(false);
+  const [activePerson, setActivePerson] = useState<Person | null>(null);
 
   return (
     <section className="bg-background pb-6 pt-2 md:pb-10">
@@ -81,15 +94,23 @@ const GreatEntrepreneurs = () => {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {PEOPLE.map((name, i) => (
+              {PEOPLE.map((person) => (
                 <div
-                  key={name}
+                  key={person.name}
                   className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 shadow-sm"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-highlight text-sm font-bold text-primary">
-                    {i + 1}
+                  <span className="h-10 w-10 shrink-0 rounded-full border border-border bg-muted" />
+                  <span className="flex-1 text-sm font-medium text-foreground">
+                    {person.name}
                   </span>
-                  <span className="text-sm font-medium text-foreground">{name}</span>
+                  <button
+                    type="button"
+                    onClick={() => setActivePerson(person)}
+                    aria-label={`История: ${person.name}`}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-highlight text-primary transition hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <Icon name="HelpCircle" size={16} />
+                  </button>
                 </div>
               ))}
             </div>
@@ -101,6 +122,20 @@ const GreatEntrepreneurs = () => {
           </CollapsibleContent>
         </Collapsible>
       </div>
+
+      <Dialog open={!!activePerson} onOpenChange={(v) => !v && setActivePerson(null)}>
+        <DialogContent className="max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="mb-2 flex items-center gap-3">
+              <span className="h-12 w-12 shrink-0 rounded-full border border-border bg-muted" />
+              <DialogTitle className="text-left">{activePerson?.name}</DialogTitle>
+            </div>
+            <DialogDescription className="text-left">
+              {activePerson?.bio || 'История этого предпринимателя скоро появится здесь.'}
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
