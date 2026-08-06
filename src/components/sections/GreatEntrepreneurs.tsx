@@ -117,9 +117,12 @@ const GreatEntrepreneurs = () => {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {PEOPLE.map((person) => (
-                <div
+                <button
+                  type="button"
                   key={person.name}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 shadow-sm"
+                  onClick={() => setActivePerson(person)}
+                  aria-label={`История: ${person.name}`}
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-left shadow-sm transition hover:border-primary/40 hover:shadow-md"
                 >
                   {person.photo ? (
                     <img
@@ -133,15 +136,7 @@ const GreatEntrepreneurs = () => {
                   <span className="flex-1 text-sm font-medium text-foreground">
                     {person.name}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => setActivePerson(person)}
-                    aria-label={`История: ${person.name}`}
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-highlight text-primary transition hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <Icon name="HelpCircle" size={16} />
-                  </button>
-                </div>
+                </button>
               ))}
             </div>
 
