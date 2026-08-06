@@ -16,7 +16,23 @@ import {
 interface Person {
   name: string;
   bio: string;
+  photo?: string;
+  title?: string;
 }
+
+const LINDGOLM_BIO = `Все во Владивостоке знают Токаревский маяк — визитную карточку столицы Приморья. Но мало кто знает, что построил его Отто Вильгельм (Васильевич) Линдгольм — самый богатый человек Дальнего Востока дореволюционной России, купец, путешественник, основатель китобойного промысла в регионе. Человек невероятной силы и мужества, шкипер, за 1869–1882 годы 13 раз обошедший земной шар.
+
+Линдгольм родился в 1832 году на острове Утё в Финляндии, тогда входившей в состав Российской империи. Море манило его с детства: вместо университета он ушёл в море простым матросом, затем служил на судах Российско-Американской компании. С 1857 года — вольный шкипер; добычу китов освоил на службе в Российско-Финляндской китоловной компании.
+
+В 1862–63 годах вместе с тремя товарищами-финнами он отправился на Дальний Восток, в Николаевск-на-Амуре, и основал китобойную факторию в Тугуре. Через три года компания владела тремя шхунами и сотнями баррелей китового жира. Товарищи не выдержали суровой жизни и ушли — остался только Линдгольм, о котором говорили, что у него «сатанинская сила». Один во всех ролях — от распорядителя до шкипера и гарпунёра — он лично добыл 26 китов. Однажды кит длиной 92 фута едва не утащил его на дно, но Линдгольм отшутился: «Бабка мне напророчила — не в воде моя смерть».
+
+Пока шли дела в Тугуре, на Балтике его ждала невеста. Линдгольм всё оставил и вернулся за ней; она приехала с ним на Дальний Восток и даже выходила в море бить китов, но не выдержала суровых условий, простыла и умерла. Эту потерю он не смог простить себе до конца жизни.
+
+Дело процветало: Линдгольм получил звание купца первой гильдии, а генерал-губернатор Восточной Сибири М. С. Корсаков добился для него награждения Золотым знаком на Владимирской ленте — как первого русского китобоя Дальнего Востока. Этот знак Линдгольм носил до самой смерти.
+
+В 1874 году, обосновавшись во Владивостоке, он открыл торговый дом «О. В. Линдгольм и К°», получивший кредиты в Японии, США, Англии и Германии — к 1875 году на сумму до миллиона долларов. Он построил кирпичный завод, в 1896 году взял в аренду завод Кустера, разрабатывал угольные копи на 28-й версте от города. В жёсткой конкурентной борьбе он получил у Морского министерства подряд на строительство сухого дока имени цесаревича Николая на Дальзаводе — 7 октября 1897 года док торжественно открыли, и в него вошёл крейсер «Дмитрий Донской».
+
+Строил Линдгольм и маяки по заказу Морского министерства — Аскольдовский, Поворотный, Речной — и неплохо на этом зарабатывал. Но Токаревский маяк на Токаревской кошке он возвёл на собственные деньги, без всякого подряда. Строительство начали в 1910 году, каменную башню высотой 8,23 метра сложили в 1911-м, а в 1913 году маяк наконец засветил. Линдгольм умер в декабре 1914 года — спустя год после того, как маяк, ставший символом Владивостока, начал свою работу.`;
 
 const PEOPLE: Person[] = [
   { name: 'Яков Лазаревич Семёнов', bio: '' },
@@ -47,7 +63,13 @@ const PEOPLE: Person[] = [
   { name: 'Василий Анисимович Жариков', bio: '' },
   { name: 'Скидельский (Хаим-Лейба Шиманович)', bio: '' },
   { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
-  { name: 'Отто Васильевич Линдгольм', bio: '' },
+  {
+    name: 'Отто Васильевич Линдгольм',
+    title: 'Он построил Токаревский маяк',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/ee129d53-f24f-46ea-9839-763dd8c4f54f.png',
+    bio: LINDGOLM_BIO,
+  },
 ];
 
 const GreatEntrepreneurs = () => {
@@ -99,7 +121,15 @@ const GreatEntrepreneurs = () => {
                   key={person.name}
                   className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 shadow-sm"
                 >
-                  <span className="h-10 w-10 shrink-0 rounded-full border border-border bg-muted" />
+                  {person.photo ? (
+                    <img
+                      src={person.photo}
+                      alt={person.name}
+                      className="h-10 w-10 shrink-0 rounded-full border border-border object-cover"
+                    />
+                  ) : (
+                    <span className="h-10 w-10 shrink-0 rounded-full border border-border bg-muted" />
+                  )}
                   <span className="flex-1 text-sm font-medium text-foreground">
                     {person.name}
                   </span>
@@ -124,14 +154,35 @@ const GreatEntrepreneurs = () => {
       </div>
 
       <Dialog open={!!activePerson} onOpenChange={(v) => !v && setActivePerson(null)}>
-        <DialogContent className="max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-xl">
           <DialogHeader>
             <div className="mb-2 flex items-center gap-3">
-              <span className="h-12 w-12 shrink-0 rounded-full border border-border bg-muted" />
-              <DialogTitle className="text-left">{activePerson?.name}</DialogTitle>
+              {activePerson?.photo ? (
+                <img
+                  src={activePerson.photo}
+                  alt={activePerson.name}
+                  className="h-16 w-16 shrink-0 rounded-full border border-border object-cover"
+                />
+              ) : (
+                <span className="h-16 w-16 shrink-0 rounded-full border border-border bg-muted" />
+              )}
+              <div>
+                <DialogTitle className="text-left">{activePerson?.name}</DialogTitle>
+                {activePerson?.title && (
+                  <p className="mt-0.5 text-sm font-semibold text-accent">
+                    {activePerson.title}
+                  </p>
+                )}
+              </div>
             </div>
-            <DialogDescription className="text-left">
-              {activePerson?.bio || 'История этого предпринимателя скоро появится здесь.'}
+            <DialogDescription asChild>
+              <div className="space-y-3 text-left leading-relaxed">
+                {activePerson?.bio
+                  ? activePerson.bio
+                      .split('\n\n')
+                      .map((paragraph, i) => <p key={i}>{paragraph}</p>)
+                  : <p>История этого предпринимателя скоро появится здесь.</p>}
+              </div>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
