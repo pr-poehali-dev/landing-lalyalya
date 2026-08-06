@@ -138,8 +138,8 @@ const GreatEntrepreneurs = () => {
                   </span>
                   <Icon
                     name="MousePointerClick"
-                    size={16}
-                    className="shrink-0 animate-pulse text-muted-foreground/60"
+                    size={20}
+                    className="shrink-0 animate-pulse text-[#D52B1E]"
                   />
                 </button>
               ))}
