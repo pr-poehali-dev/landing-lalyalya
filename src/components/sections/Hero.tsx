@@ -7,13 +7,13 @@ const HERO_IMG =
 const Hero = () => {
   return (
     <section id="about" className="relative overflow-hidden bg-background">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8 lg:gap-10 lg:pb-12 xl:pb-16 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8 lg:grid-cols-2">
         <div className="min-w-0">
-          <p className="mb-4 inline-block rounded-full bg-primary-highlight px-4 py-1.5 text-sm font-semibold text-primary lg:mb-3">
+          <p className="mb-5 inline-block rounded-full bg-primary-highlight px-4 py-1.5 text-sm font-semibold text-primary">
             Приморское краевое отделение «ОПОРА РОССИИ»
           </p>
 
-          <h1 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl">
+          <h1 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl md:text-5xl">
             Церемония открытия камня для памятника предпринимателям Приморья
           </h1>
 
@@ -37,32 +37,32 @@ const Hero = () => {
             </div>
           </div>
 
-          <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mt-4 lg:text-base xl:text-lg">
+          <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mt-6">
             Приглашаем предпринимателей, жителей и гостей Владивостока на церемонию
             открытия камня для будущего памятника предпринимателям Приморья.
           </p>
 
-          <div className="mt-8 space-y-3 lg:mt-5 lg:space-y-2">
+          <div className="mt-8 space-y-3">
             <div className="flex items-center gap-3">
               <Icon name="Calendar" size={22} className="shrink-0 text-accent" />
-              <span className="text-lg font-bold text-foreground lg:text-base xl:text-lg">
+              <span className="text-lg font-bold text-foreground">
                 31 августа 2026 года · 13:00
               </span>
             </div>
             <div className="flex items-center gap-3">
               <Icon name="MapPin" size={22} className="shrink-0 text-accent" />
-              <span className="text-lg font-medium text-foreground lg:text-base xl:text-lg">
+              <span className="text-lg font-medium text-foreground">
                 Сцена на площади Адмирала Фокина · Владивосток
               </span>
             </div>
           </div>
 
-          <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground lg:mt-4 lg:text-sm xl:text-base">
+          <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
             Это событие объединит тех, кто создаёт рабочие места, развивает город, берёт
             ответственность и формирует будущее Приморского края.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3 lg:mt-5">
+          <div className="mt-8 flex flex-wrap gap-3">
             <ApplicationDialog>
               <button className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-accent-foreground shadow-sm transition hover:opacity-90">
                 Принять участие
@@ -82,11 +82,11 @@ const Hero = () => {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl bg-surface shadow-xl xl:aspect-[16/11]">
+          <div className="overflow-hidden rounded-3xl shadow-xl">
             <img
               src={HERO_IMG}
               alt="Площадь Адмирала Фокина, Владивосток"
-              className="h-full w-full object-contain"
+              className="h-full w-full object-cover"
             />
           </div>
           <div className="absolute -bottom-5 left-4 right-4 rounded-2xl border border-border bg-background/95 px-5 py-4 shadow-lg backdrop-blur md:left-8 md:right-8">
