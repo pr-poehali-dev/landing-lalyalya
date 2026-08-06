@@ -2,7 +2,7 @@ import Icon from '@/components/ui/icon';
 import ApplicationDialog from '@/components/ApplicationDialog';
 
 const HERO_IMG =
-  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/79899f03-4dbf-474c-8c00-6736ce663cb8.jpg';
+  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/e0278096-1125-4087-8f19-b384d38d1c3d.png';
 
 const Hero = () => {
   return (
@@ -21,7 +21,7 @@ const Hero = () => {
             <div className="overflow-hidden rounded-3xl shadow-xl">
               <img
                 src={HERO_IMG}
-                alt="Владивосток, маяк Токаревской кошки"
+                alt="Площадь Адмирала Фокина, Владивосток"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -85,7 +85,7 @@ const Hero = () => {
           <div className="overflow-hidden rounded-3xl shadow-xl">
             <img
               src={HERO_IMG}
-              alt="Владивосток, маяк Токаревской кошки"
+              alt="Площадь Адмирала Фокина, Владивосток"
               className="h-full w-full object-cover"
             />
           </div>
