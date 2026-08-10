@@ -9,7 +9,8 @@
         "last_name": "Петров",
         "phone": "+79001234567",
         "email": "ivan@example.com",
-        "consent": true
+        "consent": true,
+        "photo_consent": true
       },
       "expectedStatus": 200,
       "expectedBody": {"success": true},

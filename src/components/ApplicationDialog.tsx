@@ -14,6 +14,7 @@ import Icon from '@/components/ui/icon';
 import { toast } from '@/hooks/use-toast';
 import { ApplicationOfferText } from '@/components/consent/ApplicationOfferText';
 import { ApplicationPrivacyText } from '@/components/consent/ApplicationPrivacyText';
+import { PhotoConsentText } from '@/components/consent/PhotoConsentText';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 
@@ -29,10 +30,12 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
   const [email, setEmail] = useState('');
   const [offerChecked, setOfferChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
+  const [photoConsentChecked, setPhotoConsentChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [showOffer, setShowOffer] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showPhotoConsent, setShowPhotoConsent] = useState(false);
 
   const consent = offerChecked && privacyChecked;
 
@@ -43,6 +46,7 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
     setEmail('');
     setOfferChecked(false);
     setPrivacyChecked(false);
+    setPhotoConsentChecked(false);
     setDone(false);
   };
 
@@ -63,6 +67,7 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
           phone,
           email,
           consent,
+          photo_consent: photoConsentChecked,
         }),
       });
       const data = await res.json();
@@ -205,6 +210,30 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
                     и даю согласие на обработку моих персональных данных.
                   </span>
                 </label>
+                <label className="flex cursor-pointer items-start gap-3">
+                  <Checkbox
+                    checked={photoConsentChecked}
+                    onCheckedChange={(v) => setPhotoConsentChecked(v === true)}
+                    className="mt-1 shrink-0"
+                  />
+                  <span className="text-xs leading-relaxed text-muted-foreground">
+                    Я даю согласие на фото- и видеосъёмку, а также на
+                    публикацию и использование моего изображения в материалах
+                    Приморского краевого отделения «ОПОРА РОССИИ», посвящённых
+                    мероприятию и проекту памятника предпринимателям
+                    Приморского края.{' '}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowPhotoConsent(true);
+                      }}
+                      className="font-semibold text-accent underline hover:opacity-80"
+                    >
+                      Условия согласия
+                    </button>
+                  </span>
+                </label>
               </div>
 
               <button
@@ -239,6 +268,17 @@ const ApplicationDialog = ({ children }: ApplicationDialogProps) => {
             </DialogTitle>
           </DialogHeader>
           <ApplicationPrivacyText />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showPhotoConsent} onOpenChange={setShowPhotoConsent}>
+        <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">
+              Согласие на фото- и видеосъёмку
+            </DialogTitle>
+          </DialogHeader>
+          <PhotoConsentText />
         </DialogContent>
       </Dialog>
     </Dialog>

@@ -38,6 +38,7 @@ interface Application {
   last_name: string;
   phone: string;
   email: string;
+  photo_consent?: boolean;
   created_at: string | null;
 }
 
@@ -248,6 +249,7 @@ const Admin = () => {
                   <TableHead>Фамилия</TableHead>
                   <TableHead>Телефон</TableHead>
                   <TableHead>Почта</TableHead>
+                  <TableHead>Фото/видео</TableHead>
                   <TableHead>Дата заявки</TableHead>
                   <TableHead className="text-right">Действия</TableHead>
                 </TableRow>
@@ -267,6 +269,17 @@ const Admin = () => {
                       <a href={`mailto:${a.email}`} className="text-accent hover:underline">
                         {a.email}
                       </a>
+                    </TableCell>
+                    <TableCell>
+                      {a.photo_consent ? (
+                        <span className="inline-flex items-center gap-1 text-accent">
+                          <Icon name="Check" size={16} />
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-muted-foreground">
+                          <Icon name="X" size={16} />
+                        </span>
+                      )}
                     </TableCell>
                     <TableCell className="whitespace-nowrap text-muted-foreground">
                       {formatDate(a.created_at)}

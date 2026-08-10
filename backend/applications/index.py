@@ -41,6 +41,7 @@ def handler(event: dict, context) -> dict:
         phone = (body.get('phone') or '').strip()
         email = (body.get('email') or '').strip()
         consent = bool(body.get('consent'))
+        photo_consent = bool(body.get('photo_consent'))
 
         if not first_name or not last_name or not phone or not email:
             return {
@@ -68,10 +69,11 @@ def handler(event: dict, context) -> dict:
 
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
+        pc = 'TRUE' if photo_consent else 'FALSE'
         cur.execute(
             f"INSERT INTO {schema}.ceremony_applications "
-            f"(first_name, last_name, phone, email, consent) "
-            f"VALUES ('{fn}', '{ln}', '{ph}', '{em}', TRUE) RETURNING id"
+            f"(first_name, last_name, phone, email, consent, photo_consent) "
+            f"VALUES ('{fn}', '{ln}', '{ph}', '{em}', TRUE, {pc}) RETURNING id"
         )
         new_id = cur.fetchone()[0]
         conn.commit()
@@ -91,7 +93,7 @@ def handler(event: dict, context) -> dict:
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
         cur.execute(
-            f"SELECT id, first_name, last_name, phone, email, created_at "
+            f"SELECT id, first_name, last_name, phone, email, photo_consent, created_at "
             f"FROM {schema}.ceremony_applications ORDER BY created_at DESC"
         )
         rows = cur.fetchall()
@@ -105,7 +107,8 @@ def handler(event: dict, context) -> dict:
                 'last_name': r[2],
                 'phone': r[3],
                 'email': r[4],
-                'created_at': r[5].isoformat() if r[5] else None,
+                'photo_consent': r[5],
+                'created_at': r[6].isoformat() if r[6] else None,
             }
             for r in rows
         ]
