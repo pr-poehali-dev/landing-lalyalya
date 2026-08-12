@@ -89,7 +89,7 @@ const GreatEntrepreneurs = () => {
               </span>
               <div>
                 <span className="block font-display text-xl font-bold text-primary">
-                  Великие предприниматели Приморья
+                  Почëтные Предприниматели Приморья
                 </span>
                 <span className="mt-0.5 flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
                   <Icon name={open ? 'ChevronUp' : 'ChevronDown'} size={14} className="shrink-0" />
