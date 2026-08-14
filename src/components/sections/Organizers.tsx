@@ -1,9 +1,14 @@
 import Icon from '@/components/ui/icon';
 
 const PARTNERS = [
-  'Приморское краевое отделение «ОПОРА РОССИИ»',
-  'Деловое сообщество Приморского края',
-  'Партнёры проекта',
+  {
+    name: 'Приморское краевое отделение «ОПОРА РОССИИ»',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/41adb462-a00e-46a2-90ef-29290e6ca77f.png',
+  },
+  {
+    name: 'Школа «Хакни Нейросети»',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/8b24499b-9af0-407e-8ae5-6245fda266be.png',
+  },
 ];
 
 const Organizers = () => {
@@ -54,13 +59,18 @@ const Organizers = () => {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PARTNERS.map((p, i) => (
             <div
-              key={p}
-              className={`flex min-h-24 items-center rounded-2xl border border-border p-5 shadow-sm ${
+              key={p.name}
+              className={`flex min-h-24 flex-col items-center justify-center gap-3 rounded-2xl border border-border p-5 text-center shadow-sm ${
                 i % 2 === 0 ? 'bg-card-blue' : 'bg-card-red'
               }`}
             >
-              <p className="font-display text-sm font-bold leading-snug text-primary">
-                {p}
+              <img
+                src={p.logo}
+                alt={p.name}
+                className="h-12 w-auto max-w-full object-contain"
+              />
+              <p className="font-display text-xs font-bold leading-snug text-primary">
+                {p.name}
               </p>
             </div>
           ))}
