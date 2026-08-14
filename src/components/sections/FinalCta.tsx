@@ -28,7 +28,7 @@ const FinalCta = () => {
           </span>
         </h2>
         <p className="mb-10 text-lg leading-relaxed text-white/85 md:text-xl">
-          Памятник предпринимателям Приморья — это знак уважения к людям, которые
+          Памятник Почётным Предпринимателям Приморья — это знак уважения к людям, которые
           создают опору для будущего региона.
         </p>
 
@@ -37,7 +37,9 @@ const FinalCta = () => {
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/15">
               <Icon name="Calendar" size={20} className="shrink-0 text-accent" />
             </span>
-            <span className="text-lg font-semibold">31 августа 2026 года · 13:00</span>
+            <span className="text-lg font-semibold">
+              31 августа 2026 · сбор в 12:30, начало в 13:00
+            </span>
           </div>
           <div className="flex items-center justify-center gap-3 rounded-xl px-6 py-4 text-left sm:justify-start">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/15">

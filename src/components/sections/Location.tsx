@@ -65,7 +65,7 @@ const Location = () => {
                     Дата и время
                   </p>
                   <p className="font-display text-lg font-bold text-primary">
-                    31.08.2026 · 13:00
+                    31.08.2026 · сбор в 12:30, начало в 13:00
                   </p>
                 </div>
               </div>

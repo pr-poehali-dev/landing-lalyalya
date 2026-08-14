@@ -46,7 +46,7 @@ const Hero = () => {
             <div className="flex items-center gap-3">
               <Icon name="Calendar" size={22} className="shrink-0 text-accent" />
               <span className="text-lg font-bold text-foreground lg:text-base xl:text-lg">
-                31 августа 2026 года · 13:00
+                31 августа 2026 · сбор в 12:30, начало в 13:00
               </span>
             </div>
             <div className="flex items-center gap-3">

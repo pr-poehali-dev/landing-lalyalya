@@ -81,7 +81,7 @@ const Project = () => {
         </div>
 
         <Accordion type="single" collapsible defaultValue="intro" className="space-y-4">
-          <ProjectSection value="intro" icon="Landmark" title="Памятник предпринимателям Приморья" color="primary">
+          <ProjectSection value="intro" icon="Landmark" title="Памятник Почётным Предпринимателям Приморья" color="primary">
             <p>
               Этот памятник посвящён предпринимателям — тем, кто созидает, берёт
               ответственность, объединяет людей и формирует экономику региона не лозунгами,

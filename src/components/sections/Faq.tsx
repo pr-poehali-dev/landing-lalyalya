@@ -66,7 +66,7 @@ const Faq = () => {
               Когда состоится церемония?
             </AccordionTrigger>
             <AccordionContent className="leading-relaxed text-muted-foreground">
-              31 августа 2026 года в 13:00.
+              31 августа 2026 года. Сбор гостей в 12:30, начало церемонии в 13:00.
             </AccordionContent>
           </AccordionItem>
 

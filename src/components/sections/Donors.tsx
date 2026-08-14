@@ -66,8 +66,8 @@ const Donors = () => {
                 Список неравнодушных
               </DialogTitle>
               <DialogDescription>
-                Благодарим каждого, кто поддержал создание памятника предпринимателям
-                Приморья
+                Благодарим каждого, кто поддержал создание памятника Почётным
+                Предпринимателям Приморья
               </DialogDescription>
               <p className="pt-1 text-sm font-semibold text-accent">
                 Всего собрано: {formatAmount(total)}

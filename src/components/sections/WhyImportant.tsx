@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 const STATS = [
   { label: 'История предпринимательства в Приморье', value: 'Более 165 лет', icon: 'History' },
   { label: 'Приморскому отделению «ОПОРЫ РОССИИ»', value: '20 лет', icon: 'Award' },
-  { label: 'Церемония открытия камня', value: '31.08.2026 · 13:00', icon: 'Calendar' },
+  { label: 'Начало церемонии (сбор в 12:30)', value: '31.08.2026 · 13:00', icon: 'Calendar' },
   { label: 'Вскрытие капсулы времени', value: '2046 год', icon: 'Clock' },
 ];
 

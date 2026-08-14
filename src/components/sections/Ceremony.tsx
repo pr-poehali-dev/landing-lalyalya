@@ -2,7 +2,7 @@ import Icon from '@/components/ui/icon';
 import ApplicationDialog from '@/components/ApplicationDialog';
 
 const DETAILS = [
-  { icon: 'Calendar', label: 'Дата и время', value: '31.08.2026 · 13:00' },
+  { icon: 'Calendar', label: 'Дата и время', value: '31.08.2026 · сбор в 12:30, начало в 13:00' },
   { icon: 'MapPin', label: 'Место', value: 'Сцена на площади Адмирала Фокина, Владивосток' },
   {
     icon: 'Award',
@@ -26,7 +26,9 @@ const Ceremony = () => {
         <h2 className="mb-2 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">
           Церемония открытия камня
         </h2>
-        <p className="mb-8 text-xl font-semibold text-white/85">31 августа 2026 года · 13:00</p>
+        <p className="mb-8 text-xl font-semibold text-white/85">
+          31 августа 2026 года · сбор гостей в 12:30, начало церемонии в 13:00
+        </p>
 
         <div className="mb-10 max-w-3xl space-y-4 text-lg leading-relaxed text-white/85">
           <p>
