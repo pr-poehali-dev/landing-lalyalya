@@ -7,7 +7,7 @@ const PARTNERS = [
   },
   {
     name: 'Школа «Хакни Нейросети»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/8b24499b-9af0-407e-8ae5-6245fda266be.png',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/aa97aecc-f3fb-4b34-8088-e69992bcf912.png',
   },
 ];
 
