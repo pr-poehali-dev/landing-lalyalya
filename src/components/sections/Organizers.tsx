@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 const PARTNERS = [
   {
     name: 'Приморское краевое отделение «ОПОРА РОССИИ»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/006623b2-8c49-48ff-b683-909722e29f49.png',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/41adb462-a00e-46a2-90ef-29290e6ca77f.png',
   },
   {
     name: 'Школа «Хакни Нейросети»',
