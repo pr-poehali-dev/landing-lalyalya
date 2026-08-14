@@ -2,9 +2,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AboutOrgDialog from '@/components/AboutOrgDialog';
 import Hero from '@/components/sections/Hero';
-import GreatEntrepreneurs from '@/components/sections/GreatEntrepreneurs';
-import Values from '@/components/sections/Values';
 import Project from '@/components/sections/Project';
+import GreatEntrepreneurs from '@/components/sections/GreatEntrepreneurs';
 import WhyImportant from '@/components/sections/WhyImportant';
 import Ceremony from '@/components/sections/Ceremony';
 import Monument from '@/components/sections/Monument';
@@ -22,9 +21,8 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <GreatEntrepreneurs />
-        <Values />
         <Project />
+        <GreatEntrepreneurs />
         <WhyImportant />
         <Ceremony />
         <Monument />

@@ -56,7 +56,7 @@ const Support = () => {
     <section id="support" className="bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-10 flex items-center gap-3">
-          <span className="text-sm font-bold uppercase tracking-widest text-accent">08</span>
+          <span className="text-sm font-bold uppercase tracking-widest text-accent">07</span>
           <span className="h-px flex-1 max-w-16 bg-border" />
           <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
             Поддержать проект

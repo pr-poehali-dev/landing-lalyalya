@@ -12,7 +12,7 @@ const Faq = () => {
     <section id="faq" className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 md:px-8">
         <div className="mb-10 flex items-center gap-3">
-          <span className="text-sm font-bold uppercase tracking-widest text-accent">10</span>
+          <span className="text-sm font-bold uppercase tracking-widest text-accent">09</span>
           <span className="h-px flex-1 max-w-16 bg-border" />
           <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
             FAQ
