@@ -49,7 +49,9 @@ const Donors = () => {
                 </span>
                 <span className="mt-1 flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
                   <Icon name="ChevronRight" size={14} className="shrink-0" />
-                  {DONORS.length} человек и организаций поддержали проект — нажмите, чтобы посмотреть
+                  {DONORS.length > 0
+                    ? `${DONORS.length} человек и организаций поддержали проект — нажмите, чтобы посмотреть`
+                    : 'Список пока пуст — станьте первым, кто поддержит проект'}
                 </span>
               </div>
             </div>
@@ -75,23 +77,29 @@ const Donors = () => {
             </DialogHeader>
 
             <div className="max-h-[55vh] overflow-y-auto px-6 py-2">
-              <ul className="divide-y divide-border">
-                {sorted.map((d) => (
-                  <li
-                    key={d.name}
-                    className="flex items-center justify-between gap-4 py-3"
-                  >
-                    <span className="font-medium text-foreground">{d.name}</span>
-                    <button
-                      onClick={() => setSelected(d)}
-                      title="Подробнее"
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-accent transition hover:bg-accent/10"
+              {sorted.length > 0 ? (
+                <ul className="divide-y divide-border">
+                  {sorted.map((d) => (
+                    <li
+                      key={d.name}
+                      className="flex items-center justify-between gap-4 py-3"
                     >
-                      <Icon name="Info" size={20} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
+                      <span className="font-medium text-foreground">{d.name}</span>
+                      <button
+                        onClick={() => setSelected(d)}
+                        title="Подробнее"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-accent transition hover:bg-accent/10"
+                      >
+                        <Icon name="Info" size={20} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="py-8 text-center text-sm text-muted-foreground">
+                  Пока никто не значится в списке — станьте первым
+                </p>
+              )}
             </div>
 
             <p className="border-t border-border px-6 py-4 text-center text-sm italic text-muted-foreground">
