@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/accordion';
 
 const MONUMENT_IMG =
-  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/c1954dc5-1472-4181-8e8e-352398884295.png';
+  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/9cbd1e9a-0bc5-40b5-a600-133269b0f520.png';
 
 const Monument = () => {
   return (
