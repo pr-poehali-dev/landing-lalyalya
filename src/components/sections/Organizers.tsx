@@ -60,18 +60,15 @@ const Organizers = () => {
           {PARTNERS.map((p, i) => (
             <div
               key={p.name}
-              className={`flex min-h-24 flex-col items-center justify-center gap-3 rounded-2xl border border-border p-5 text-center shadow-sm ${
+              className={`flex min-h-32 items-center justify-center rounded-2xl border border-border p-5 shadow-sm ${
                 i % 2 === 0 ? 'bg-card-blue' : 'bg-card-red'
               }`}
             >
               <img
                 src={p.logo}
                 alt={p.name}
-                className="h-12 w-auto max-w-full object-contain"
+                className="h-20 w-auto max-w-full object-contain"
               />
-              <p className="font-display text-xs font-bold leading-snug text-primary">
-                {p.name}
-              </p>
             </div>
           ))}
 
