@@ -113,9 +113,17 @@ const Donors = () => {
             {selected && (
               <>
                 <DialogHeader>
-                  <span className="mb-2 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10 text-accent">
-                    <Icon name="User" size={26} />
-                  </span>
+                  {selected.photo ? (
+                    <img
+                      src={selected.photo}
+                      alt={selected.name}
+                      className="mb-2 h-14 w-14 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="mb-2 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10 text-accent">
+                      <Icon name="User" size={26} />
+                    </span>
+                  )}
                   <DialogTitle className="font-display text-2xl font-bold text-primary">
                     {selected.name}
                   </DialogTitle>
