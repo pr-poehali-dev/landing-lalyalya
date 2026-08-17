@@ -17,6 +17,14 @@ export const DONORS: Donor[] = [
     photo:
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/d1d00fdb-4cf5-4f64-ae0e-9558a08cd751.jpg',
   },
+  {
+    name: 'Жилинский Юрий Станиславович',
+    amount: 0,
+    role: 'Руководитель проекта «Почётные Предприниматели Приморья»',
+    bio: 'Заместитель Председателя Приморского краевого отделения ОПОРА РОССИИ, координатор федерального партийного проекта «Единой России» «Выбирай Своё» в Приморском крае.',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/80099460-5d14-4f3e-9d35-b1eb386b4abc.jpg',
+  },
 ];
 
 export const TOTAL_RAISED = 10000;
