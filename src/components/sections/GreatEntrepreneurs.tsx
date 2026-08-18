@@ -113,9 +113,6 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/5c01896f-7060-4d42-8eda-273912e5c23a.png',
     bio: '',
   },
-  { name: 'Алексей Дмитриевич Старцев', bio: '' },
-  { name: 'Дмитрий Алексеевич Старцев', bio: '' },
-  { name: 'Александр Алексеевич Старцев', bio: '' },
   {
     name: 'Карл Георгиевич Гильденштедт',
     photo:
@@ -128,7 +125,6 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/0bf4f590-3bc3-47a6-a195-b5748edc9f37.png',
     bio: '',
   },
-  { name: 'Так Цзэмин', bio: '' },
   {
     name: 'Александр С. Лусаковский',
     photo:
@@ -141,7 +137,6 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/2fab82b6-e400-4a55-9168-de9d2e3c1cc3.png',
     bio: '',
   },
-  { name: 'Иван Васильевич Кулаев', bio: '' },
   {
     name: 'Густав Васильевич Альберс',
     photo:
