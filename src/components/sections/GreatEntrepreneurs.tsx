@@ -166,7 +166,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/73ecc92f-fd13-4f2a-a22c-ac2f0380ee51.png',
     bio: '',
   },
-  { name: 'Скидельский (Хаим-Лейба Шиманович)', bio: '' },
+  {
+    name: 'Скидельский (Хаим-Лейба Шиманович)',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/e5b0a10b-2d45-41ca-a585-5b1bc6b46a59.png',
+    bio: '',
+  },
   { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
   {
     name: 'Отто Васильевич Линдгольм',
