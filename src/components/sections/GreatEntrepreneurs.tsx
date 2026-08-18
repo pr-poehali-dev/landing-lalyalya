@@ -160,7 +160,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/cdf444ae-0e47-41a0-9049-7cb7ed443799.png',
     bio: '',
   },
-  { name: 'Василий Анисимович Жариков', bio: '' },
+  {
+    name: 'Василий Анисимович Жариков',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/73ecc92f-fd13-4f2a-a22c-ac2f0380ee51.png',
+    bio: '',
+  },
   { name: 'Скидельский (Хаим-Лейба Шиманович)', bio: '' },
   { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
   {
