@@ -122,7 +122,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/5d7aea07-8ad0-43b7-9d3d-f36368d70881.png',
     bio: '',
   },
-  { name: 'Мейер Моисеевич Люри', bio: '' },
+  {
+    name: 'Мейер Моисеевич Люри',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/0bf4f590-3bc3-47a6-a195-b5748edc9f37.png',
+    bio: '',
+  },
   { name: 'Так Цзэмин', bio: '' },
   { name: 'Александр С. Лусаковский', bio: '' },
   { name: 'Братья Худяковы (Иустин, Павел, Александр)', bio: '' },
