@@ -47,7 +47,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/13de68d8-6c46-46c8-ac1a-b318760d3be6.png',
     bio: '',
   },
-  { name: 'Михаил Иванович Суворов', bio: '' },
+  {
+    name: 'Михаил Иванович Суворов',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/2a970721-f65b-4940-b6e1-62d9f4d071f1.png',
+    bio: '',
+  },
   { name: 'Михаил Григорьевич Шевелёв', bio: '' },
   { name: 'Юлий Иванович Бринер', bio: '' },
   { name: 'Константин Николаевич Шульгин', bio: '' },
