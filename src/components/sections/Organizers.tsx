@@ -3,11 +3,23 @@ import Icon from '@/components/ui/icon';
 const PARTNERS = [
   {
     name: 'Приморское краевое отделение «ОПОРА РОССИИ»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/41adb462-a00e-46a2-90ef-29290e6ca77f.png',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/75d902ac-6f8f-4827-b56b-3ae7535135a2.png',
   },
   {
     name: 'Школа «Хакни Нейросети»',
     logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/aa97aecc-f3fb-4b34-8088-e69992bcf912.png',
+  },
+  {
+    name: '«Выбирай Приморское»',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/8b3332bd-1fdd-40ef-855a-9c78da0ef291.JPG',
+  },
+  {
+    name: 'Правительство Приморского края',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/5559425f-281d-43e3-a9ba-748cecf3f066.png',
+  },
+  {
+    name: '«Прим Камни»',
+    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/a5b8e83c-b331-4ab7-bbe1-d646fc61fa17.JPG',
   },
 ];
 
@@ -32,11 +44,11 @@ const Organizers = () => {
         </p>
 
         <div className="mb-12 flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 shadow-sm md:flex-row md:items-center">
-          <span className="h-16 w-16 shrink-0 overflow-hidden rounded-full shadow-sm">
+          <span className="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white shadow-sm">
             <img
-              src="/opora-logo.jpg"
+              src="https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/75d902ac-6f8f-4827-b56b-3ae7535135a2.png"
               alt="Логотип «ОПОРЫ РОССИИ»"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain p-1"
             />
           </span>
           <div>
