@@ -172,7 +172,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/e5b0a10b-2d45-41ca-a585-5b1bc6b46a59.png',
     bio: '',
   },
-  { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
+  {
+    name: 'Иоганн (Иван) Михайлович Лангелитье',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/e3abbf17-2741-42c3-98d7-4692ffe18924.png',
+    bio: '',
+  },
   {
     name: 'Отто Васильевич Линдгольм',
     title: 'Он построил Токаревский маяк',
