@@ -80,17 +80,16 @@ const Donors = () => {
               {sorted.length > 0 ? (
                 <ul className="divide-y divide-border">
                   {sorted.map((d) => (
-                    <li
-                      key={d.name}
-                      className="flex items-center justify-between gap-4 py-3"
-                    >
-                      <span className="font-medium text-foreground">{d.name}</span>
+                    <li key={d.name}>
                       <button
                         onClick={() => setSelected(d)}
                         title="Подробнее"
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-accent transition hover:bg-accent/10"
+                        className="flex w-full items-center justify-between gap-4 rounded-lg py-3 text-left transition hover:bg-accent/5"
                       >
-                        <Icon name="Info" size={20} />
+                        <span className="font-medium text-foreground">{d.name}</span>
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-accent">
+                          <Icon name="Info" size={20} />
+                        </span>
                       </button>
                     </li>
                   ))}
