@@ -154,7 +154,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/6943b217-ceb8-4a7d-88fb-6dde7822c598.png',
     bio: '',
   },
-  { name: 'Семья Куперов (Карл, Александр, Тамара)', bio: '' },
+  {
+    name: 'Семья Куперов (Карл, Александр, Тамара)',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/cdf444ae-0e47-41a0-9049-7cb7ed443799.png',
+    bio: '',
+  },
   { name: 'Василий Анисимович Жариков', bio: '' },
   { name: 'Скидельский (Хаим-Лейба Шиманович)', bio: '' },
   { name: 'Иоганн (Иван) Михайлович Лангелитье', bio: '' },
