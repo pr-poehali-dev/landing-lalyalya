@@ -135,7 +135,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/30bab368-6889-4578-afad-4be494eb74cc.png',
     bio: '',
   },
-  { name: 'Братья Худяковы (Иустин, Павел, Александр)', bio: '' },
+  {
+    name: 'Братья Худяковы (Иустин, Павел, Александр)',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/2fab82b6-e400-4a55-9168-de9d2e3c1cc3.png',
+    bio: '',
+  },
   { name: 'Иван Васильевич Кулаев', bio: '' },
   { name: 'Густав Васильевич Альберс', bio: '' },
   { name: 'Густав Николаевич Кунст', bio: '' },
