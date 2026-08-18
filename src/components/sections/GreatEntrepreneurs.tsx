@@ -107,7 +107,12 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/d6d9f999-6cc3-4a5a-9a43-b67e58ae398e.png',
     bio: '',
   },
-  { name: 'Иван Миронович Польский', bio: '' },
+  {
+    name: 'Иван Миронович Польский',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/5c01896f-7060-4d42-8eda-273912e5c23a.png',
+    bio: '',
+  },
   { name: 'Алексей Дмитриевич Старцев', bio: '' },
   { name: 'Дмитрий Алексеевич Старцев', bio: '' },
   { name: 'Александр Алексеевич Старцев', bio: '' },
