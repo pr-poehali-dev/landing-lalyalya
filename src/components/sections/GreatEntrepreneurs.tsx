@@ -707,6 +707,8 @@ const PEOPLE: Person[] = [
       'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/ee129d53-f24f-46ea-9839-763dd8c4f54f.png',
     bio: LINDGOLM_BIO,
   },
+  { name: 'Иван Васильевич Кулаев', bio: '' },
+  { name: 'Тау Цзэмин', bio: '' },
 ];
 
 const GreatEntrepreneurs = () => {
