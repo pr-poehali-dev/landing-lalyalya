@@ -60,7 +60,12 @@ const PEOPLE: Person[] = [
     bio: '',
   },
   { name: 'Юлий Иванович Бринер', bio: '' },
-  { name: 'Константин Николаевич Шульгин', bio: '' },
+  {
+    name: 'Константин Николаевич Шульгин',
+    photo:
+      'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/931b40af-1afe-403d-b6b5-d1c6b33ca4ae.png',
+    bio: '',
+  },
   { name: 'Иван Яковлевич Чурин', bio: '' },
   { name: 'Василий Петрович Бабинцев', bio: '' },
   { name: 'Игнатий Иосифович Маковский', bio: '' },
