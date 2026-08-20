@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
 import AdminStats from '@/components/admin/AdminStats';
+import { exportApplicationsToExcel } from '@/lib/exportApplications';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 const STORAGE_KEY = 'ceremony_admin_password';
@@ -218,7 +219,15 @@ const Admin = () => {
               Всего заявок: <span className="font-semibold">{items.length}</span>
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => exportApplicationsToExcel(items)}
+              disabled={items.length === 0}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Icon name="Download" size={16} />
+              Экспорт в Excel
+            </button>
             <button
               onClick={() => fetchData(password)}
               className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
