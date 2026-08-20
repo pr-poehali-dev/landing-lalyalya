@@ -761,7 +761,7 @@ const GreatEntrepreneurs = () => {
 
   return (
     <section className="bg-background pb-6 pt-2 md:pb-10">
-      <div className="mx-auto max-w-4xl px-4 md:px-8">
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
         <Collapsible open={open} onOpenChange={setOpen}>
           <CollapsibleTrigger className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary-highlight px-6 py-5 text-left shadow-sm transition hover:border-primary/35 hover:shadow-md">
             <div className="flex items-center gap-4">

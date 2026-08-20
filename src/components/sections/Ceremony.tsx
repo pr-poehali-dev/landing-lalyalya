@@ -14,7 +14,7 @@ const DETAILS = [
 const Ceremony = () => {
   return (
     <section id="ceremony" className="bg-primary py-16 text-primary-foreground md:py-24">
-      <div className="mx-auto max-w-5xl px-4 md:px-8">
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-10 flex items-center gap-3">
           <span className="text-sm font-bold uppercase tracking-widest text-white">03</span>
           <span className="h-px flex-1 max-w-16 bg-white/25" />

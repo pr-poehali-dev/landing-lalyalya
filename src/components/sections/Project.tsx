@@ -71,7 +71,7 @@ const ProjectSection = ({ value, icon, title, color, children }: SectionProps) =
 const Project = () => {
   return (
     <section id="project" className="bg-background py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-4 md:px-8">
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-10 flex items-center gap-3">
           <span className="text-sm font-bold uppercase tracking-widest text-accent">01</span>
           <span className="h-px flex-1 max-w-16 bg-border" />
