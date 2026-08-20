@@ -20,6 +20,7 @@ def handler(event: dict, context) -> dict:
 
     dsn = os.environ['DATABASE_URL']
     schema = os.environ.get('MAIN_DB_SCHEMA', 'public')
+    table = f'"{schema}".ceremony_applications'
 
     def check_password() -> bool:
         password = (event.get('headers', {}).get('X-Admin-Password') or
@@ -62,18 +63,13 @@ def handler(event: dict, context) -> dict:
                 'body': json.dumps({'error': 'Некорректная почта'}),
             }
 
-        fn = first_name.replace("'", "''")
-        ln = last_name.replace("'", "''")
-        ph = phone.replace("'", "''")
-        em = email.replace("'", "''")
-
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
-        pc = 'TRUE' if photo_consent else 'FALSE'
         cur.execute(
-            f"INSERT INTO {schema}.ceremony_applications "
-            f"(first_name, last_name, phone, email, consent, photo_consent) "
-            f"VALUES ('{fn}', '{ln}', '{ph}', '{em}', TRUE, {pc}) RETURNING id"
+            f'INSERT INTO {table} '
+            f'(first_name, last_name, phone, email, consent, photo_consent) '
+            f'VALUES (%s, %s, %s, %s, TRUE, %s) RETURNING id',
+            (first_name, last_name, phone, email, photo_consent),
         )
         new_id = cur.fetchone()[0]
         conn.commit()
@@ -93,8 +89,8 @@ def handler(event: dict, context) -> dict:
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
         cur.execute(
-            f"SELECT id, first_name, last_name, phone, email, photo_consent, created_at "
-            f"FROM {schema}.ceremony_applications ORDER BY created_at DESC"
+            f'SELECT id, first_name, last_name, phone, email, photo_consent, created_at '
+            f'FROM {table} ORDER BY created_at DESC'
         )
         rows = cur.fetchall()
         cur.close()
@@ -150,17 +146,13 @@ def handler(event: dict, context) -> dict:
                 'body': json.dumps({'error': 'Некорректная почта'}),
             }
 
-        fn = first_name.replace("'", "''")
-        ln = last_name.replace("'", "''")
-        ph = phone.replace("'", "''")
-        em = email.replace("'", "''")
-
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
         cur.execute(
-            f"UPDATE {schema}.ceremony_applications SET "
-            f"first_name = '{fn}', last_name = '{ln}', "
-            f"phone = '{ph}', email = '{em}' WHERE id = {app_id}"
+            f'UPDATE {table} SET '
+            f'first_name = %s, last_name = %s, '
+            f'phone = %s, email = %s WHERE id = %s',
+            (first_name, last_name, phone, email, app_id),
         )
         conn.commit()
         cur.close()
@@ -190,9 +182,7 @@ def handler(event: dict, context) -> dict:
 
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
-        cur.execute(
-            f"DELETE FROM {schema}.ceremony_applications WHERE id = {app_id}"
-        )
+        cur.execute(f'DELETE FROM {table} WHERE id = %s', (app_id,))
         conn.commit()
         cur.close()
         conn.close()
