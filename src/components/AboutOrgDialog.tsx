@@ -7,9 +7,14 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
+import { useSiteImage } from '@/hooks/useSiteSettings';
+
+const ORG_LOGO_FALLBACK =
+  'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/708717a5-e1d8-48dc-b066-c29ad7d4b1e6.png';
 
 const AboutOrgDialog = () => {
   const [open, setOpen] = useState(false);
+  const orgLogo = useSiteImage('org_logo', ORG_LOGO_FALLBACK);
 
   useEffect(() => {
     const timer = setTimeout(() => setOpen(true), 60_000);
@@ -21,7 +26,7 @@ const AboutOrgDialog = () => {
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <img
-            src="https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/708717a5-e1d8-48dc-b066-c29ad7d4b1e6.png"
+            src={orgLogo}
             alt="ОПОРА РОССИИ — Приморское краевое отделение"
             className="mb-3 h-14 w-auto object-contain"
           />

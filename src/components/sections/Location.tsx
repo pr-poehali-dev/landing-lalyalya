@@ -1,9 +1,12 @@
 import Icon from '@/components/ui/icon';
+import { useSiteImage } from '@/hooks/useSiteSettings';
 
-const LOCATION_IMG =
+const LOCATION_IMG_FALLBACK =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/eafcd2bc-6509-4d37-9a72-d1a9f9d336b0.jpg';
 
 const Location = () => {
+  const LOCATION_IMG = useSiteImage('location_image', LOCATION_IMG_FALLBACK);
+
   return (
     <section id="location" className="bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">

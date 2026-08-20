@@ -26,6 +26,13 @@ TABLES = {
     },
 }
 
+SITE_IMAGE_KEYS = {
+    'hero_image': 'Фото на главном экране',
+    'monument_image': 'Фото памятного знака',
+    'location_image': 'Фото места проведения',
+    'org_logo': 'Логотип «ОПОРЫ РОССИИ»',
+}
+
 
 def handler(event: dict, context) -> dict:
     '''CRUD для реестров сайта (предприниматели, доноры, партнёры, FAQ) с управлением через админ-панель'''
@@ -60,6 +67,48 @@ def handler(event: dict, context) -> dict:
     params = event.get('queryStringParameters') or {}
     body = json.loads(event.get('body') or '{}')
     registry_type = params.get('type') or body.get('type')
+
+    if registry_type == 'settings':
+        settings_table = f'"{schema}".site_settings'
+        conn = psycopg2.connect(dsn)
+        cur = conn.cursor()
+
+        if method == 'GET':
+            cur.execute(f'SELECT key, value FROM {settings_table}')
+            rows = dict(cur.fetchall())
+            cur.close()
+            conn.close()
+            items = [
+                {'key': k, 'label': label, 'value': rows.get(k, '')}
+                for k, label in SITE_IMAGE_KEYS.items()
+            ]
+            return resp(200, {'items': items})
+
+        if not check_password():
+            cur.close()
+            conn.close()
+            return resp(401, {'error': 'Неверный пароль'})
+
+        if method == 'PUT':
+            key = body.get('key')
+            value = body.get('value')
+            if key not in SITE_IMAGE_KEYS or not value:
+                cur.close()
+                conn.close()
+                return resp(400, {'error': 'Некорректные данные'})
+            cur.execute(
+                f'INSERT INTO {settings_table} (key, value) VALUES (%s, %s) '
+                f'ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value',
+                (key, value),
+            )
+            conn.commit()
+            cur.close()
+            conn.close()
+            return resp(200, {'success': True})
+
+        cur.close()
+        conn.close()
+        return resp(405, {'error': 'Method not allowed'})
 
     if registry_type not in TABLES:
         return resp(400, {'error': 'Некорректный тип реестра'})

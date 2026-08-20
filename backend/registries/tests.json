@@ -31,6 +31,19 @@
       "expectedStatus": 400
     },
     {
+      "name": "Get site settings (public)",
+      "method": "GET",
+      "path": "/?type=settings",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Reject update settings without password",
+      "method": "PUT",
+      "path": "/",
+      "body": {"type": "settings", "key": "hero_image", "value": "https://example.com/x.png"},
+      "expectedStatus": 401
+    },
+    {
       "name": "Reject create without password",
       "method": "POST",
       "path": "/",

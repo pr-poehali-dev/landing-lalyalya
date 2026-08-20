@@ -1,5 +1,6 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import RegistryTab from './RegistryTab';
+import SiteImagesTab from './SiteImagesTab';
 
 interface AdminRegistriesProps {
   password: string;
@@ -17,6 +18,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
           <TabsTrigger value="donors">Список неравнодушных</TabsTrigger>
           <TabsTrigger value="partners">Партнёры</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
+          <TabsTrigger value="images">Фото сайта</TabsTrigger>
         </TabsList>
 
         <TabsContent value="entrepreneurs">
@@ -84,6 +86,10 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
             addLabel="Новый вопрос"
             editLabel="Редактировать вопрос"
           />
+        </TabsContent>
+
+        <TabsContent value="images">
+          <SiteImagesTab password={password} />
         </TabsContent>
       </Tabs>
     </div>

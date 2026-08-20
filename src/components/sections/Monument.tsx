@@ -5,11 +5,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useSiteImage } from '@/hooks/useSiteSettings';
 
-const MONUMENT_IMG =
+const MONUMENT_IMG_FALLBACK =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/9cbd1e9a-0bc5-40b5-a600-133269b0f520.png';
 
 const Monument = () => {
+  const MONUMENT_IMG = useSiteImage('monument_image', MONUMENT_IMG_FALLBACK);
+
   return (
     <section id="monument" className="bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">

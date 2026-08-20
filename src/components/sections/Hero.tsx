@@ -1,10 +1,13 @@
 import Icon from '@/components/ui/icon';
 import ApplicationDialog from '@/components/ApplicationDialog';
+import { useSiteImage } from '@/hooks/useSiteSettings';
 
-const HERO_IMG =
+const HERO_IMG_FALLBACK =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/e0278096-1125-4087-8f19-b384d38d1c3d.png';
 
 const Hero = () => {
+  const HERO_IMG = useSiteImage('hero_image', HERO_IMG_FALLBACK);
+
   return (
     <section id="about" className="relative overflow-hidden bg-background">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-4 md:px-8 md:pb-20 md:pt-8 lg:gap-10 lg:pb-12 xl:pb-16 lg:grid-cols-2">
