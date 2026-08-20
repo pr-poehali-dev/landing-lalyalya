@@ -28,6 +28,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
+import AdminStats from '@/components/admin/AdminStats';
 
 const API_URL = 'https://functions.poehali.dev/7a726f58-9eba-4464-b6e3-74a696e36f86';
 const STORAGE_KEY = 'ceremony_admin_password';
@@ -234,6 +235,8 @@ const Admin = () => {
             </button>
           </div>
         </div>
+
+        <AdminStats items={items} />
 
         {items.length === 0 ? (
           <div className="rounded-2xl border border-border bg-surface p-12 text-center text-muted-foreground">
