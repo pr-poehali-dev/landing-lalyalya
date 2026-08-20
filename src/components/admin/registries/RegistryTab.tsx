@@ -112,6 +112,7 @@ const RegistryTab = ({
         onClose={() => setFormOpen(false)}
         onSave={handleSave}
         saving={saving}
+        password={password}
       />
 
       <AlertDialog open={!!deleteTarget} onOpenChange={(v) => !v && setDeleteTarget(null)}>

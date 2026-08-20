@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Reject without password",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "file_data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+        "file_name": "test.png",
+        "content_type": "image/png"
+      },
+      "expectedStatus": 401
+    },
+    {
+      "name": "Reject empty body",
+      "method": "POST",
+      "path": "/",
+      "body": {},
+      "expectedStatus": 401
+    },
+    {
+      "name": "Reject GET method",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 405
+    }
+  ]
+}

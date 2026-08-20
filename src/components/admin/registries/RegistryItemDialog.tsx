@@ -8,11 +8,12 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
+import ImageUploadField from './ImageUploadField';
 
 export interface FieldConfig {
   key: string;
   label: string;
-  type: 'text' | 'textarea' | 'number';
+  type: 'text' | 'textarea' | 'number' | 'image';
   placeholder?: string;
 }
 
@@ -25,6 +26,7 @@ interface RegistryItemDialogProps {
   onClose: () => void;
   onSave: () => void;
   saving: boolean;
+  password: string;
 }
 
 const RegistryItemDialog = ({
@@ -36,6 +38,7 @@ const RegistryItemDialog = ({
   onClose,
   onSave,
   saving,
+  password,
 }: RegistryItemDialogProps) => (
   <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
     <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
@@ -53,6 +56,13 @@ const RegistryItemDialog = ({
                 value={(values[field.key] as string) ?? ''}
                 placeholder={field.placeholder}
                 onChange={(e) => onChange(field.key, e.target.value)}
+              />
+            ) : field.type === 'image' ? (
+              <ImageUploadField
+                value={(values[field.key] as string) ?? ''}
+                onChange={(url) => onChange(field.key, url)}
+                password={password}
+                placeholder={field.placeholder}
               />
             ) : (
               <Input

@@ -26,7 +26,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
             fields={[
               { key: 'name', label: 'Имя', type: 'text' },
               { key: 'title', label: 'Титул (необязательно)', type: 'text' },
-              { key: 'photo', label: 'Ссылка на фото (необязательно)', type: 'text' },
+              { key: 'photo', label: 'Фото (необязательно)', type: 'image' },
               { key: 'bio', label: 'Биография', type: 'textarea' },
             ]}
             emptyItem={{ name: '', title: '', photo: '', bio: '' }}
@@ -46,7 +46,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
               { key: 'amount', label: 'Сумма (₽)', type: 'number' },
               { key: 'role', label: 'Роль / должность', type: 'text' },
               { key: 'bio', label: 'Описание', type: 'textarea' },
-              { key: 'photo', label: 'Ссылка на фото (необязательно)', type: 'text' },
+              { key: 'photo', label: 'Фото (необязательно)', type: 'image' },
             ]}
             emptyItem={{ name: '', amount: 0, role: '', bio: '', photo: '' }}
             renderTitle={(item) => String(item.name)}
@@ -62,7 +62,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
             password={password}
             fields={[
               { key: 'name', label: 'Название', type: 'text' },
-              { key: 'logo', label: 'Ссылка на логотип', type: 'text' },
+              { key: 'logo', label: 'Логотип', type: 'image' },
             ]}
             emptyItem={{ name: '', logo: '' }}
             renderTitle={(item) => String(item.name)}
