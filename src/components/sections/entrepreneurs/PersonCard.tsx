@@ -1,9 +1,9 @@
 import Icon from '@/components/ui/icon';
-import type { Person } from '@/data/entrepreneurs';
+import type { EntrepreneurItem } from '@/types/registries';
 
 interface PersonCardProps {
-  person: Person;
-  onClick: (person: Person) => void;
+  person: EntrepreneurItem;
+  onClick: (person: EntrepreneurItem) => void;
 }
 
 const PersonCard = ({ person, onClick }: PersonCardProps) => (

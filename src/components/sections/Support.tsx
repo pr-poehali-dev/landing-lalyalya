@@ -7,9 +7,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { GOAL_AMOUNT, TOTAL_RAISED, formatAmount } from '@/data/donors';
+import { GOAL_AMOUNT, formatAmount } from '@/data/donors';
 import ConsentText from '@/components/ConsentText';
 import { toast } from '@/hooks/use-toast';
+import { useRegistry } from '@/hooks/useRegistry';
+import type { DonorItem } from '@/types/registries';
 
 const DONATE_URL = 'https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn';
 
@@ -40,7 +42,9 @@ const Support = () => {
   const [open, setOpen] = useState(false);
   const [consentMain, setConsentMain] = useState(false);
   const [consentModal, setConsentModal] = useState(false);
-  const percent = Math.min(100, (TOTAL_RAISED / GOAL_AMOUNT) * 100);
+  const { items: donors } = useRegistry<DonorItem>('donors');
+  const totalRaised = donors.reduce((sum, d) => sum + (d.amount || 0), 0);
+  const percent = Math.min(100, (totalRaised / GOAL_AMOUNT) * 100);
 
   const handleDonateClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -123,7 +127,7 @@ const Support = () => {
                 Собрано на памятник
               </p>
               <p className="mt-1 font-display text-3xl font-extrabold text-accent md:text-4xl">
-                {formatAmount(TOTAL_RAISED)}
+                {formatAmount(totalRaised)}
               </p>
             </div>
             <div className="text-right">
@@ -148,7 +152,7 @@ const Support = () => {
               {percent.toFixed(1)}% от цели
             </span>
             <span className="text-muted-foreground">
-              Осталось собрать: {formatAmount(Math.max(GOAL_AMOUNT - TOTAL_RAISED, 0))}
+              Осталось собрать: {formatAmount(Math.max(GOAL_AMOUNT - totalRaised, 0))}
             </span>
           </div>
         </div>

@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import type { Person } from '@/data/entrepreneurs';
+import type { EntrepreneurItem } from '@/types/registries';
+import { useRegistry } from '@/hooks/useRegistry';
 import EntrepreneursCollapsible from './entrepreneurs/EntrepreneursCollapsible';
 import PersonBioDialog from './entrepreneurs/PersonBioDialog';
 
 const GreatEntrepreneurs = () => {
   const [open, setOpen] = useState(false);
-  const [activePerson, setActivePerson] = useState<Person | null>(null);
+  const [activePerson, setActivePerson] = useState<EntrepreneurItem | null>(null);
+  const { items } = useRegistry<EntrepreneurItem>('entrepreneurs');
 
   return (
     <section className="bg-background pb-6 pt-2 md:pb-10">
@@ -14,6 +16,7 @@ const GreatEntrepreneurs = () => {
           open={open}
           onOpenChange={setOpen}
           onPersonClick={setActivePerson}
+          people={items}
         />
       </div>
 

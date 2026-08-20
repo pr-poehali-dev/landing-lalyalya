@@ -5,10 +5,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import type { Person } from '@/data/entrepreneurs';
+import type { EntrepreneurItem } from '@/types/registries';
 
 interface PersonBioDialogProps {
-  activePerson: Person | null;
+  activePerson: EntrepreneurItem | null;
   onOpenChange: (open: boolean) => void;
 }
 

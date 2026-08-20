@@ -1,29 +1,10 @@
 import Icon from '@/components/ui/icon';
-
-const PARTNERS = [
-  {
-    name: 'Приморское краевое отделение «ОПОРА РОССИИ»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/75d902ac-6f8f-4827-b56b-3ae7535135a2.png',
-  },
-  {
-    name: 'Школа «Хакни Нейросети»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/aa97aecc-f3fb-4b34-8088-e69992bcf912.png',
-  },
-  {
-    name: '«Выбирай Приморское»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/8b3332bd-1fdd-40ef-855a-9c78da0ef291.JPG',
-  },
-  {
-    name: 'Правительство Приморского края',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/5559425f-281d-43e3-a9ba-748cecf3f066.png',
-  },
-  {
-    name: '«Прим Камни»',
-    logo: 'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/a5b8e83c-b331-4ab7-bbe1-d646fc61fa17.JPG',
-  },
-];
+import { useRegistry } from '@/hooks/useRegistry';
+import type { PartnerItem } from '@/types/registries';
 
 const Organizers = () => {
+  const { items: partners } = useRegistry<PartnerItem>('partners');
+
   return (
     <section id="organizers" className="bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
@@ -69,9 +50,9 @@ const Organizers = () => {
         </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PARTNERS.map((p, i) => (
+          {partners.map((p, i) => (
             <div
-              key={p.name}
+              key={p.id}
               className={`flex min-h-32 items-center justify-center rounded-2xl border border-border p-5 shadow-sm ${
                 i % 2 === 0 ? 'bg-card-blue' : 'bg-card-red'
               }`}

@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Get entrepreneurs list (public)",
+      "method": "GET",
+      "path": "/?type=entrepreneurs",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Get donors list (public)",
+      "method": "GET",
+      "path": "/?type=donors",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Get partners list (public)",
+      "method": "GET",
+      "path": "/?type=partners",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Get faq list (public)",
+      "method": "GET",
+      "path": "/?type=faq",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Reject unknown registry type",
+      "method": "GET",
+      "path": "/?type=unknown",
+      "expectedStatus": 400
+    },
+    {
+      "name": "Reject create without password",
+      "method": "POST",
+      "path": "/",
+      "body": {"type": "faq", "question": "Test?", "answer": "Test answer"},
+      "expectedStatus": 401
+    },
+    {
+      "name": "Reject update without password",
+      "method": "PUT",
+      "path": "/",
+      "body": {"type": "faq", "id": 1, "question": "Test?", "answer": "Test answer"},
+      "expectedStatus": 401
+    },
+    {
+      "name": "Reject delete without password",
+      "method": "DELETE",
+      "path": "/?type=faq&id=1",
+      "expectedStatus": 401
+    }
+  ]
+}

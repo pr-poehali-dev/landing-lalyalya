@@ -7,13 +7,16 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { DONORS, TOTAL_RAISED, formatAmount, type Donor } from '@/data/donors';
+import { formatAmount } from '@/data/donors';
+import { useRegistry } from '@/hooks/useRegistry';
+import type { DonorItem } from '@/types/registries';
 
 const Donors = () => {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Donor | null>(null);
-  const sorted = [...DONORS].sort((a, b) => b.amount - a.amount);
-  const total = TOTAL_RAISED;
+  const [selected, setSelected] = useState<DonorItem | null>(null);
+  const { items } = useRegistry<DonorItem>('donors');
+  const sorted = [...items].sort((a, b) => b.amount - a.amount);
+  const total = items.reduce((sum, d) => sum + (d.amount || 0), 0);
 
   return (
     <section className="bg-background py-16 md:py-24">
@@ -49,8 +52,8 @@ const Donors = () => {
                 </span>
                 <span className="mt-1 flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
                   <Icon name="ChevronRight" size={14} className="shrink-0" />
-                  {DONORS.length > 0
-                    ? `${DONORS.length} человек и организаций поддержали проект — нажмите, чтобы посмотреть`
+                  {items.length > 0
+                    ? `${items.length} человек и организаций поддержали проект — нажмите, чтобы посмотреть`
                     : 'Список пока пуст — станьте первым, кто поддержит проект'}
                 </span>
               </div>
@@ -80,7 +83,7 @@ const Donors = () => {
               {sorted.length > 0 ? (
                 <ul className="divide-y divide-border">
                   {sorted.map((d) => (
-                    <li key={d.name}>
+                    <li key={d.id}>
                       <button
                         onClick={() => setSelected(d)}
                         title="Подробнее"

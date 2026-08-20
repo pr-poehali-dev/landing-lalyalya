@@ -4,19 +4,21 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { PEOPLE, type Person } from '@/data/entrepreneurs';
+import type { EntrepreneurItem } from '@/types/registries';
 import PersonCard from './PersonCard';
 
 interface EntrepreneursCollapsibleProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onPersonClick: (person: Person) => void;
+  onPersonClick: (person: EntrepreneurItem) => void;
+  people: EntrepreneurItem[];
 }
 
 const EntrepreneursCollapsible = ({
   open,
   onOpenChange,
   onPersonClick,
+  people,
 }: EntrepreneursCollapsibleProps) => (
   <Collapsible open={open} onOpenChange={onOpenChange}>
     <CollapsibleTrigger className="group flex w-full items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary-highlight px-6 py-5 text-left shadow-sm transition hover:border-primary/35 hover:shadow-md">
@@ -53,8 +55,8 @@ const EntrepreneursCollapsible = ({
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {PEOPLE.map((person) => (
-          <PersonCard key={person.name} person={person} onClick={onPersonClick} />
+        {people.map((person) => (
+          <PersonCard key={person.id} person={person} onClick={onPersonClick} />
         ))}
       </div>
 

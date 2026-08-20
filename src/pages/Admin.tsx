@@ -4,6 +4,7 @@ import AdminLoginForm from '@/components/admin/AdminLoginForm';
 import AdminApplicationsTable from '@/components/admin/AdminApplicationsTable';
 import AdminEditDialog from '@/components/admin/AdminEditDialog';
 import AdminDeleteDialog from '@/components/admin/AdminDeleteDialog';
+import AdminRegistries from '@/components/admin/registries/AdminRegistries';
 import { exportApplicationsToExcel } from '@/lib/exportApplications';
 import { useAdminApplications } from '@/hooks/useAdminApplications';
 
@@ -83,6 +84,10 @@ const Admin = () => {
           onEdit={setEditItem}
           onDelete={setDeleteItem}
         />
+
+        <div className="mt-10">
+          <AdminRegistries password={password} />
+        </div>
       </div>
 
       <AdminEditDialog
