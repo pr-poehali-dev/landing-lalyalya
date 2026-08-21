@@ -33,7 +33,7 @@ const Donors = () => {
           Те, кто приближает открытие памятника
         </h2>
         <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Памятник создаётся на добровольные взносы неравнодушных людей и организаций
+          Памятник создаётся на добровольные взносы благотворителей — людей и организаций
           Приморья. Каждый вклад — часть общего дела.
         </p>
 
@@ -48,7 +48,7 @@ const Donors = () => {
               </span>
               <div>
                 <span className="block font-display text-xl font-bold text-primary md:text-2xl">
-                  Список неравнодушных
+                  Список благотворителей
                 </span>
                 <span className="mt-1 flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
                   <Icon name="ChevronRight" size={14} className="shrink-0" />
@@ -68,7 +68,7 @@ const Donors = () => {
           <DialogContent className="max-h-[85vh] max-w-lg overflow-hidden p-0">
             <DialogHeader className="border-b border-border px-6 pb-4 pt-6">
               <DialogTitle className="font-display text-xl font-bold text-primary">
-                Список неравнодушных
+                Список благотворителей
               </DialogTitle>
               <DialogDescription>
                 Благодарим каждого, кто поддержал создание памятника Почётным

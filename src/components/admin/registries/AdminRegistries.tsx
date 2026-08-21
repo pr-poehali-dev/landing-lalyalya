@@ -15,7 +15,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
       <Tabs defaultValue="entrepreneurs">
         <TabsList className="mb-4 flex-wrap">
           <TabsTrigger value="entrepreneurs">Предприниматели</TabsTrigger>
-          <TabsTrigger value="donors">Список неравнодушных</TabsTrigger>
+          <TabsTrigger value="donors">Список благотворителей</TabsTrigger>
           <TabsTrigger value="partners">Партнёры</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
           <TabsTrigger value="images">Фото сайта</TabsTrigger>
