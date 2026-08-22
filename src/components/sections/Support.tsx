@@ -7,11 +7,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { GOAL_AMOUNT, formatAmount } from '@/data/donors';
+import { formatAmount } from '@/data/donors';
 import ConsentText from '@/components/ConsentText';
 import { toast } from '@/hooks/use-toast';
-import { useRegistry } from '@/hooks/useRegistry';
-import type { DonorItem } from '@/types/registries';
+import { useSiteAmount } from '@/hooks/useSiteSettings';
 
 const DONATE_URL = 'https://pay.alfabank.ru/sc/NPiVXlymznsYNFcn';
 
@@ -42,9 +41,9 @@ const Support = () => {
   const [open, setOpen] = useState(false);
   const [consentMain, setConsentMain] = useState(false);
   const [consentModal, setConsentModal] = useState(false);
-  const { items: donors } = useRegistry<DonorItem>('donors');
-  const totalRaised = donors.reduce((sum, d) => sum + (d.amount || 0), 0);
-  const percent = Math.min(100, (totalRaised / GOAL_AMOUNT) * 100);
+  const totalRaised = useSiteAmount('raised_amount', 0);
+  const goalAmount = useSiteAmount('goal_amount', 15000000);
+  const percent = Math.min(100, (totalRaised / goalAmount) * 100);
 
   const handleDonateClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -135,7 +134,7 @@ const Support = () => {
                 Цель
               </p>
               <p className="mt-1 font-display text-2xl font-bold text-primary md:text-3xl">
-                {formatAmount(GOAL_AMOUNT)}
+                {formatAmount(goalAmount)}
               </p>
             </div>
           </div>
@@ -152,7 +151,7 @@ const Support = () => {
               {percent.toFixed(1)}% от цели
             </span>
             <span className="text-muted-foreground">
-              Осталось собрать: {formatAmount(Math.max(GOAL_AMOUNT - totalRaised, 0))}
+              Осталось собрать: {formatAmount(Math.max(goalAmount - totalRaised, 0))}
             </span>
           </div>
         </div>

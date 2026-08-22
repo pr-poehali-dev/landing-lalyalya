@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { formatAmount } from '@/data/donors';
 import { useRegistry } from '@/hooks/useRegistry';
+import { useSiteAmount } from '@/hooks/useSiteSettings';
 import type { DonorItem } from '@/types/registries';
 
 const Donors = () => {
@@ -16,7 +17,7 @@ const Donors = () => {
   const [selected, setSelected] = useState<DonorItem | null>(null);
   const { items } = useRegistry<DonorItem>('donors');
   const sorted = [...items].sort((a, b) => b.amount - a.amount);
-  const total = items.reduce((sum, d) => sum + (d.amount || 0), 0);
+  const total = useSiteAmount('raised_amount', 0);
 
   return (
     <section className="bg-background py-16 md:py-24">

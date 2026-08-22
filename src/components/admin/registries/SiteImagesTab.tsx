@@ -1,5 +1,6 @@
 import { useSiteSettingsAdmin } from '@/hooks/useSiteSettings';
 import ImageUploadField from './ImageUploadField';
+import AmountField from './AmountField';
 import { Switch } from '@/components/ui/switch';
 import { toast } from '@/hooks/use-toast';
 
@@ -8,7 +9,7 @@ interface SiteImagesTabProps {
 }
 
 const SiteImagesTab = ({ password }: SiteImagesTabProps) => {
-  const { items, toggles, loading, saving, updateSetting } = useSiteSettingsAdmin(password);
+  const { items, toggles, amounts, loading, saving, updateSetting } = useSiteSettingsAdmin(password);
 
   const handleChange = async (key: string, value: string) => {
     const ok = await updateSetting(key, value);
@@ -16,6 +17,15 @@ const SiteImagesTab = ({ password }: SiteImagesTabProps) => {
       toast({ title: 'Фото обновлено' });
     } else {
       toast({ title: 'Не удалось сохранить фото', variant: 'destructive' });
+    }
+  };
+
+  const handleAmountSave = async (key: string, value: string) => {
+    const ok = await updateSetting(key, value);
+    if (ok) {
+      toast({ title: 'Сумма обновлена' });
+    } else {
+      toast({ title: 'Не удалось сохранить сумму', variant: 'destructive' });
     }
   };
 
@@ -50,6 +60,16 @@ const SiteImagesTab = ({ password }: SiteImagesTabProps) => {
             onCheckedChange={(checked) => handleToggle(toggle.key, checked)}
           />
         </div>
+      ))}
+
+      {amounts.map((amount) => (
+        <AmountField
+          key={amount.key}
+          label={amount.label}
+          value={amount.value}
+          saving={saving}
+          onSave={(value) => handleAmountSave(amount.key, value)}
+        />
       ))}
 
       {items.map((item) => (

@@ -37,6 +37,11 @@ SITE_TOGGLE_KEYS = {
     'about_org_popup_enabled': 'Всплывающее окно об организации',
 }
 
+SITE_AMOUNT_KEYS = {
+    'raised_amount': 'Собрано на памятник (₽)',
+    'goal_amount': 'Цель сбора (₽)',
+}
+
 
 def handler(event: dict, context) -> dict:
     '''CRUD для реестров сайта (предприниматели, доноры, партнёры, FAQ) с управлением через админ-панель'''
@@ -90,7 +95,11 @@ def handler(event: dict, context) -> dict:
                 {'key': k, 'label': label, 'value': rows.get(k, 'true')}
                 for k, label in SITE_TOGGLE_KEYS.items()
             ]
-            return resp(200, {'items': items, 'toggles': toggles})
+            amounts = [
+                {'key': k, 'label': label, 'value': rows.get(k, '0')}
+                for k, label in SITE_AMOUNT_KEYS.items()
+            ]
+            return resp(200, {'items': items, 'toggles': toggles, 'amounts': amounts})
 
         if not check_password():
             cur.close()
@@ -100,11 +109,21 @@ def handler(event: dict, context) -> dict:
         if method == 'PUT':
             key = body.get('key')
             value = body.get('value')
-            valid_keys = set(SITE_IMAGE_KEYS) | set(SITE_TOGGLE_KEYS)
+            valid_keys = set(SITE_IMAGE_KEYS) | set(SITE_TOGGLE_KEYS) | set(SITE_AMOUNT_KEYS)
             if key not in valid_keys or value in (None, ''):
                 cur.close()
                 conn.close()
                 return resp(400, {'error': 'Некорректные данные'})
+            if key in SITE_AMOUNT_KEYS:
+                try:
+                    amount = int(value)
+                    if amount < 0:
+                        raise ValueError
+                except (TypeError, ValueError):
+                    cur.close()
+                    conn.close()
+                    return resp(400, {'error': 'Сумма должна быть неотрицательным числом'})
+                value = str(amount)
             cur.execute(
                 f'INSERT INTO {settings_table} (key, value) VALUES (%s, %s) '
                 f'ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value',
