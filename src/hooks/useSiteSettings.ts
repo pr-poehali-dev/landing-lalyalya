@@ -29,8 +29,30 @@ export const useSiteImage = (key: string, fallback: string) => {
   return url;
 };
 
+export const useSiteToggle = (key: string, fallback: boolean) => {
+  const [enabled, setEnabled] = useState(fallback);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${API_URL}?type=settings`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        const found = (data.toggles || []).find((item: SiteSettingItem) => item.key === key);
+        if (found?.value !== undefined) setEnabled(found.value !== 'false');
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [key]);
+
+  return enabled;
+};
+
 export const useSiteSettingsAdmin = (password: string) => {
   const [items, setItems] = useState<SiteSettingItem[]>([]);
+  const [toggles, setToggles] = useState<SiteSettingItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -40,6 +62,7 @@ export const useSiteSettingsAdmin = (password: string) => {
       const res = await fetch(`${API_URL}?type=settings`);
       const data = await res.json();
       setItems(data.items || []);
+      setToggles(data.toggles || []);
     } finally {
       setLoading(false);
     }
@@ -68,5 +91,5 @@ export const useSiteSettingsAdmin = (password: string) => {
     }
   };
 
-  return { items, loading, saving, updateSetting };
+  return { items, toggles, loading, saving, updateSetting };
 };

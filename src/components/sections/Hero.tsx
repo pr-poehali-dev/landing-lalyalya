@@ -17,7 +17,7 @@ const Hero = () => {
           </p>
 
           <h1 className="font-display text-[2rem] font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl">
-            Церемония открытия камня будущему памятнику Почетным Предпринимателям Приморья
+            Церемония открытия закладного камня будущему памятнику Почетным Предпринимателям Приморья
           </h1>
 
           <div className="relative mt-6 lg:hidden">
@@ -42,7 +42,7 @@ const Hero = () => {
 
           <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mt-4 lg:text-base xl:text-lg">
             Приглашаем предпринимателей, жителей и гостей Владивостока на церемонию
-            открытия камня будущему памятнику Почетным Предпринимателям Приморья.
+            открытия закладного камня будущему памятнику Почетным Предпринимателям Приморья.
           </p>
 
           <div className="mt-8 space-y-3 lg:mt-5 lg:space-y-2">

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { useSiteImage } from '@/hooks/useSiteSettings';
+import { useSiteImage, useSiteToggle } from '@/hooks/useSiteSettings';
 
 const ORG_LOGO_FALLBACK =
   'https://cdn.poehali.dev/projects/20c40919-c53c-4803-af73-3c78a03661eb/bucket/708717a5-e1d8-48dc-b066-c29ad7d4b1e6.png';
@@ -15,11 +15,15 @@ const ORG_LOGO_FALLBACK =
 const AboutOrgDialog = () => {
   const [open, setOpen] = useState(false);
   const orgLogo = useSiteImage('org_logo', ORG_LOGO_FALLBACK);
+  const enabled = useSiteToggle('about_org_popup_enabled', true);
 
   useEffect(() => {
+    if (!enabled) return;
     const timer = setTimeout(() => setOpen(true), 60_000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

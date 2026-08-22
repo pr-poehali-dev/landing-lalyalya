@@ -24,7 +24,7 @@ const Ceremony = () => {
         </div>
 
         <h2 className="mb-2 font-display text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">
-          Церемония открытия камня
+          Церемония открытия закладного камня
         </h2>
         <p className="mb-8 text-xl font-semibold text-white/85">
           31 августа 2026 года · сбор гостей в 12:30, начало церемонии в 13:00
@@ -33,7 +33,7 @@ const Ceremony = () => {
         <div className="mb-10 max-w-3xl space-y-4 text-lg leading-relaxed text-white/85">
           <p>
             В честь 20-летия Приморского краевого отделения «ОПОРЫ РОССИИ» состоится
-            церемония открытия камня будущему памятнику Почетным Предпринимателям Приморья
+            церемония открытия закладного камня будущему памятнику Почетным Предпринимателям Приморья
             и закладки капсулы времени.
           </p>
           <p>

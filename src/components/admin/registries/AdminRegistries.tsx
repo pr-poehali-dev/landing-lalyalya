@@ -18,7 +18,7 @@ const AdminRegistries = ({ password }: AdminRegistriesProps) => {
           <TabsTrigger value="donors">Список благотворителей</TabsTrigger>
           <TabsTrigger value="partners">Партнёры</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
-          <TabsTrigger value="images">Фото сайта</TabsTrigger>
+          <TabsTrigger value="images">Настройки сайта</TabsTrigger>
         </TabsList>
 
         <TabsContent value="entrepreneurs">

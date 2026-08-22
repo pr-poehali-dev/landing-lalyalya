@@ -33,6 +33,10 @@ SITE_IMAGE_KEYS = {
     'org_logo': 'Логотип «ОПОРЫ РОССИИ»',
 }
 
+SITE_TOGGLE_KEYS = {
+    'about_org_popup_enabled': 'Всплывающее окно об организации',
+}
+
 
 def handler(event: dict, context) -> dict:
     '''CRUD для реестров сайта (предприниматели, доноры, партнёры, FAQ) с управлением через админ-панель'''
@@ -82,7 +86,11 @@ def handler(event: dict, context) -> dict:
                 {'key': k, 'label': label, 'value': rows.get(k, '')}
                 for k, label in SITE_IMAGE_KEYS.items()
             ]
-            return resp(200, {'items': items})
+            toggles = [
+                {'key': k, 'label': label, 'value': rows.get(k, 'true')}
+                for k, label in SITE_TOGGLE_KEYS.items()
+            ]
+            return resp(200, {'items': items, 'toggles': toggles})
 
         if not check_password():
             cur.close()
@@ -92,7 +100,8 @@ def handler(event: dict, context) -> dict:
         if method == 'PUT':
             key = body.get('key')
             value = body.get('value')
-            if key not in SITE_IMAGE_KEYS or not value:
+            valid_keys = set(SITE_IMAGE_KEYS) | set(SITE_TOGGLE_KEYS)
+            if key not in valid_keys or value in (None, ''):
                 cur.close()
                 conn.close()
                 return resp(400, {'error': 'Некорректные данные'})
